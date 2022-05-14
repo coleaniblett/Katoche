@@ -38,7 +38,17 @@ void Room::setExits(Room* northToSet, Room* westToSet, Room* southToSet,
 	this->down = downToset;
 }
 
+void Room::addObject(GameObject* objectToAdd)
+{
+	contents.insert({ objectToAdd->getName(), objectToAdd });
+}
+
 void Room::printDescription()
 {
+	std::map<std::string, GameObject*>::iterator it;
 	std::cout << this->description << std::endl;
+	for (it = this->contents.begin(); it != this->contents.end(); it++)
+	{
+		std::cout << it->second->getDescription() << std::endl;
+	}
 }

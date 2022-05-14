@@ -1,11 +1,14 @@
 #pragma once
 #include <string>
 #include <iostream>
+#include <map>
+#include "GameObject.h"
 class Room
 {
 private:
 	std::string name;
 	std::string description;
+	std::map<std::string, GameObject*> contents;
 	Room* north;
 	Room* west;
 	Room* south;
@@ -19,7 +22,9 @@ public:
 		std::string descriptionToSet
 	);
 	std::string getDescription() { return this->description; }
+	std::string getName() { return this->name; }
 	void setExits(Room* northToSet, Room* westToSet, Room* southToSet,
 		Room* eastToSet, Room* upToSet, Room* downToset);
+	void addObject(GameObject* objectToAdd);
 	void printDescription();
 };
