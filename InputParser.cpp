@@ -10,6 +10,8 @@ InputParser::InputParser()
 InputParser::InputParser(CommandInterpreter* interpreterToSet)
 {
     this->interpreter = interpreterToSet;
+    this->identifierPosition = 0;
+    this->spacePosition = 0;
 }
 
 void InputParser::parseInput(std::string inputToParse)
