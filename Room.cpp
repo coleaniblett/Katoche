@@ -38,9 +38,27 @@ void Room::setExits(Room* northToSet, Room* westToSet, Room* southToSet,
 	this->down = downToset;
 }
 
+GameObject* Room::getObject(std::string objectToGet)
+{
+	return this->contents.at(objectToGet);
+}
+
 void Room::addObject(GameObject* objectToAdd)
 {
 	contents.insert({ objectToAdd->getName(), objectToAdd });
+}
+
+void Room::removeObject(std::string objectToRemove)
+{
+	contents.erase(objectToRemove);
+}
+
+bool Room::containsObject(std::string objectToCheck)
+{
+	if (this->contents.count(objectToCheck))
+		return true;
+	else
+		return false;
 }
 
 void Room::printDescription()
@@ -49,6 +67,6 @@ void Room::printDescription()
 	std::cout << this->description << std::endl;
 	for (it = this->contents.begin(); it != this->contents.end(); it++)
 	{
-		std::cout << it->second->getDescription() << std::endl;
+		std::cout << it->second->getLocationDescription() << std::endl;
 	}
 }

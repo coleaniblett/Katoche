@@ -18,3 +18,7 @@ void Player::enterRoom(Room* roomToEnter)
 	roomToEnter->printDescription();
 }
 
+void Player::addToInventory(GameObject* objectToAdd)
+{
+	this->inventory.insert({ objectToAdd->getName(), objectToAdd });
+}

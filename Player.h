@@ -6,6 +6,7 @@ class Player
 private:
 	bool continueGame;
 	World* world;
+	std::map <std::string, GameObject*> inventory;
 public:
 	Player();
 	Player(World* worldToSet);
@@ -14,4 +15,5 @@ public:
 	bool getContinueGame() { return this->continueGame; }
 	void setContinueGame(bool valueToSet) { this->continueGame = valueToSet; }
 	void enterRoom(Room* roomToEnter);
+	void addToInventory(GameObject* objectToAdd);
 };

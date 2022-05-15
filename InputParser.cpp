@@ -24,13 +24,14 @@ void InputParser::parseInput(std::string inputToParse)
     }
     else
     {
+        
         this->findAction();
         // command is too complex for parsing
         if (this->containsMultipleIdentifiers())
             return;
         this->findIdentifier();
         // if a command contains a identifier
-        if (this->identifier.size() == 0)
+        if (this->identifier.size() != 0)
         {
             identifierPosition = input.find(this->identifier, 0);
             this->identifier.erase(0, 1);
@@ -57,7 +58,7 @@ void InputParser::parseInput(std::string inputToParse)
         else
         {
             findPrimaryObject(0, 0);
-            this->interpreter->interpretSimpleCommand(action, primaryObject);
+            this->interpreter->interpretCommand(action, primaryObject);
         }
     }
 }

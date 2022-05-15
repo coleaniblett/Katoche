@@ -38,8 +38,8 @@ Room World::getSampleRoom1()
 {
     GameObject egg(
         "egg",
-        "It's a regular egg, presumably from a hen.\n",
-        " A small egg is sitting in the middle of the room.",
+        "It's a regular egg, presumably from a hen.",
+        "A small egg is sitting in the middle of the room.",
         true
     );
     Room sampleRoom(
@@ -56,7 +56,7 @@ Room World::getSampleRoom2()
     GameObject nest(
         "nest",
         "The nest is made of small twigs, and the center is covered with dead grass.",
-        " A nest lies in the corner.",
+        "A nest lies in the corner.",
         true
     );
     Room sampleRoom2(
