@@ -22,3 +22,13 @@ void Player::addToInventory(GameObject* objectToAdd)
 {
 	this->inventory.insert({ objectToAdd->getName(), objectToAdd });
 }
+
+void Player::printInventory()
+{
+	std::cout << "You currently have:" << std::endl;
+	std::map<std::string, GameObject*>::iterator it;
+	for (it = this->inventory.begin(); it != this->inventory.end(); it++)
+	{
+		std::cout << it->first << std::endl;
+	}
+}

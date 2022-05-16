@@ -18,6 +18,8 @@ void CommandInterpreter::interpretSimpleCommand(std::string action)
         this->player->setContinueGame(false);
     else if (action == "take")
         std::cout << "Take what?" << std::endl;
+    else if (action == "inventory")
+        this->player->printInventory();
 }
 
 void CommandInterpreter::interpretSimpleCommand(std::string action, std::string identifier)
@@ -27,7 +29,6 @@ void CommandInterpreter::interpretSimpleCommand(std::string action, std::string 
 
 void CommandInterpreter::interpretCommand(std::string action, std::string dirObject)
 {
-    std::cout << "Test" << std::endl;
     if (action == "take")
     {
         if (this->world->getCurrentRoom()->containsObject(dirObject))
@@ -36,6 +37,8 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
             this->world->getCurrentRoom()->removeObject(dirObject);
             std::cout << "You take the " << dirObject << std::endl;
         }
+        else
+            std::cout << "There is no " << dirObject << " to take." << std::endl;
     }
 }
 

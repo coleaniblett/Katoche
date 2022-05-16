@@ -16,4 +16,5 @@ public:
 	void setContinueGame(bool valueToSet) { this->continueGame = valueToSet; }
 	void enterRoom(Room* roomToEnter);
 	void addToInventory(GameObject* objectToAdd);
+	void printInventory();
 };
