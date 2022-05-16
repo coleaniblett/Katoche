@@ -32,3 +32,11 @@ void Player::printInventory()
 		std::cout << it->first << std::endl;
 	}
 }
+
+void Player::move(std::string direction)
+{
+	if (this->getWorld()->getCurrentRoom()->getRoom(direction))
+		this->enterRoom(this->getWorld()->getCurrentRoom()->getRoom(direction));
+	else
+		std::cout << "You can't go that way." << std::endl;
+}

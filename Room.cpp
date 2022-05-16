@@ -38,6 +38,27 @@ void Room::setExits(Room* northToSet, Room* westToSet, Room* southToSet,
 	this->down = downToset;
 }
 
+Room* Room::getRoom(std::string roomToGet)
+{
+	if (roomToGet == "north")
+		return this->north;
+	else if (roomToGet == "east")
+		return this->east;
+	else if (roomToGet == "south")
+		return this->south;
+	else if (roomToGet == "west")
+		return this->west;
+	else if (roomToGet == "up")
+		return this->up;
+	else if (roomToGet == "down")
+		return this->down;
+	else
+	{
+		std::cout << "Error in Room::getRoom function";
+		return NULL;
+	}
+}
+
 GameObject* Room::getObject(std::string objectToGet)
 {
 	return this->contents.at(objectToGet);

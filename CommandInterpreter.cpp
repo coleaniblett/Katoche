@@ -20,6 +20,9 @@ void CommandInterpreter::interpretSimpleCommand(std::string action)
         std::cout << "Take what?" << std::endl;
     else if (action == "inventory")
         this->player->printInventory();
+    else if (action == "north" || action == "east" || action == "south" ||
+        action == "west" || action == "up" || action == "down")
+        this->player->move(action);
 }
 
 void CommandInterpreter::interpretSimpleCommand(std::string action, std::string identifier)

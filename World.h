@@ -20,6 +20,10 @@ public:
 	{
 		this->rooms.insert({ getSampleRoom1().getName(), getSampleRoom1() });
 		this->rooms.insert({ getSampleRoom2().getName(), getSampleRoom2() });
+		this->rooms.at("Sample Room 1").setExits(&(this->rooms.at("Sample Room 2")), NULL,
+			NULL, NULL, NULL, NULL);
+		this->rooms.at("Sample Room 2").setExits(NULL, NULL, &(this->rooms.at("Sample Room 1")),
+			NULL, NULL, NULL);
 		this->currentRoom = &(this->rooms.at("Sample Room 1"));
 	};
 	void testRooms();

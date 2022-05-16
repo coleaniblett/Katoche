@@ -17,4 +17,5 @@ public:
 	void enterRoom(Room* roomToEnter);
 	void addToInventory(GameObject* objectToAdd);
 	void printInventory();
+	void move(std::string direction);
 };

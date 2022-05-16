@@ -25,6 +25,7 @@ public:
 	std::string getName() { return this->name; }
 	void setExits(Room* northToSet, Room* westToSet, Room* southToSet,
 		Room* eastToSet, Room* upToSet, Room* downToset);
+	Room* getRoom(std::string roomToGet);
 	GameObject* getObject(std::string objectToGet);
 	void addObject(GameObject* objectToAdd);
 	void removeObject(std::string objectToRemove);
