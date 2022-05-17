@@ -1,33 +1,15 @@
 #include "World.h"
 
-//void World::setRooms()
-//{
-//    Room sampleRoom1 = getSampleRoom1();
-//    Room sampleRoom2 = getSampleRoom2();
-//    sampleRoom1.setExits(&sampleRoom2, NULL, NULL,
-//        NULL, NULL, NULL);
-//    sampleRoom2.setExits(NULL, NULL, &sampleRoom1,
-//        NULL, NULL, NULL);
-    //this->rooms.push_back(&sampleRoom1);
-    //this->rooms.push_back(&sampleRoom2);
-//    setCurrentRoom(&sampleRoom1);
-//    this->testRooms();
-//}
-
-//void World::testRooms()
-//{
-//    std::cout << "TESTING ROOMS" << std::endl;
-//    for (Room* roomToTest : this->rooms)
-//    {
-//        roomToTest->printDescription();
-//    }
-//}
-
-//void World::initializeFirstRoom()
-//{
-//    delete this->currentRoom;
-//    this->currentRoom = this->rooms[0];
-//}
+World::World()
+{
+    this->rooms.insert({ getSampleRoom1().getName(), getSampleRoom1() });
+    this->rooms.insert({ getSampleRoom2().getName(), getSampleRoom2() });
+    this->rooms.at("Sample Room 1").setExits(&(this->rooms.at("Sample Room 2")), NULL,
+        NULL, NULL, NULL, NULL);
+    this->rooms.at("Sample Room 2").setExits(NULL, NULL, &(this->rooms.at("Sample Room 1")),
+        NULL, NULL, NULL);
+    this->currentRoom = &(this->rooms.at("Sample Room 1"));
+}
 
 void World::setCurrentRoom(Room* roomToSet)
 {

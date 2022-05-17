@@ -15,7 +15,10 @@ public:
 	bool getContinueGame() { return this->continueGame; }
 	void setContinueGame(bool valueToSet) { this->continueGame = valueToSet; }
 	void enterRoom(Room* roomToEnter);
+	GameObject* getObject(std::string objectToGet);
 	void addToInventory(GameObject* objectToAdd);
+	bool hasObject(std::string objectToCheck);
 	void printInventory();
 	void move(std::string direction);
+	void getHelp();
 };

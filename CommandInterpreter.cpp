@@ -16,23 +16,29 @@ void CommandInterpreter::interpretSimpleCommand(std::string action)
 {
     if (action == "quit")
         this->player->setContinueGame(false);
+    if (action == "help")
+        this->player->getHelp();
     else if (action == "take")
         std::cout << "Take what?" << std::endl;
+    else if (action == "get")
+        std::cout << "Get what?" << std::endl;
     else if (action == "inventory")
         this->player->printInventory();
     else if (action == "north" || action == "east" || action == "south" ||
         action == "west" || action == "up" || action == "down")
         this->player->move(action);
+    else if (action == "examine")
+        this->world->getCurrentRoom()->printDescription();
 }
 
 void CommandInterpreter::interpretSimpleCommand(std::string action, std::string identifier)
 {
-
+    
 }
 
 void CommandInterpreter::interpretCommand(std::string action, std::string dirObject)
 {
-    if (action == "take")
+    if (action == "take" || action == "get")
     {
         if (this->world->getCurrentRoom()->containsObject(dirObject))
         {
@@ -42,6 +48,17 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
         }
         else
             std::cout << "There is no " << dirObject << " to take." << std::endl;
+    }
+    else if (action == "examine")
+    {
+        if (dirObject == "room")
+            this->world->getCurrentRoom()->printDescription();
+        else if (this->world->getCurrentRoom()->containsObject(dirObject))
+            std::cout << this->world->getCurrentRoom()->getObject(dirObject)->getDescription() << std::endl;
+        else if (this->player->hasObject(dirObject))
+            std::cout << this->player->getObject(dirObject)->getDescription() << std::endl;
+        else
+            std::cout << "What " << dirObject << "?" << std::endl;
     }
 }
 

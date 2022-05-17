@@ -18,9 +18,22 @@ void Player::enterRoom(Room* roomToEnter)
 	roomToEnter->printDescription();
 }
 
+GameObject* Player::getObject(std::string objectToGet)
+{
+	return this->inventory.at(objectToGet);
+}
+
 void Player::addToInventory(GameObject* objectToAdd)
 {
 	this->inventory.insert({ objectToAdd->getName(), objectToAdd });
+}
+
+bool Player::hasObject(std::string objectToCheck)
+{
+	if (this->inventory.count(objectToCheck))
+		return true;
+	else
+		return false;
 }
 
 void Player::printInventory()
@@ -39,4 +52,16 @@ void Player::move(std::string direction)
 		this->enterRoom(this->getWorld()->getCurrentRoom()->getRoom(direction));
 	else
 		std::cout << "You can't go that way." << std::endl;
+}
+
+void Player::getHelp()
+{
+	std::cout << "Experiment with different commands to solve puzzles and progress. "
+		<< "Example commands include:\n"
+		<< "    - NORTH, EAST, SOUTH, WEST, UP, and DOWN to travel\n"
+		<< "    - TAKE or GET to pick up objects\n"
+		<< "    - INVENTORY to check your current items\n"
+		<< "    - EXAMINE to look at something more closely\n"
+		<< "    - HELP to print this message again\n" 
+		<< "    - QUIT to exit the game\n" << std::endl;
 }

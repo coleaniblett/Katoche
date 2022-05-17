@@ -8,12 +8,14 @@ StdInStream::StdInStream(Player* playerToSet, InputParser* parserToSet)
 
 void StdInStream::loopInputRequest()
 {
-    //this->parser->getInterpreter()->getPlayer()->enterRoom(this->parser->getInterpreter()->getWorld()->getCurrentRoom());
+    std::cout << "Welcome to Katoche!" << std::endl;
+    this->player->getHelp();
     this->player->enterRoom(this->player->getWorld()->getCurrentRoom());
     while (this->player->getContinueGame())
     {
         std::cout << "What do you do? ";
         this->userInput = this->takeInput();
+        std::cout << std::endl;
         this->parser->parseInput(this->userInput);
     }
 }
