@@ -8,6 +8,7 @@ World::World()
     this->rooms.insert({ getAntechamber().getName(), getAntechamber() });
     this->rooms.at("Outside Entrance").setExits(&this->rooms.at("Antechamber"), NULL, NULL,
         NULL, NULL, NULL);
+    this->rooms.at("Outside Entrance").setRoomContained(&this->rooms.at("Antechamber"));
     this->rooms.at("Antechamber").setExits(NULL, NULL, &this->rooms.at("Outside Entrance"),
         NULL, NULL, NULL);
     //this->rooms.at("Sample Room 1").setExits(&(this->rooms.at("Sample Room 2")), NULL,
@@ -32,7 +33,8 @@ Room World::getSampleRoom1()
     );
     Room sampleRoom(
         "Sample Room 1",
-        "An open passage lies on the North side of the room."
+        "An open passage lies on the North side of the room.",
+        false
     );
     this->objects.insert({ egg.getName(), egg });
     //this->sampleObject1 = egg;
@@ -50,7 +52,8 @@ Room World::getSampleRoom2()
     );
     Room sampleRoom2(
         "Sample Room 2",
-        "The only exit lies to the south."
+        "The only exit lies to the south.",
+        false
     );
     //sampleRoom2.addObject(&nest);
     return sampleRoom2;
@@ -66,7 +69,8 @@ Room World::getOutsideEntrance()
     );
     Room outsideEntrance(
         "Outside Entrance",
-        "You're in a dark forest. Before you is a concrete cubic structure, about the size of the garage at your parents house."
+        "You're in a dark forest. Before you is a concrete cubic structure, about the size of the garage at your parents house.",
+        true
     );
     this->objects.insert({ entrance.getName(), entrance });
     outsideEntrance.addObject(&this->objects.at("entrance"));
@@ -83,7 +87,8 @@ Room World::getAntechamber()
     );
     Room antechamber(
         "Antechamber",
-        "Leaves that have blown in from the forest outside scatter the floor."
+        "Leaves that have blown in from the forest outside scatter the floor.",
+        true
     );
     this->objects.insert({ hole.getName(), hole });
     antechamber.addObject(&this->objects.at("hole"));

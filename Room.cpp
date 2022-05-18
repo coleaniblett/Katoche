@@ -14,11 +14,13 @@ Room::Room()
 
 Room::Room(
 	std::string nameToSet,
-	std::string descriptionToSet
+	std::string descriptionToSet,
+	bool containsRoomToSet
 )
 {
 	this->name = nameToSet;
 	this->description = descriptionToSet;
+	this->containsRoom = containsRoomToSet;
 }
 
 void Room::setExits(Room* northToSet, Room* westToSet, Room* southToSet,

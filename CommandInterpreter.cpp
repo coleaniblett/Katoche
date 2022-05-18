@@ -14,7 +14,7 @@ CommandInterpreter::CommandInterpreter(Player* playerToSet, World* worldToSet)
 
 std::string CommandInterpreter::standardizeDirObject(std::string dirObject)
 {
-    if (dirObject == "opening")
+    if (dirObject == "opening" || dirObject == "building" || dirObject == "structure")
         return "entrance";
     else
         return dirObject;
@@ -78,7 +78,8 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
     }
     else if (action == "enter")
     {
-
+        if (this->world->getCurrentRoom()->getRoomContained())
+            this->player->enterRoom(this->world->getCurrentRoom()->getRoomContained());
     }
 }
 
