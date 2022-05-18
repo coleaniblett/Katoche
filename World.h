@@ -18,5 +18,6 @@ public:
 	Room* getCurrentRoom() { return this->currentRoom; }
 	Room getSampleRoom1();
 	Room getSampleRoom2();
+	Room outsideEntrance();
 };
 

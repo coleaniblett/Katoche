@@ -48,3 +48,12 @@ Room World::getSampleRoom2()
     //sampleRoom2.addObject(&nest);
     return sampleRoom2;
 }
+
+Room World::outsideEntrance()
+{
+    Room outsideEntrance(
+        "Outside Entrance",
+        "You're in a dark forest. Before you is a concrete cubic structure, about the size of the garage at your parents house. On its front is a tall opening with no door. It looks dark inside."
+    );
+    return outsideEntrance;
+}
