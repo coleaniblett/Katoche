@@ -12,6 +12,14 @@ CommandInterpreter::CommandInterpreter(Player* playerToSet, World* worldToSet)
     this->world = worldToSet;
 }
 
+std::string CommandInterpreter::standardizeDirObject(std::string dirObject)
+{
+    if (dirObject == "opening")
+        return "entrance";
+    else
+        return dirObject;
+}
+
 void CommandInterpreter::interpretSimpleCommand(std::string action)
 {
     if (action == "quit")
@@ -29,6 +37,8 @@ void CommandInterpreter::interpretSimpleCommand(std::string action)
         this->player->move(action);
     else if (action == "examine")
         this->world->getCurrentRoom()->printDescription();
+    else if (action == "enter")
+        std::cout << "Enter what?" << std::endl;
 }
 
 void CommandInterpreter::interpretSimpleCommand(std::string action, std::string identifier)
@@ -38,6 +48,7 @@ void CommandInterpreter::interpretSimpleCommand(std::string action, std::string 
 
 void CommandInterpreter::interpretCommand(std::string action, std::string dirObject)
 {
+    dirObject = this->standardizeDirObject(dirObject);
     if (action == "take" || action == "get")
     {
         if (this->world->getCurrentRoom()->containsObject(dirObject))
@@ -64,6 +75,10 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
             std::cout << this->player->getObject(dirObject)->getDescription() << std::endl;
         else
             std::cout << "What " << dirObject << "?" << std::endl;
+    }
+    else if (action == "enter")
+    {
+
     }
 }
 

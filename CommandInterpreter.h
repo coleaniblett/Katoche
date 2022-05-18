@@ -13,6 +13,7 @@ public:
 	CommandInterpreter(Player* playerToSet, World* worldToSet);
 	World* getWorld() { return this->world; }
 	Player* getPlayer() { return this->player; }
+	std::string standardizeDirObject(std::string dirObject);
 	void interpretSimpleCommand(std::string action);
 	void interpretSimpleCommand(std::string action, std::string identifier);
 	void interpretCommand(std::string action, std::string dirObject);
