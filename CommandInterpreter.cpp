@@ -42,9 +42,14 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
     {
         if (this->world->getCurrentRoom()->containsObject(dirObject))
         {
-            this->player->addToInventory(this->world->getCurrentRoom()->getObject(dirObject));
-            this->world->getCurrentRoom()->removeObject(dirObject);
-            std::cout << "You take the " << dirObject << std::endl;
+            if (this->world->getCurrentRoom()->getObject(dirObject)->getCanBeTaken())
+            {
+                this->player->addToInventory(this->world->getCurrentRoom()->getObject(dirObject));
+                this->world->getCurrentRoom()->removeObject(dirObject);
+                std::cout << "You take the " << dirObject << "." << std::endl;
+            }
+            else
+                std::cout << "You can't take the " << dirObject << "." << std::endl;
         }
         else
             std::cout << "There is no " << dirObject << " to take." << std::endl;

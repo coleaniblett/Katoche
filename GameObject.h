@@ -18,5 +18,6 @@ public:
 	std::string getName() { return this->name; }
 	std::string getDescription() { return this->description; }
 	std::string getLocationDescription() { return this->locationDescription; }
+	bool getCanBeTaken() { return this->canBeTaken; }
 };
 
