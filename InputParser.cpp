@@ -39,7 +39,13 @@ void InputParser::parseInput(std::string inputToParse)
             if (identifierPosition == 0)
             {
                 findPrimaryObject(1, 1);
-                this->interpreter->interpretCommand(this->action, this->primaryObject, this->identifier);
+                if (this->primaryObject.size() == 0)
+                {
+                    this->identifier.erase(this->identifier.size() - 1, 1);
+                    this->interpreter->interpretSimpleCommand(this->action, this->identifier);
+                }
+                else
+                    this->interpreter->interpretCommand(this->action, this->primaryObject, this->identifier);
             }
             // if identifier is at end of command
             else if (identifierPosition + this->identifier.size() + 1 == input.size())
@@ -113,7 +119,8 @@ void InputParser::findPrimaryObject(int identifierFlag, int locationFlag)
         if (locationFlag == 1)
         {
             this->primaryObject = this->input.erase(0, this->identifier.size() + 1);
-            this->primaryObject.erase(this->primaryObject.size() - 1, 1);
+            if (this->primaryObject.size() > 0)
+                this->primaryObject.erase(this->primaryObject.size() - 1, 1);
         }
         // identifier is located at end
         else
