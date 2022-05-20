@@ -10,7 +10,8 @@ class InputParser
 private:
 	CommandInterpreter* interpreter;
 	std::vector<std::string> identifiers = { " under ", " around ", " at ", " above ",
-		" next to ", " with ", " on ", " to ", " in ", " into ", " out ", " up ", " from " };
+		" next to ", " with ", " on ", " to ", " in ", " into ", " out ", " up ", " from ",
+		" down "};
 	std::string input;
 	std::string action;
 	std::string identifier;
