@@ -7,13 +7,15 @@ World::World()
     this->rooms.insert({ getOutsideEntrance().getName(), getOutsideEntrance() });
     this->rooms.insert({ getAntechamber().getName(), getAntechamber() });
     this->rooms.insert({ getEventHorizon().getName(), getEventHorizon() });
+    this->rooms.insert({ getFirstRoom().getName(), getFirstRoom() });
     this->rooms.at("Outside Entrance").setExits(&this->rooms.at("Antechamber"), NULL, NULL,
         NULL, NULL, NULL);
     this->rooms.at("Outside Entrance").setRoomContained(&this->rooms.at("Antechamber"));
     this->rooms.at("Antechamber").setExits(NULL, NULL, &this->rooms.at("Outside Entrance"),
         NULL, NULL, &this->rooms.at("Event Horizon"));
     this->rooms.at("Event Horizon").setExits(NULL, NULL, NULL, NULL, &this->rooms.at("Antechamber"),
-        NULL);
+        &this->rooms.at("First Room"));
+    this->rooms.at("First Room").setExits(NULL, NULL, NULL, NULL, NULL, NULL);
     //this->rooms.at("Sample Room 1").setExits(&(this->rooms.at("Sample Room 2")), NULL,
     //    NULL, NULL, NULL, NULL);
     //this->rooms.at("Sample Room 2").setExits(NULL, NULL, &(this->rooms.at("Sample Room 1")),
@@ -106,4 +108,30 @@ Room World::getEventHorizon()
         false
     );
     return eventHorizon;
+}
+
+Room World::getFirstRoom()
+{
+    GameObject corpse(
+        "corpse",
+        "Looking more closely at the corpse, you see that its face and body are identical to yours. Its expression is twisted into a look of terror.",
+        "A body lies on the floor, a knife sticking out of its back.",
+        false
+    );
+    GameObject writing(
+        "writing",
+        "The words read, \'you have to find and kill your shadowself\'. It's in your own handwriting.",
+        "Above the corpse on the south wall, some writing is scribbled.",
+        false
+    );
+    Room firstRoom(
+        "First Room",
+        "Your feet touch the ground after a short drop, and the darkness disappears in an instant as two torches light up on the western side of this small room, seemingly by themselves. Between them is a door.",
+        false
+    );
+    this->objects.insert({ corpse.getName(), corpse });
+    this->objects.insert({ writing.getName(), writing });
+    firstRoom.addObject(&this->objects.at("corpse"));
+    firstRoom.addObject(&this->objects.at("writing"));
+    return firstRoom;
 }

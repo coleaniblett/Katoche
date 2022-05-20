@@ -21,5 +21,6 @@ public:
 	Room getOutsideEntrance();
 	Room getAntechamber();
 	Room getEventHorizon();
+	Room getFirstRoom();
 };
 
