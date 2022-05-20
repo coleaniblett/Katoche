@@ -43,7 +43,13 @@ void CommandInterpreter::interpretSimpleCommand(std::string action)
 
 void CommandInterpreter::interpretSimpleCommand(std::string action, std::string identifier)
 {
-    
+    if (action == "climb")
+    {
+        if (identifier == "up" || identifier == "down")
+        {
+            this->player->move(identifier);
+        }
+    }
 }
 
 void CommandInterpreter::interpretCommand(std::string action, std::string dirObject)
