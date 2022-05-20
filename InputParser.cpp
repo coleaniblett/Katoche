@@ -38,14 +38,17 @@ void InputParser::parseInput(std::string inputToParse)
             // if identifier is at start of command
             if (identifierPosition == 0)
             {
+                this->identifier.erase(this->identifier.size() - 1, 1);
                 findPrimaryObject(1, 1);
                 if (this->primaryObject.size() == 0)
                 {
-                    this->identifier.erase(this->identifier.size() - 1, 1);
                     this->interpreter->interpretSimpleCommand(this->action, this->identifier);
                 }
                 else
+                {
+                    this->primaryObject.erase(0, 1);
                     this->interpreter->interpretCommand(this->action, this->primaryObject, this->identifier);
+                }
             }
             // if identifier is at end of command
             else if (identifierPosition + this->identifier.size() + 1 == input.size())
