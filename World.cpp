@@ -6,11 +6,14 @@ World::World()
     //this->rooms.insert({ getSampleRoom2().getName(), getSampleRoom2() });
     this->rooms.insert({ getOutsideEntrance().getName(), getOutsideEntrance() });
     this->rooms.insert({ getAntechamber().getName(), getAntechamber() });
+    this->rooms.insert({ getEventHorizon().getName(), getEventHorizon() });
     this->rooms.at("Outside Entrance").setExits(&this->rooms.at("Antechamber"), NULL, NULL,
         NULL, NULL, NULL);
     this->rooms.at("Outside Entrance").setRoomContained(&this->rooms.at("Antechamber"));
     this->rooms.at("Antechamber").setExits(NULL, NULL, &this->rooms.at("Outside Entrance"),
-        NULL, NULL, NULL);
+        NULL, NULL, &this->rooms.at("Event Horizon"));
+    this->rooms.at("Event Horizon").setExits(NULL, NULL, NULL, NULL, &this->rooms.at("Antechamber"),
+        NULL);
     //this->rooms.at("Sample Room 1").setExits(&(this->rooms.at("Sample Room 2")), NULL,
     //    NULL, NULL, NULL, NULL);
     //this->rooms.at("Sample Room 2").setExits(NULL, NULL, &(this->rooms.at("Sample Room 1")),
@@ -93,4 +96,14 @@ Room World::getAntechamber()
     this->objects.insert({ hole.getName(), hole });
     antechamber.addObject(&this->objects.at("hole"));
     return antechamber;
+}
+
+Room World::getEventHorizon()
+{
+    Room eventHorizon(
+        "Event Horizon",
+        "You're hanging on the end of a rope, submerged in darkness. You're not sure how far above the floor you are, but the rope has stopped.",
+        false
+    );
+    return eventHorizon;
 }

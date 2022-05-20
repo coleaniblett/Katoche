@@ -20,5 +20,6 @@ public:
 	Room getSampleRoom2();
 	Room getOutsideEntrance();
 	Room getAntechamber();
+	Room getEventHorizon();
 };
 
