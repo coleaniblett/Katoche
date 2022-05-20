@@ -16,6 +16,8 @@ std::string CommandInterpreter::standardizeDirObject(std::string dirObject)
 {
     if (dirObject == "opening" || dirObject == "building" || dirObject == "structure")
         return "entrance";
+    else if (dirObject == "body" || dirObject == "dead body" || dirObject == "dead person")
+        return "corpse";
     else
         return dirObject;
 }
@@ -54,15 +56,15 @@ void CommandInterpreter::interpretSimpleCommand(std::string action, std::string 
 
 void CommandInterpreter::interpretCommand(std::string action, std::string dirObject)
 {
-    dirObject = this->standardizeDirObject(dirObject);
+    std::string newDirObject = this->standardizeDirObject(dirObject);
     if (action == "take" || action == "get")
     {
-        if (this->world->getCurrentRoom()->containsObject(dirObject))
+        if (this->world->getCurrentRoom()->containsObject(newDirObject))
         {
-            if (this->world->getCurrentRoom()->getObject(dirObject)->getCanBeTaken())
+            if (this->world->getCurrentRoom()->getObject(newDirObject)->getCanBeTaken())
             {
-                this->player->addToInventory(this->world->getCurrentRoom()->getObject(dirObject));
-                this->world->getCurrentRoom()->removeObject(dirObject);
+                this->player->addToInventory(this->world->getCurrentRoom()->getObject(newDirObject));
+                this->world->getCurrentRoom()->removeObject(newDirObject);
                 std::cout << "You take the " << dirObject << "." << std::endl;
             }
             else
@@ -75,10 +77,12 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
     {
         if (dirObject == "room")
             this->world->getCurrentRoom()->printDescription();
-        else if (this->world->getCurrentRoom()->containsObject(dirObject))
-            std::cout << this->world->getCurrentRoom()->getObject(dirObject)->getDescription() << std::endl;
-        else if (this->player->hasObject(dirObject))
-            std::cout << this->player->getObject(dirObject)->getDescription() << std::endl;
+        else if (dirObject == "shadow")
+            this->player->printShadowDescription();
+        else if (this->world->getCurrentRoom()->containsObject(newDirObject))
+            std::cout << this->world->getCurrentRoom()->getObject(newDirObject)->getDescription() << std::endl;
+        else if (this->player->hasObject(newDirObject))
+            std::cout << this->player->getObject(newDirObject)->getDescription() << std::endl;
         else
             std::cout << "What " << dirObject << "?" << std::endl;
     }
@@ -91,7 +95,20 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
 
 void CommandInterpreter::interpretCommand(std::string action, std::string dirObject, std::string identifier)
 {
-
+    std::string newDirObject = this->standardizeDirObject(dirObject);
+    if (action == "look" && identifier == "at")
+    {
+        if (newDirObject == "room")
+            this->world->getCurrentRoom()->printDescription();
+        else if (dirObject == "shadow")
+            this->player->printShadowDescription();
+        else if (this->world->getCurrentRoom()->containsObject(newDirObject))
+            std::cout << this->world->getCurrentRoom()->getObject(newDirObject)->getDescription() << std::endl;
+        else if (this->player->hasObject(newDirObject))
+            std::cout << this->player->getObject(newDirObject)->getDescription() << std::endl;
+        else
+            std::cout << "What " << dirObject << "?" << std::endl;
+    }
 }
 
 void CommandInterpreter::interpretCommand(std::string action, std::string dirObject, std::string identifier, std::string secObject)
