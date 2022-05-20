@@ -33,7 +33,7 @@ Room World::getSampleRoom1()
     GameObject egg(
         "egg",
         "It's a regular egg, presumably from a hen.",
-        "A small egg is sitting in the middle of the room.",
+        "A small egg is sitting in the middle of the room.\n",
         true
     );
     Room sampleRoom(
@@ -52,7 +52,7 @@ Room World::getSampleRoom2()
     GameObject nest(
         "nest",
         "The nest is made of small twigs, and the center is covered with dead grass.",
-        "A nest lies in the corner.",
+        "A nest lies in the corner.\n",
         true
     );
     Room sampleRoom2(
@@ -69,7 +69,7 @@ Room World::getOutsideEntrance()
     GameObject entrance(
         "entrance",     
         "The entranceway is about six and a half feet tall, three feet wide. There is no sign that it ever included a door. The little light in the forest barely illuminates the inside.",
-        "On its front is a tall opening with no door. It looks dark inside.",
+        "On its front is a tall opening with no door. It looks dark inside.\n",
         false
     );
     Room outsideEntrance(
@@ -87,7 +87,7 @@ Room World::getAntechamber()
     GameObject hole(
         "hole",
         "You cannot see its bottom. The rope descends further than your vision.",
-        "In the middle of the floor is a small square hole with a metal ring fixed into the concrete floor on one of its sides. Attached to the ring, a rope hangs, descending into the darkness below.",
+        "In the middle of the floor is a small square hole with a metal ring fixed into the concrete floor on one of its sides. Attached to the ring, a rope hangs, descending into the darkness below.\n",
         false
     );
     Room antechamber(
@@ -115,13 +115,13 @@ Room World::getFirstRoom()
     GameObject corpse(
         "corpse",
         "Looking more closely at the corpse, you see that its face and body are identical to yours. Its expression is twisted into a look of terror.",
-        "A body lies on the floor, a knife sticking out of its back.",
+        "A body lies on the floor, a knife sticking out of its back.\n",
         false
     );
     GameObject writing(
         "writing",
         "The words read, \'you have to find and kill your shadowself\'. It's in your own handwriting.",
-        "Above the corpse on the south wall, some writing is scribbled.",
+        "Above the corpse on the south wall, some writing is scribbled.\n",
         false
     );
     Room firstRoom(

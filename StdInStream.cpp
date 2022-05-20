@@ -15,7 +15,6 @@ void StdInStream::loopInputRequest()
     {
         std::cout << "What do you do? ";
         this->userInput = this->takeInput();
-        std::cout << std::endl;
         this->parser->parseInput(this->userInput);
     }
 }
