@@ -8,6 +8,7 @@ World::World()
     this->rooms.insert({ getAntechamber().getName(), getAntechamber() });
     this->rooms.insert({ getEventHorizon().getName(), getEventHorizon() });
     this->rooms.insert({ getFirstRoom().getName(), getFirstRoom() });
+    this->rooms.insert({ getFountainRoom().getName(), getFountainRoom() });
     this->rooms.at("Outside Entrance").setExits(&this->rooms.at("Antechamber"), NULL, NULL,
         NULL, NULL, NULL);
     this->rooms.at("Outside Entrance").setRoomContained(&this->rooms.at("Antechamber"));
@@ -15,7 +16,11 @@ World::World()
         NULL, NULL, &this->rooms.at("Event Horizon"));
     this->rooms.at("Event Horizon").setExits(NULL, NULL, NULL, NULL, &this->rooms.at("Antechamber"),
         &this->rooms.at("First Room"));
-    this->rooms.at("First Room").setExits(NULL, NULL, NULL, NULL, NULL, NULL);
+    this->rooms.at("First Room").setExits(NULL, &this->rooms.at("Fountain Room"), NULL, NULL,
+        NULL, NULL);
+    this->rooms.at("Fountain Room").setExits(NULL, &this->rooms.at("First Room"), NULL, NULL,
+        NULL, NULL);
+
     //this->rooms.at("Sample Room 1").setExits(&(this->rooms.at("Sample Room 2")), NULL,
     //    NULL, NULL, NULL, NULL);
     //this->rooms.at("Sample Room 2").setExits(NULL, NULL, &(this->rooms.at("Sample Room 1")),
@@ -115,7 +120,7 @@ Room World::getFirstRoom()
     GameObject corpse(
         "corpse",
         "Looking more closely at the corpse, you see that its face and body are identical to yours. Its expression is twisted into a look of terror.",
-        "A body lies on the floor, a knife sticking out of its back.\n",
+        "A body lies on the floor.\n",
         false
     );
     GameObject writing(
@@ -124,6 +129,12 @@ Room World::getFirstRoom()
         "Above the corpse on the south wall, some writing is scribbled.\n",
         false
     );
+    GameObject knife(
+        "knife",
+        "It looks like a hunting knife.",
+        "A knife sticks out of the back of the corpse.",
+        true
+    );
     Room firstRoom(
         "First Room",
         "Your feet touch the ground after a short drop, and the darkness disappears in an instant as two torches light up on the western side of this small room, seemingly by themselves. Between them is a door.",
@@ -131,7 +142,35 @@ Room World::getFirstRoom()
     );
     this->objects.insert({ corpse.getName(), corpse });
     this->objects.insert({ writing.getName(), writing });
+    this->objects.insert({ knife.getName(), knife });
     firstRoom.addObject(&this->objects.at("corpse"));
     firstRoom.addObject(&this->objects.at("writing"));
+    firstRoom.addObject(&this->objects.at("knife")); 
     return firstRoom;
+}
+
+Room World::getFountainRoom()
+{
+    GameObject bowAndQuiver(
+        "bow and quiver",
+        "The bow is a simple short bow, about three feet long. The quiver looks full with arrows.",
+        "Around the gargoyle's head hangs a bow and a quiver of arrows. It looks to be out of reach.\n",
+        false
+    );
+    GameObject fountain(
+        "fountain",
+        "The bottom of the fountain is filled with coins.",
+        "A massive fountain sits at the center. The water flows backwards, out of the fountain and into the mouth of a gargoyle that hangs from the ceiling.",
+        false
+    );
+    Room fountainRoom(
+        "Fountain Room",
+        "You find yourself in a circular room.",
+        false
+    );
+    this->objects.insert({ bowAndQuiver.getName(), bowAndQuiver });
+    this->objects.insert({ fountain.getName(), fountain });
+    fountainRoom.addObject(&this->objects.at("bow and quiver"));
+    fountainRoom.addObject(&this->objects.at("fountain"));
+    return fountainRoom;
 }
