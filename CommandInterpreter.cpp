@@ -29,9 +29,9 @@ void CommandInterpreter::interpretSimpleCommand(std::string action)
     if (action == "help")
         this->player->getHelp();
     else if (action == "take")
-        std::cout << "Take what?" << std::endl;
+        std::cout << "Take what?\n";
     else if (action == "get")
-        std::cout << "Get what?" << std::endl;
+        std::cout << "Get what?\n";
     else if (action == "inventory")
         this->player->printInventory();
     else if (action == "north" || action == "east" || action == "south" ||
@@ -40,12 +40,14 @@ void CommandInterpreter::interpretSimpleCommand(std::string action)
     else if (action == "examine")
         this->world->getCurrentRoom()->printDescription();
     else if (action == "enter")
-        std::cout << "Enter what?" << std::endl;
+        std::cout << "Enter what?\n";
+    else if (action == "go")
+        std::cout << "Go where?\n";
 }
 
 void CommandInterpreter::interpretSimpleCommand(std::string action, std::string identifier)
 {
-    if (action == "climb")
+    if (action == "climb" || action == "go")
     {
         if (identifier == "up" || identifier == "down")
         {
@@ -88,8 +90,18 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
     }
     else if (action == "enter")
     {
-        if (this->world->getCurrentRoom()->getRoomContained())
-            this->player->enterRoom(this->world->getCurrentRoom()->getRoomContained());
+        if (this->world->getCurrentRoom()->getRoom("inner"))
+            this->player->move("inner");
+    }
+    else if (action == "go")
+    {
+        if (dirObject == "inside")
+        {
+            this->player->move("inner");
+        }
+        else if (dirObject == "north" || dirObject == "west" || dirObject == "south"
+            || dirObject == "east")
+            this->player->move(dirObject);
     }
 }
 
