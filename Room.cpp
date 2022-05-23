@@ -4,6 +4,7 @@ Room::Room()
 {
 	this->name = "";
 	this->description = "";
+	this->inner = new Room;
 	this->north = new Room;
 	this->west = new Room;
 	this->south = new Room;
@@ -14,18 +15,18 @@ Room::Room()
 
 Room::Room(
 	std::string nameToSet,
-	std::string descriptionToSet,
-	bool containsRoomToSet
+	std::string descriptionToSet
 )
 {
 	this->name = nameToSet;
 	this->description = descriptionToSet;
-	this->containsRoom = containsRoomToSet;
 }
 
-void Room::setExits(Room* northToSet, Room* westToSet, Room* southToSet,
+void Room::setExits(Room* innerToSet, Room* northToSet, Room* westToSet, Room* southToSet,
 	Room* eastToSet, Room* upToSet, Room* downToset)
 {
+	delete this->inner;
+	this->inner = innerToSet;
 	delete this->north;
 	this->north = northToSet;
 	delete this->west;
@@ -42,7 +43,9 @@ void Room::setExits(Room* northToSet, Room* westToSet, Room* southToSet,
 
 Room* Room::getRoom(std::string roomToGet)
 {
-	if (roomToGet == "north")
+	if (roomToGet == "inner")
+		return this->inner;
+	else if (roomToGet == "north")
 		return this->north;
 	else if (roomToGet == "east")
 		return this->east;
