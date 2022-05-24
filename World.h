@@ -21,6 +21,7 @@ private:
 	Room getFountainRoom();
 	Room getStableRoom();
 	Room getTempleRoom();
+	Room getShroomRoom();
 public:
 	World();
 	void setCurrentRoom(Room* roomToSet);

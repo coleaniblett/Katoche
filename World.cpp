@@ -11,6 +11,7 @@ World::World()
     this->rooms.insert({ getFountainRoom().getName(), getFountainRoom() });
     this->rooms.insert({ getStableRoom().getName(), getStableRoom() });
     this->rooms.insert({ getTempleRoom().getName(), getTempleRoom() });
+    this->rooms.insert({ getShroomRoom().getName(), getShroomRoom() });
     this->rooms.at("Outside Entrance").setExits(&this->rooms.at("Antechamber"), NULL, NULL, NULL,
         NULL, NULL, NULL);
     this->rooms.at("Antechamber").setExits(NULL, NULL, NULL, &this->rooms.at("Outside Entrance"),
@@ -23,7 +24,9 @@ World::World()
         &this->rooms.at("Stable Room"), NULL, NULL);
     this->rooms.at("Stable Room").setExits(NULL, NULL, &this->rooms.at("Fountain Room"), NULL, NULL,
         NULL, NULL);
-    this->rooms.at("Temple Room").setExits(NULL, NULL, &this->rooms.at("Fountain Room"), NULL, NULL,
+    this->rooms.at("Temple Room").setExits(NULL, &this->rooms.at("Shroom Room"), &this->rooms.at("Fountain Room"), 
+        NULL, NULL, NULL, NULL);
+    this->rooms.at("Shroom Room").setExits(NULL, NULL, NULL, &this->rooms.at("Temple Room"), NULL,
         NULL, NULL);
     //this->rooms.at("Sample Room 1").setExits(&(this->rooms.at("Sample Room 2")), NULL,
     //    NULL, NULL, NULL, NULL);
@@ -212,4 +215,37 @@ Room World::getTempleRoom()
     this->objects.insert({ statue.getName(), statue });
     templeRoom.addObject(&this->objects.at("statue"));
     return templeRoom;
+}
+
+Room World::getShroomRoom()
+{
+    GameObject brownMushroom(
+        "brown mushroom",
+        "It's a pretty ordinary looking mushroom, like the kind you'd see on lawns in the winter.",
+        "",
+        true
+    );
+    GameObject redMushroom(
+        "red mushroom",
+        "The mushroom is red, with white spots. It reminds you of a video game you used to play as a kid.",
+        "A red mushroom grows in the middle, shorter than the rest but visible by its bright color.\n",
+        true
+    );
+    GameObject purpleMushroom(
+        "purple mushroom",
+        "It's a sickly purple color.",
+        "A few purple mushrooms sit in the corner.\n",
+        true
+    );
+    Room shroomRoom(
+        "Shroom Room",
+        "This strange room is filled with mushrooms, mostly brown."
+    );
+    this->objects.insert({ brownMushroom.getName(), brownMushroom });
+    this->objects.insert({ redMushroom.getName(), redMushroom });
+    this->objects.insert({ purpleMushroom.getName(), purpleMushroom });
+    shroomRoom.addObject(&this->objects.at("brown mushroom"));
+    shroomRoom.addObject(&this->objects.at("red mushroom"));
+    shroomRoom.addObject(&this->objects.at("brown mushroom"));
+    return shroomRoom;
 }
