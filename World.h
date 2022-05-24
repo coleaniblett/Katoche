@@ -23,5 +23,6 @@ public:
 	Room getEventHorizon();
 	Room getFirstRoom();
 	Room getFountainRoom();
+	Room getStableRoom();
 };
 

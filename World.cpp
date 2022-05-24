@@ -9,17 +9,19 @@ World::World()
     this->rooms.insert({ getEventHorizon().getName(), getEventHorizon() });
     this->rooms.insert({ getFirstRoom().getName(), getFirstRoom() });
     this->rooms.insert({ getFountainRoom().getName(), getFountainRoom() });
+    this->rooms.insert({ getStableRoom().getName(), getStableRoom() });
     this->rooms.at("Outside Entrance").setExits(&this->rooms.at("Antechamber"), NULL, NULL, NULL,
         NULL, NULL, NULL);
     this->rooms.at("Antechamber").setExits(NULL, NULL, NULL, &this->rooms.at("Outside Entrance"),
         NULL, NULL, &this->rooms.at("Event Horizon"));
     this->rooms.at("Event Horizon").setExits(NULL, NULL, NULL, NULL, NULL, &this->rooms.at("Antechamber"),
         &this->rooms.at("First Room"));
-    this->rooms.at("First Room").setExits(NULL, NULL, &this->rooms.at("Fountain Room"), NULL, NULL,
+    this->rooms.at("First Room").setExits(NULL, &this->rooms.at("Fountain Room"), NULL, NULL, NULL,
         NULL, NULL);
-    this->rooms.at("Fountain Room").setExits(NULL, NULL, &this->rooms.at("First Room"), NULL, NULL,
+    this->rooms.at("Fountain Room").setExits(NULL, NULL, NULL, &this->rooms.at("First Room"), 
+        &this->rooms.at("Stable Room"), NULL, NULL);
+    this->rooms.at("Stable Room").setExits(NULL, NULL, &this->rooms.at("Fountain Room"), NULL, NULL,
         NULL, NULL);
-
     //this->rooms.at("Sample Room 1").setExits(&(this->rooms.at("Sample Room 2")), NULL,
     //    NULL, NULL, NULL, NULL);
     //this->rooms.at("Sample Room 2").setExits(NULL, NULL, &(this->rooms.at("Sample Room 1")),
@@ -131,7 +133,7 @@ Room World::getFirstRoom()
     );
     Room firstRoom(
         "First Room",
-        "Your feet touch the ground after a short drop, and the darkness disappears in an instant as two torches light up on the western side of this small room, seemingly by themselves. Between them is a door."
+        "Your feet touch the ground after a short drop, and the darkness disappears in an instant as two torches light up on the northern side of this small room, seemingly by themselves. Between them is a door."
     );
     this->objects.insert({ corpse.getName(), corpse });
     this->objects.insert({ writing.getName(), writing });
@@ -165,4 +167,28 @@ Room World::getFountainRoom()
     fountainRoom.addObject(&this->objects.at("bow and quiver"));
     fountainRoom.addObject(&this->objects.at("fountain"));
     return fountainRoom;
+}
+Room World::getStableRoom()
+{
+    GameObject horse(
+        "horse",
+        "The horse appears calm, but when you look into its eyes you see what looks like remarkable awareness. But then again, you've never spent much time around horses. Have you?",
+        "In one of the stalls stands a tall bay horse.\n",
+        false
+    );
+    GameObject shovel(
+        "shovel",
+        "It's pretty much an ordinary shovel.",
+        "A shovel rests against the wall.\n",
+        true
+    );
+    Room stableRoom(
+        "Stable Room",
+        "Straw lies strewn across the ground of this long room. To the right, five stalls line the room."
+    );
+    this->objects.insert({ horse.getName(), horse });
+    this->objects.insert({ shovel.getName(), shovel });
+    stableRoom.addObject(&this->objects.at("horse"));
+    stableRoom.addObject(&this->objects.at("shovel"));
+    return stableRoom;
 }
