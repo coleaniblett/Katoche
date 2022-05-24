@@ -12,10 +12,6 @@ private:
 	std::map<std::string, GameObject> objects;
 	GameObject sampleObject1;
 	GameObject sampleObject2;
-public:
-	World();
-	void setCurrentRoom(Room* roomToSet);
-	Room* getCurrentRoom() { return this->currentRoom; }
 	Room getSampleRoom1();
 	Room getSampleRoom2();
 	Room getOutsideEntrance();
@@ -24,5 +20,10 @@ public:
 	Room getFirstRoom();
 	Room getFountainRoom();
 	Room getStableRoom();
+	Room getTempleRoom();
+public:
+	World();
+	void setCurrentRoom(Room* roomToSet);
+	Room* getCurrentRoom() { return this->currentRoom; }	
 };
 

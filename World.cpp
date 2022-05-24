@@ -10,6 +10,7 @@ World::World()
     this->rooms.insert({ getFirstRoom().getName(), getFirstRoom() });
     this->rooms.insert({ getFountainRoom().getName(), getFountainRoom() });
     this->rooms.insert({ getStableRoom().getName(), getStableRoom() });
+    this->rooms.insert({ getTempleRoom().getName(), getTempleRoom() });
     this->rooms.at("Outside Entrance").setExits(&this->rooms.at("Antechamber"), NULL, NULL, NULL,
         NULL, NULL, NULL);
     this->rooms.at("Antechamber").setExits(NULL, NULL, NULL, &this->rooms.at("Outside Entrance"),
@@ -18,9 +19,11 @@ World::World()
         &this->rooms.at("First Room"));
     this->rooms.at("First Room").setExits(NULL, &this->rooms.at("Fountain Room"), NULL, NULL, NULL,
         NULL, NULL);
-    this->rooms.at("Fountain Room").setExits(NULL, NULL, NULL, &this->rooms.at("First Room"), 
+    this->rooms.at("Fountain Room").setExits(NULL, NULL, &this->rooms.at("Temple Room"), &this->rooms.at("First Room"),
         &this->rooms.at("Stable Room"), NULL, NULL);
     this->rooms.at("Stable Room").setExits(NULL, NULL, &this->rooms.at("Fountain Room"), NULL, NULL,
+        NULL, NULL);
+    this->rooms.at("Temple Room").setExits(NULL, NULL, &this->rooms.at("Fountain Room"), NULL, NULL,
         NULL, NULL);
     //this->rooms.at("Sample Room 1").setExits(&(this->rooms.at("Sample Room 2")), NULL,
     //    NULL, NULL, NULL, NULL);
@@ -128,7 +131,7 @@ Room World::getFirstRoom()
     GameObject knife(
         "knife",
         "It looks like a hunting knife.",
-        "A knife sticks out of the back of the corpse.",
+        "A knife sticks out of the back of the corpse.\n",
         true
     );
     Room firstRoom(
@@ -168,6 +171,7 @@ Room World::getFountainRoom()
     fountainRoom.addObject(&this->objects.at("fountain"));
     return fountainRoom;
 }
+
 Room World::getStableRoom()
 {
     GameObject horse(
@@ -191,4 +195,21 @@ Room World::getStableRoom()
     stableRoom.addObject(&this->objects.at("horse"));
     stableRoom.addObject(&this->objects.at("shovel"));
     return stableRoom;
+}
+
+Room World::getTempleRoom()
+{
+    GameObject statue(
+        "statue",
+        "He looks peaceful. You feel a strong contentmen looking at him.",
+        "Atop the stage sits a statue of a bearded man, head draped and hands cupped.\n",
+        false
+    );
+    Room templeRoom(
+        "Temple Room",
+        "This tall room leads to a short stage."
+    );
+    this->objects.insert({ statue.getName(), statue });
+    templeRoom.addObject(&this->objects.at("statue"));
+    return templeRoom;
 }
