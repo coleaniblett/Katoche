@@ -19,6 +19,7 @@ private:
 	Room getTempleRoom();
 	Room getShroomRoom();
 	Room getLibrary();
+	Room getYourBedroom();
 public:
 	World();
 	void setCurrentRoom(Room* roomToSet);

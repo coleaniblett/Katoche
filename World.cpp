@@ -11,6 +11,7 @@ World::World()
     this->rooms.insert({ getTempleRoom().getName(), getTempleRoom() });
     this->rooms.insert({ getShroomRoom().getName(), getShroomRoom() });
     this->rooms.insert({ getLibrary().getName(), getLibrary() });
+    this->rooms.insert({ getYourBedroom().getName(), getYourBedroom() });
     this->rooms.at("Outside Entrance").setExits(&this->rooms.at("Antechamber"), NULL, NULL, NULL,
         NULL, NULL, NULL);
     this->rooms.at("Antechamber").setExits(NULL, NULL, NULL, &this->rooms.at("Outside Entrance"),
@@ -27,7 +28,9 @@ World::World()
         &this->rooms.at("Fountain Room"), NULL, NULL);
     this->rooms.at("Shroom Room").setExits(NULL, NULL, NULL, &this->rooms.at("Temple Room"), NULL,
         NULL, NULL);
-    this->rooms.at("Library").setExits(NULL, NULL, NULL, NULL, &this->rooms.at("Temple Room"),
+    this->rooms.at("Library").setExits(NULL, NULL, NULL, &this->rooms.at("Your Bedroom"), &this->rooms.at("Temple Room"),
+        NULL, NULL);
+    this->rooms.at("Your Bedroom").setExits(NULL, &this->rooms.at("Library"), NULL, NULL, NULL,
         NULL, NULL);
     this->currentRoom = &(this->rooms.at("Outside Entrance"));
 }
@@ -228,4 +231,37 @@ Room World::getLibrary()
     this->objects.insert({ book.getName(), book });
     library.addObject(&this->objects.at("book"));
     return library;
+}
+
+Room World::getYourBedroom()
+{
+    GameObject blinds(
+        "blinds",
+        "They're closed.",
+        "The blinds are drawn on your bedroom window.",
+        false
+    );
+    GameObject bed(
+        "bed",
+        "It has the same green and brown bedspread you've had for years.",
+        "In front of you is your bed, the one you fall asleep in every night.\n",
+        false
+    );
+    GameObject dresser(
+        "dresser",
+        "It has six drawers, probably filled with your clothes.",
+        "Your dresser stands against the wall.\n",
+        false
+    );
+    Room yourBedroom(
+        "Your Bedroom",
+        "It's the strangest thing... This room is your bedroom."
+    );
+    this->objects.insert({ blinds.getName(), blinds });
+    this->objects.insert({ bed.getName(), bed });
+    this->objects.insert({ dresser.getName(), dresser });
+    yourBedroom.addObject(&this->objects.at("blinds"));
+    yourBedroom.addObject(&this->objects.at("bed"));
+    yourBedroom.addObject(&this->objects.at("dresser"));
+    return yourBedroom;
 }
