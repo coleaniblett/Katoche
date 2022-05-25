@@ -2,8 +2,6 @@
 
 World::World()
 {
-    //this->rooms.insert({ getSampleRoom1().getName(), getSampleRoom1() });
-    //this->rooms.insert({ getSampleRoom2().getName(), getSampleRoom2() });
     this->rooms.insert({ getOutsideEntrance().getName(), getOutsideEntrance() });
     this->rooms.insert({ getAntechamber().getName(), getAntechamber() });
     this->rooms.insert({ getEventHorizon().getName(), getEventHorizon() });
@@ -12,6 +10,7 @@ World::World()
     this->rooms.insert({ getStableRoom().getName(), getStableRoom() });
     this->rooms.insert({ getTempleRoom().getName(), getTempleRoom() });
     this->rooms.insert({ getShroomRoom().getName(), getShroomRoom() });
+    this->rooms.insert({ getLibrary().getName(), getLibrary() });
     this->rooms.at("Outside Entrance").setExits(&this->rooms.at("Antechamber"), NULL, NULL, NULL,
         NULL, NULL, NULL);
     this->rooms.at("Antechamber").setExits(NULL, NULL, NULL, &this->rooms.at("Outside Entrance"),
@@ -24,54 +23,18 @@ World::World()
         &this->rooms.at("Stable Room"), NULL, NULL);
     this->rooms.at("Stable Room").setExits(NULL, NULL, &this->rooms.at("Fountain Room"), NULL, NULL,
         NULL, NULL);
-    this->rooms.at("Temple Room").setExits(NULL, &this->rooms.at("Shroom Room"), &this->rooms.at("Fountain Room"), 
-        NULL, NULL, NULL, NULL);
+    this->rooms.at("Temple Room").setExits(NULL, &this->rooms.at("Shroom Room"), &this->rooms.at("Library"), NULL,
+        &this->rooms.at("Fountain Room"), NULL, NULL);
     this->rooms.at("Shroom Room").setExits(NULL, NULL, NULL, &this->rooms.at("Temple Room"), NULL,
         NULL, NULL);
-    //this->rooms.at("Sample Room 1").setExits(&(this->rooms.at("Sample Room 2")), NULL,
-    //    NULL, NULL, NULL, NULL);
-    //this->rooms.at("Sample Room 2").setExits(NULL, NULL, &(this->rooms.at("Sample Room 1")),
-    //    NULL, NULL, NULL);
+    this->rooms.at("Library").setExits(NULL, NULL, NULL, NULL, &this->rooms.at("Temple Room"),
+        NULL, NULL);
     this->currentRoom = &(this->rooms.at("Outside Entrance"));
 }
 
 void World::setCurrentRoom(Room* roomToSet)
 {
     this->currentRoom = roomToSet;
-}
-
-Room World::getSampleRoom1()
-{
-    GameObject egg(
-        "egg",
-        "It's a regular egg, presumably from a hen.",
-        "A small egg is sitting in the middle of the room.\n",
-        true
-    );
-    Room sampleRoom(
-        "Sample Room 1",
-        "An open passage lies on the North side of the room."
-    );
-    this->objects.insert({ egg.getName(), egg });
-    //this->sampleObject1 = egg;
-    sampleRoom.addObject(&this->objects.at("egg"));
-    return sampleRoom;
-}
-
-Room World::getSampleRoom2()
-{
-    GameObject nest(
-        "nest",
-        "The nest is made of small twigs, and the center is covered with dead grass.",
-        "A nest lies in the corner.\n",
-        true
-    );
-    Room sampleRoom2(
-        "Sample Room 2",
-        "The only exit lies to the south."
-    );
-    //sampleRoom2.addObject(&nest);
-    return sampleRoom2;
 }
 
 Room World::getOutsideEntrance()
@@ -248,4 +211,21 @@ Room World::getShroomRoom()
     shroomRoom.addObject(&this->objects.at("red mushroom"));
     shroomRoom.addObject(&this->objects.at("brown mushroom"));
     return shroomRoom;
+}
+
+Room World::getLibrary()
+{
+    GameObject book(
+        "book",
+        "The leather cover shows the outline of a feathered serpent. The pages are written in English.",
+        "One book sits in the middle of an otherwise empty shelf.\n",
+        true
+    );
+    Room library(
+        "Library",
+        "Shelves line the walls, but they look to have been stripped bare."
+    );
+    this->objects.insert({ book.getName(), book });
+    library.addObject(&this->objects.at("book"));
+    return library;
 }
