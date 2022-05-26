@@ -24,7 +24,7 @@ private:
 	Room getArmory();
 	Room getGraveyardRoom();
 	Room getNeverRoom();
-
+	Room getForeverRoom();
 public:
 	World();
 	void setCurrentRoom(Room* roomToSet);

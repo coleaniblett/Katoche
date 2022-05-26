@@ -16,6 +16,7 @@ World::World()
     this->rooms.insert({ getArmory().getName(), getArmory() });
     this->rooms.insert({ getGraveyardRoom().getName(), getGraveyardRoom() });
     this->rooms.insert({ getNeverRoom().getName(), getNeverRoom() });
+    this->rooms.insert({ getForeverRoom().getName(), getForeverRoom() });
     this->rooms.at("Outside Entrance").setExits(&this->rooms.at("Antechamber"), NULL, NULL, NULL,
         NULL, NULL, NULL);
     this->rooms.at("Antechamber").setExits(NULL, NULL, NULL, &this->rooms.at("Outside Entrance"),
@@ -344,4 +345,13 @@ Room World::getNeverRoom()
         "There's something wrong with this room. You don't like this room. You have a powerful urge to leave."
     );
     return neverRoom;
+}
+
+Room World::getForeverRoom()
+{
+    Room foreverRoom(
+        "Forever Room",
+        "You feel a profound tranquility here. A sense that you coud live out eternity, just existing in this room."
+    );
+    return foreverRoom;
 }
