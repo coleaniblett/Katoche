@@ -14,6 +14,7 @@ World::World()
     this->rooms.insert({ getYourBedroom().getName(), getYourBedroom() });
     this->rooms.insert({ getInfinityRoom().getName(), getInfinityRoom() });
     this->rooms.insert({ getArmory().getName(), getArmory() });
+    this->rooms.insert({ getGraveyardRoom().getName(), getGraveyardRoom() });
     this->rooms.at("Outside Entrance").setExits(&this->rooms.at("Antechamber"), NULL, NULL, NULL,
         NULL, NULL, NULL);
     this->rooms.at("Antechamber").setExits(NULL, NULL, NULL, &this->rooms.at("Outside Entrance"),
@@ -34,9 +35,11 @@ World::World()
         NULL, NULL);
     this->rooms.at("Your Bedroom").setExits(NULL, &this->rooms.at("Library"), NULL, NULL, NULL,
         NULL, NULL);
-    this->rooms.at("Infinity Room").setExits(NULL, NULL, NULL, &this->rooms.at("Fountain Room"), NULL,
-        NULL, NULL);
+    this->rooms.at("Infinity Room").setExits(NULL, &this->rooms.at("Graveyard Room"), NULL, 
+        &this->rooms.at("Fountain Room"), NULL, NULL, NULL);
     this->rooms.at("Armory").setExits(NULL, NULL, NULL, &this->rooms.at("Stable Room"), NULL,
+        NULL, NULL);
+    this->rooms.at("Graveyard Room").setExits(NULL, NULL, NULL, &this->rooms.at("Infinity Room"), NULL,
         NULL, NULL);
     this->currentRoom = &(this->rooms.at("Outside Entrance"));
 }
@@ -312,4 +315,21 @@ Room World::getArmory()
     armory.addObject(&this->objects.at("chest"));
     armory.addObject(&this->objects.at("sword"));
     return armory;
+}
+
+Room World::getGraveyardRoom()
+{
+    GameObject headstone(
+        "headstone",
+        "It has your name on it.",
+        "A headstone stands erect in the middle of the room.\n",
+        false
+    );
+    Room graveyardRoom(
+        "Graveyard Room",
+        "The floor is made of dirt, and the illumination is a bit darker than the other rooms you've seen."
+    );
+    this->objects.insert({ headstone.getName(), headstone });
+    graveyardRoom.addObject(&this->objects.at("headstone"));
+    return graveyardRoom;
 }
