@@ -12,6 +12,7 @@ World::World()
     this->rooms.insert({ getShroomRoom().getName(), getShroomRoom() });
     this->rooms.insert({ getLibrary().getName(), getLibrary() });
     this->rooms.insert({ getYourBedroom().getName(), getYourBedroom() });
+    this->rooms.insert({ getInfinityRoom().getName(), getInfinityRoom() });
     this->rooms.at("Outside Entrance").setExits(&this->rooms.at("Antechamber"), NULL, NULL, NULL,
         NULL, NULL, NULL);
     this->rooms.at("Antechamber").setExits(NULL, NULL, NULL, &this->rooms.at("Outside Entrance"),
@@ -20,8 +21,8 @@ World::World()
         &this->rooms.at("First Room"));
     this->rooms.at("First Room").setExits(NULL, &this->rooms.at("Fountain Room"), NULL, NULL, NULL,
         NULL, NULL);
-    this->rooms.at("Fountain Room").setExits(NULL, NULL, &this->rooms.at("Temple Room"), &this->rooms.at("First Room"),
-        &this->rooms.at("Stable Room"), NULL, NULL);
+    this->rooms.at("Fountain Room").setExits(NULL, &this->rooms.at("Infinity Room"), 
+        &this->rooms.at("Temple Room"), &this->rooms.at("First Room"), &this->rooms.at("Stable Room"), NULL, NULL);
     this->rooms.at("Stable Room").setExits(NULL, NULL, &this->rooms.at("Fountain Room"), NULL, NULL,
         NULL, NULL);
     this->rooms.at("Temple Room").setExits(NULL, &this->rooms.at("Shroom Room"), &this->rooms.at("Library"), NULL,
@@ -31,6 +32,8 @@ World::World()
     this->rooms.at("Library").setExits(NULL, NULL, NULL, &this->rooms.at("Your Bedroom"), &this->rooms.at("Temple Room"),
         NULL, NULL);
     this->rooms.at("Your Bedroom").setExits(NULL, &this->rooms.at("Library"), NULL, NULL, NULL,
+        NULL, NULL);
+    this->rooms.at("Infinity Room").setExits(NULL, NULL, NULL, &this->rooms.at("Fountain Room"), NULL,
         NULL, NULL);
     this->currentRoom = &(this->rooms.at("Outside Entrance"));
 }
@@ -264,4 +267,21 @@ Room World::getYourBedroom()
     yourBedroom.addObject(&this->objects.at("bed"));
     yourBedroom.addObject(&this->objects.at("dresser"));
     return yourBedroom;
+}
+
+Room World::getInfinityRoom()
+{
+    GameObject shadowSelf(
+        "shadow self",
+        "His movements seem to mirror yours.",
+        "The figure appears to be you.\n",
+        false
+    );
+    Room infinityRoom(
+        "Infinity Room",
+        "As you stand in the open doorway of this room, you see another figure standing in a doorway on the opposite side, his back to you."
+    );
+    this->objects.insert({ shadowSelf.getName(), shadowSelf });
+    infinityRoom.addObject(&this->objects.at("shadow self"));
+    return infinityRoom;
 }

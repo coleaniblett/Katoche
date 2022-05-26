@@ -20,6 +20,7 @@ private:
 	Room getShroomRoom();
 	Room getLibrary();
 	Room getYourBedroom();
+	Room getInfinityRoom();
 public:
 	World();
 	void setCurrentRoom(Room* roomToSet);
