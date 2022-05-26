@@ -13,6 +13,7 @@ World::World()
     this->rooms.insert({ getLibrary().getName(), getLibrary() });
     this->rooms.insert({ getYourBedroom().getName(), getYourBedroom() });
     this->rooms.insert({ getInfinityRoom().getName(), getInfinityRoom() });
+    this->rooms.insert({ getArmory().getName(), getArmory() });
     this->rooms.at("Outside Entrance").setExits(&this->rooms.at("Antechamber"), NULL, NULL, NULL,
         NULL, NULL, NULL);
     this->rooms.at("Antechamber").setExits(NULL, NULL, NULL, &this->rooms.at("Outside Entrance"),
@@ -23,8 +24,8 @@ World::World()
         NULL, NULL);
     this->rooms.at("Fountain Room").setExits(NULL, &this->rooms.at("Infinity Room"), 
         &this->rooms.at("Temple Room"), &this->rooms.at("First Room"), &this->rooms.at("Stable Room"), NULL, NULL);
-    this->rooms.at("Stable Room").setExits(NULL, NULL, &this->rooms.at("Fountain Room"), NULL, NULL,
-        NULL, NULL);
+    this->rooms.at("Stable Room").setExits(NULL, &this->rooms.at("Armory"), &this->rooms.at("Fountain Room"),
+        NULL, NULL, NULL, NULL);
     this->rooms.at("Temple Room").setExits(NULL, &this->rooms.at("Shroom Room"), &this->rooms.at("Library"), NULL,
         &this->rooms.at("Fountain Room"), NULL, NULL);
     this->rooms.at("Shroom Room").setExits(NULL, NULL, NULL, &this->rooms.at("Temple Room"), NULL,
@@ -34,6 +35,8 @@ World::World()
     this->rooms.at("Your Bedroom").setExits(NULL, &this->rooms.at("Library"), NULL, NULL, NULL,
         NULL, NULL);
     this->rooms.at("Infinity Room").setExits(NULL, NULL, NULL, &this->rooms.at("Fountain Room"), NULL,
+        NULL, NULL);
+    this->rooms.at("Armory").setExits(NULL, NULL, NULL, &this->rooms.at("Stable Room"), NULL,
         NULL, NULL);
     this->currentRoom = &(this->rooms.at("Outside Entrance"));
 }
@@ -284,4 +287,29 @@ Room World::getInfinityRoom()
     this->objects.insert({ shadowSelf.getName(), shadowSelf });
     infinityRoom.addObject(&this->objects.at("shadow self"));
     return infinityRoom;
+}
+
+Room World::getArmory()
+{
+    GameObject chest(
+        "chest",
+        "It's made of dark wood with no ornamentation. The opening has a clasp, but there is no lock.",
+        "",
+        false
+    );
+    GameObject sword(
+        "sword",
+        "It's a longsword, a bit aged by the look of it.",
+        "Above the chest hangs a sword.\n",
+        true
+    );
+    Room armory(
+        "Armory",
+        "A chest sits in this small room."
+    );
+    this->objects.insert({ chest.getName(), chest });
+    this->objects.insert({ sword.getName(), sword });
+    armory.addObject(&this->objects.at("chest"));
+    armory.addObject(&this->objects.at("sword"));
+    return armory;
 }
