@@ -15,6 +15,7 @@ World::World()
     this->rooms.insert({ getInfinityRoom().getName(), getInfinityRoom() });
     this->rooms.insert({ getArmory().getName(), getArmory() });
     this->rooms.insert({ getGraveyardRoom().getName(), getGraveyardRoom() });
+    this->rooms.insert({ getNeverRoom().getName(), getNeverRoom() });
     this->rooms.at("Outside Entrance").setExits(&this->rooms.at("Antechamber"), NULL, NULL, NULL,
         NULL, NULL, NULL);
     this->rooms.at("Antechamber").setExits(NULL, NULL, NULL, &this->rooms.at("Outside Entrance"),
@@ -39,7 +40,9 @@ World::World()
         &this->rooms.at("Fountain Room"), NULL, NULL, NULL);
     this->rooms.at("Armory").setExits(NULL, NULL, NULL, &this->rooms.at("Stable Room"), NULL,
         NULL, NULL);
-    this->rooms.at("Graveyard Room").setExits(NULL, NULL, NULL, &this->rooms.at("Infinity Room"), NULL,
+    this->rooms.at("Graveyard Room").setExits(NULL, &this->rooms.at("Never Room"), NULL, 
+        &this->rooms.at("Infinity Room"), NULL, NULL, NULL);
+    this->rooms.at("Never Room").setExits(NULL, NULL, NULL, &this->rooms.at("Graveyard Room"), NULL,
         NULL, NULL);
     this->currentRoom = &(this->rooms.at("Outside Entrance"));
 }
@@ -332,4 +335,13 @@ Room World::getGraveyardRoom()
     this->objects.insert({ headstone.getName(), headstone });
     graveyardRoom.addObject(&this->objects.at("headstone"));
     return graveyardRoom;
+}
+
+Room World::getNeverRoom()
+{
+    Room neverRoom(
+        "Never Room",
+        "There's something wrong with this room. You don't like this room. You have a powerful urge to leave."
+    );
+    return neverRoom;
 }

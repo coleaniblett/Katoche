@@ -23,6 +23,8 @@ private:
 	Room getInfinityRoom();
 	Room getArmory();
 	Room getGraveyardRoom();
+	Room getNeverRoom();
+
 public:
 	World();
 	void setCurrentRoom(Room* roomToSet);
