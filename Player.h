@@ -30,6 +30,7 @@ public:
 	// movement methods
 	void enterRoom(Room* roomToEnter);
 	void move(std::string direction);
+	void jump();
 	// other methods
 	void getHelp();
 };

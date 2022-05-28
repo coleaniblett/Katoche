@@ -61,6 +61,27 @@ void Player::move(std::string direction)
 		std::cout << "You can't go that way." << std::endl;
 }
 
+void Player::jump()
+{
+	std::string currentRoomName = this->world->getCurrentRoom()->getName();
+	if (currentRoomName == "Event Horizon")
+	{
+		this->move("down");
+	}
+	else
+	{
+		std::cout << "You jump. It's not particularly impressive.\n";
+		if (currentRoomName == "First Room")
+		{
+			std::cout << "You can't jump high enough to reach the rope.\n";
+		}
+		else if (currentRoomName == "Fountain Room")
+		{
+			std::cout << "You can't jump high enough to reach the bow.\n";
+		}
+	}
+}
+
 // shadowState methods
 void Player::printShadowDescription()
 {

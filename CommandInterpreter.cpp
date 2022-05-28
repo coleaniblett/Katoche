@@ -43,6 +43,8 @@ void CommandInterpreter::interpretSimpleCommand(std::string action)
         std::cout << "Enter what?\n";
     else if (action == "go")
         std::cout << "Go where?\n";
+    else if (action == "jump")
+        this->player->jump();
 }
 
 void CommandInterpreter::interpretSimpleCommand(std::string action, std::string identifier)
