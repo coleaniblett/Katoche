@@ -48,6 +48,8 @@ GameObject* Player::getObject(std::string objectToGet)
 void Player::enterRoom(Room* roomToEnter)
 {
 	this->world->setCurrentRoom(roomToEnter);
+	std::cout << std::endl;
+	std::cout << "Current Room: " << this->world->getCurrentRoom()->getName() << std::endl;
 	roomToEnter->printDescription();
 }
 
