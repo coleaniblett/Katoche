@@ -144,8 +144,14 @@ Room World::getFountainRoom()
         false
     );
     GameObject gargoyle(
+        "gargoyle",
+        "It has a long neck, a small pair of wings, and a pair of arms tucked into its sides. It looks pretty well crafted.",
         "",
-        "",
+        false
+    );
+    GameObject coins(
+        "coins",
+        "They are mostly copper, but some look like they may be made of silver, and you even see a few gold.",
         "",
         false
     );
