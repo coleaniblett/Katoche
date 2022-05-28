@@ -106,7 +106,7 @@ Room World::getFirstRoom()
     );
     GameObject writing(
         "writing",
-        "The words read, \'you have to find and kill your shadowself\'. It's in your own handwriting.",
+        "The words read, \'you have to find and kill your shadow self\'. It's in your own handwriting.",
         "Above the corpse on the south wall, some writing is scribbled.\n",
         false
     );
@@ -140,17 +140,23 @@ Room World::getFountainRoom()
     GameObject fountain(
         "fountain",
         "The bottom of the fountain is filled with coins.",
-        "A massive fountain sits at the center. The water flows backwards, out of the fountain and into the mouth of a gargoyle that hangs from the ceiling.",
+        "",
+        false
+    );
+    GameObject gargoyle(
+        "",
+        "",
+        "",
         false
     );
     Room fountainRoom(
         "Fountain Room",
-        "You find yourself in a circular room."
+        "You find yourself in a circular room. A massive fountain sits at the center. The water flows backwards, out of the fountain and into the mouth of a gargoyle that hangs from the ceiling."
     );
     this->objects.insert({ bowAndQuiver.getName(), bowAndQuiver });
     this->objects.insert({ fountain.getName(), fountain });
-    fountainRoom.addObject(&this->objects.at("bow and quiver"));
     fountainRoom.addObject(&this->objects.at("fountain"));
+    fountainRoom.addObject(&this->objects.at("bow and quiver"));
     return fountainRoom;
 }
 
@@ -183,7 +189,7 @@ Room World::getTempleRoom()
 {
     GameObject statue(
         "statue",
-        "He looks peaceful. You feel a strong contentmen looking at him.",
+        "He looks peaceful. You feel a strong contentment looking at him.",
         "Atop the stage sits a statue of a bearded man, head draped and hands cupped.\n",
         false
     );
@@ -354,4 +360,13 @@ Room World::getForeverRoom()
         "You feel a profound tranquility here. A sense that you coud live out eternity, just existing in this room."
     );
     return foreverRoom;
+}
+
+Room World::getFinalRoom()
+{
+    Room finalRoom(
+        "",
+        ""
+    );
+    return finalRoom;
 }
