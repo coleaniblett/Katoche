@@ -37,7 +37,7 @@ void CommandInterpreter::interpretSimpleCommand(std::string action)
     else if (action == "north" || action == "east" || action == "south" ||
         action == "west" || action == "up" || action == "down")
         this->player->move(action);
-    else if (action == "examine")
+    else if (action == "examine" || action == "look")
         this->world->getCurrentRoom()->printDescription();
     else if (action == "enter")
         std::cout << "Enter what?\n";
@@ -53,6 +53,11 @@ void CommandInterpreter::interpretSimpleCommand(std::string action, std::string 
         {
             this->player->move(identifier);
         }
+    }
+    if (action == "look")
+    {
+        if (identifier == "around")
+            this->world->getCurrentRoom()->printDescription();
     }
 }
 
