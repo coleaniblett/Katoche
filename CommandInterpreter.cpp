@@ -66,7 +66,7 @@ void CommandInterpreter::interpretSimpleCommand(std::string action, std::string 
 void CommandInterpreter::interpretCommand(std::string action, std::string dirObject)
 {
     std::string newDirObject = this->standardizeDirObject(dirObject);
-    if (action == "take" || action == "get")
+    if (action == "take" || action == "get" || action == "grab")
     {
         if (this->world->getCurrentRoom()->containsObject(newDirObject))
         {
