@@ -47,9 +47,16 @@ GameObject* Player::getObject(std::string objectToGet)
 // movement methods
 void Player::enterRoom(Room* roomToEnter)
 {
+	std::string currentRoomName = this->world->getCurrentRoom()->getName();
+	std::string newRoomName = roomToEnter->getName();
+	bool droppingDown = false;
+	if (currentRoomName == "Event Horizon" && newRoomName == "First Room")
+		droppingDown = true;
 	this->world->setCurrentRoom(roomToEnter);
 	std::cout << std::endl;
 	std::cout << "Current Room: " << this->world->getCurrentRoom()->getName() << std::endl;
+	if (droppingDown == true)
+		std::cout << "Your feet touch the ground after a short drop, and the darkness disappears in an instant, seemingly out of nowhere.";
 	roomToEnter->printDescription();
 }
 
