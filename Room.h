@@ -2,6 +2,8 @@
 #include <string>
 #include <iostream>
 #include <map>
+#include <cstdlib>
+#include <ctime>
 #include "GameObject.h"
 class Room
 {

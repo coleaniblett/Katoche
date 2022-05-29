@@ -62,10 +62,26 @@ void Player::enterRoom(Room* roomToEnter)
 
 void Player::move(std::string direction)
 {
-	if (this->getWorld()->getCurrentRoom()->getRoom(direction))
-		this->enterRoom(this->getWorld()->getCurrentRoom()->getRoom(direction));
+	// special functionality for forest exploration
+	if (this->world->getCurrentRoom()->getName() == "Forest"
+		&& direction != "up" && direction != "down")
+	{
+		int roomCode = (rand() % 7);
+		if (roomCode <= 3)
+			this->enterRoom(this->getWorld()->getRoom("Forest"));
+		else if (roomCode <= 5)
+			this->enterRoom(this->getWorld()->getRoom("Outside Entrance"));
+		else
+			this->enterRoom(this->getWorld()->getRoom("Outside Exit"));
+	}
+	// standard functionality
 	else
-		std::cout << "You can't go that way." << std::endl;
+	{
+		if (this->getWorld()->getCurrentRoom()->getRoom(direction))
+			this->enterRoom(this->getWorld()->getCurrentRoom()->getRoom(direction));
+		else
+			std::cout << "You can't go that way." << std::endl;
+	}
 }
 
 void Player::jump()

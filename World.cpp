@@ -18,8 +18,10 @@ World::World()
     this->rooms.insert({ getNeverRoom().getName(), getNeverRoom() });
     this->rooms.insert({ getForeverRoom().getName(), getForeverRoom() });
     this->rooms.insert({ getFinalRoom().getName(), getFinalRoom() });
-    this->rooms.at("Outside Entrance").setExits(&this->rooms.at("Antechamber"), NULL, NULL, NULL,
-        NULL, NULL, NULL);
+    this->rooms.insert({ getForest().getName(), getForest() });
+    this->rooms.insert({ getOutsideExit().getName(), getOutsideExit() });
+    this->rooms.at("Outside Entrance").setExits(&this->rooms.at("Antechamber"), &this->rooms.at("Forest"), 
+        &this->rooms.at("Forest"), &this->rooms.at("Forest"), &this->rooms.at("Forest"), NULL, NULL);
     this->rooms.at("Antechamber").setExits(NULL, NULL, NULL, &this->rooms.at("Outside Entrance"),
         NULL, NULL, &this->rooms.at("Event Horizon"));
     this->rooms.at("Event Horizon").setExits(NULL, NULL, NULL, NULL, NULL, &this->rooms.at("Antechamber"),
@@ -48,6 +50,8 @@ World::World()
         &this->rooms.at("Graveyard Room"), NULL, NULL, NULL);
     this->rooms.at("Final Room").setExits(NULL, NULL, NULL, &this->rooms.at("Never Room"), NULL,
         NULL, NULL);
+    this->rooms.at("Outside Exit").setExits(NULL, &this->rooms.at("Forest"), &this->rooms.at("Forest"),
+        &this->rooms.at("Forest"), &this->rooms.at("Forest"), NULL, NULL);
     this->currentRoom = &(this->rooms.at("Outside Entrance"));
 }
 
@@ -375,7 +379,25 @@ Room World::getFinalRoom()
 {
     Room finalRoom(
         "Final Room",
-        "This room is small and completely empty. A door faces you on the northern side of the room.\n"
+        "This room is small and completely empty. A pair of stairs lead up to a slanted door on the opposite side of the room.\n"
     );
     return finalRoom;
+}
+
+Room World::getForest()
+{
+    Room forest(
+        "Forest",
+        "You're in the forest. The trees are thin, leafless, and almost branchless.\n"
+    );
+    return forest;
+}
+
+Room World::getOutsideExit()
+{
+    Room outsideExit(
+        "Outside Exit",
+        "You're outside. An oblique door like that of a storm cellar emerges from the ground.\n"
+    );
+    return outsideExit;
 }

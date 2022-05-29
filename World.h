@@ -26,8 +26,11 @@ private:
 	Room getNeverRoom();
 	Room getForeverRoom();
 	Room getFinalRoom();
+	Room getForest();
+	Room getOutsideExit();
 public:
 	World();
+	Room* getRoom(std::string roomToGet) { return &this->rooms.at(roomToGet); }
 	void setCurrentRoom(Room* roomToSet);
 	Room* getCurrentRoom() { return this->currentRoom; }	
 };

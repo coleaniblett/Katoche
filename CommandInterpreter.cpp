@@ -51,7 +51,9 @@ void CommandInterpreter::interpretSimpleCommand(std::string action, std::string 
 {
     if (action == "climb" || action == "go")
     {
-        if (identifier == "up" || identifier == "down")
+        if (this->world->getCurrentRoom()->getName() == "Outside Exit")
+            std::cout << "The door is locked.\n";
+        else if (identifier == "up" || identifier == "down")
         {
             this->player->move(identifier);
         }
@@ -104,7 +106,10 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
     {
         if (dirObject == "inside")
         {
-            this->player->move("inner");
+            if (this->world->getCurrentRoom()->getName() == "Outside Exit")
+                std::cout << "The door is locked.\n";
+            else
+                this->player->move("inner");
         }
         else if (dirObject == "north" || dirObject == "west" || dirObject == "south"
             || dirObject == "east")
