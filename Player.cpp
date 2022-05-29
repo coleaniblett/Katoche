@@ -122,5 +122,5 @@ void Player::getHelp()
 		<< "    - INVENTORY to check your current items\n"
 		<< "    - EXAMINE to look at something more closely\n"
 		<< "    - HELP to print this message again\n" 
-		<< "    - QUIT to exit the game\n" << std::endl;
+		<< "    - QUIT to exit the game\n\n";
 }

@@ -4,6 +4,7 @@
 #include <map>
 #include <cstdlib>
 #include <ctime>
+#include <vector>
 #include "GameObject.h"
 class Room
 {
@@ -29,6 +30,7 @@ public:
 	std::string getName() { return this->name; }
 	void setExits(Room* innerToSet, Room* northToSet, Room* westToSet, Room* southToSet,
 		Room* eastToSet, Room* upToSet, Room* downToset);
+	void printExits();
 	Room* getRoom(std::string roomToGet);
 	GameObject* getObject(std::string objectToGet);
 	void addObject(GameObject* objectToAdd);

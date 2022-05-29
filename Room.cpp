@@ -41,6 +41,36 @@ void Room::setExits(Room* innerToSet, Room* northToSet, Room* westToSet, Room* s
 	this->down = downToset;
 }
 
+void Room::printExits()
+{
+	if (this->name == "Outside Entrance" || this->name == "Outside Exit")
+		return;
+	std::vector<std::string> exits;
+	if (this->north != NULL)
+		exits.push_back("north"); 
+	if (this->west != NULL)
+		exits.push_back("west"); 
+	if (this->south != NULL)
+		exits.push_back("south"); 
+	if (this->east != NULL)
+		exits.push_back("east");
+	if (exits.size() == 0)
+		return;
+	else if (exits.size() == 1)
+		std::cout << "There is one exit to the " << exits.at(0) << "\n";
+	else
+	{
+		std::cout << "There are exits to the " << exits.at(0);
+		exits.erase(exits.begin());
+		while (exits.size() > 1)
+		{
+			std::cout << ", " << exits.at(0);
+			exits.erase(exits.begin());
+		}
+		std::cout << " and " << exits.at(0) << ".\n";
+	}
+}
+
 Room* Room::getRoom(std::string roomToGet)
 {
 	if (roomToGet == "inner")
@@ -95,4 +125,5 @@ void Room::printDescription()
 	{
 		std::cout << it->second->getLocationDescription();
 	}
+	this->printExits();
 }

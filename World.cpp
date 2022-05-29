@@ -48,7 +48,7 @@ World::World()
         &this->rooms.at("Infinity Room"), NULL, NULL, NULL);
     this->rooms.at("Never Room").setExits(NULL, &this->rooms.at("Final Room"), NULL, 
         &this->rooms.at("Graveyard Room"), NULL, NULL, NULL);
-    this->rooms.at("Final Room").setExits(NULL, NULL, NULL, &this->rooms.at("Never Room"), NULL,
+    this->rooms.at("Final Room").setExits(NULL, &this->rooms.at("Outside Exit"), NULL, &this->rooms.at("Never Room"), NULL,
         NULL, NULL);
     this->rooms.at("Outside Exit").setExits(NULL, &this->rooms.at("Forest"), &this->rooms.at("Forest"),
         &this->rooms.at("Forest"), &this->rooms.at("Forest"), NULL, NULL);
