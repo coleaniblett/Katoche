@@ -90,7 +90,7 @@ bool Room::containsObject(std::string objectToCheck)
 void Room::printDescription()
 {
 	std::map<std::string, GameObject*>::iterator it;
-	std::cout << this->description << std::endl;
+	std::cout << this->description;
 	for (it = this->contents.begin(); it != this->contents.end(); it++)
 	{
 		std::cout << it->second->getLocationDescription();

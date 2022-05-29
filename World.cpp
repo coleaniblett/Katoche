@@ -63,7 +63,7 @@ Room World::getOutsideEntrance()
     );
     Room outsideEntrance(
         "Outside Entrance",
-        "You're in a dark forest. Before you is a concrete cubic structure, about the size of the garage at your parents house."
+        "You're in a dark forest. Before you is a concrete cubic structure, about the size of the garage at your parents house.\n"
     );
     this->objects.insert({ entrance.getName(), entrance });
     outsideEntrance.addObject(&this->objects.at("entrance"));
@@ -80,7 +80,7 @@ Room World::getAntechamber()
     );
     Room antechamber(
         "Antechamber",
-        "Leaves that have blown in from the forest outside scatter the floor."
+        "Leaves that have blown in from the forest outside scatter the floor.\n"
     );
     this->objects.insert({ hole.getName(), hole });
     antechamber.addObject(&this->objects.at("hole"));
@@ -91,7 +91,7 @@ Room World::getEventHorizon()
 {
     Room eventHorizon(
         "Event Horizon",
-        "You're hanging on the end of a rope, submerged in darkness. You're not sure how far above the floor you are, but the rope has stopped."
+        "You're hanging on the end of a rope, submerged in darkness. You're not sure how far above the floor you are, but the rope has stopped.\n"
     );
     return eventHorizon;
 }
@@ -100,7 +100,7 @@ Room World::getFirstRoom()
 {
     GameObject corpse(
         "corpse",
-        "Looking more closely at the corpse, you see that its face and body are identical to yours. Its expression is twisted into a look of terror.",
+        "Looking more closely at the corpse, you see that its face and body are identical to yours. Its expression is twisted into a look of terror.\n",
         "A body lies on the floor.\n",
         false
     );
@@ -118,7 +118,7 @@ Room World::getFirstRoom()
     );
     Room firstRoom(
         "First Room",
-        "Your feet touch the ground after a short drop, and the darkness disappears in an instant as two torches light up on the northern side of this small room, seemingly by themselves. Between them is a door."
+        ""
     );
     this->objects.insert({ corpse.getName(), corpse });
     this->objects.insert({ writing.getName(), writing });
@@ -157,7 +157,7 @@ Room World::getFountainRoom()
     );
     Room fountainRoom(
         "Fountain Room",
-        "You find yourself in a circular room. A massive fountain sits at the center. The water flows backwards, out of the fountain and into the mouth of a gargoyle that hangs from the ceiling."
+        "You find yourself in a circular room. A massive fountain sits at the center. The water flows backwards, out of the fountain and into the mouth of a gargoyle that hangs from the ceiling.\n"
     );
     this->objects.insert({ bowAndQuiver.getName(), bowAndQuiver });
     this->objects.insert({ fountain.getName(), fountain });
@@ -182,7 +182,7 @@ Room World::getStableRoom()
     );
     Room stableRoom(
         "Stable Room",
-        "Straw lies strewn across the ground of this long room. To the right, five stalls line the room."
+        "Straw lies strewn across the ground of this long room. To the right, five stalls line the room.\n"
     );
     this->objects.insert({ horse.getName(), horse });
     this->objects.insert({ shovel.getName(), shovel });
@@ -201,7 +201,7 @@ Room World::getTempleRoom()
     );
     Room templeRoom(
         "Temple Room",
-        "This tall room leads to a short stage."
+        "This tall room leads to a short stage.\n"
     );
     this->objects.insert({ statue.getName(), statue });
     templeRoom.addObject(&this->objects.at("statue"));
@@ -230,7 +230,7 @@ Room World::getShroomRoom()
     );
     Room shroomRoom(
         "Shroom Room",
-        "This strange room is filled with mushrooms, mostly brown."
+        "This strange room is filled with mushrooms, mostly brown.\n"
     );
     this->objects.insert({ brownMushroom.getName(), brownMushroom });
     this->objects.insert({ redMushroom.getName(), redMushroom });
@@ -251,7 +251,7 @@ Room World::getLibrary()
     );
     Room library(
         "Library",
-        "Shelves line the walls, but they look to have been stripped bare."
+        "Shelves line the walls, but they look to have been stripped bare.\n"
     );
     this->objects.insert({ book.getName(), book });
     library.addObject(&this->objects.at("book"));
@@ -280,7 +280,7 @@ Room World::getYourBedroom()
     );
     Room yourBedroom(
         "Your Bedroom",
-        "It's the strangest thing... This room is your bedroom."
+        "It's the strangest thing... This room is your bedroom.\n"
     );
     this->objects.insert({ blinds.getName(), blinds });
     this->objects.insert({ bed.getName(), bed });
@@ -301,7 +301,7 @@ Room World::getInfinityRoom()
     );
     Room infinityRoom(
         "Infinity Room",
-        "As you stand in the open doorway of this room, you see another figure standing in a doorway on the opposite side, his back to you."
+        "As you stand in the open doorway of this room, you see another figure standing in a doorway on the opposite side, his back to you.\n"
     );
     this->objects.insert({ shadowSelf.getName(), shadowSelf });
     infinityRoom.addObject(&this->objects.at("shadow self"));
@@ -324,7 +324,7 @@ Room World::getArmory()
     );
     Room armory(
         "Armory",
-        "A chest sits in this small room."
+        "A chest sits in this small room.\n"
     );
     this->objects.insert({ chest.getName(), chest });
     this->objects.insert({ sword.getName(), sword });
@@ -343,7 +343,7 @@ Room World::getGraveyardRoom()
     );
     Room graveyardRoom(
         "Graveyard Room",
-        "The floor is made of dirt, and the illumination is a bit darker than the other rooms you've seen."
+        "The floor is made of dirt, and the illumination is a bit darker than the other rooms you've seen.\n"
     );
     this->objects.insert({ headstone.getName(), headstone });
     graveyardRoom.addObject(&this->objects.at("headstone"));
@@ -354,7 +354,7 @@ Room World::getNeverRoom()
 {
     Room neverRoom(
         "Never Room",
-        "There's something wrong with this room. You don't like this room. You have a powerful urge to leave."
+        "There's something wrong with this room. You don't like this room. You have a powerful urge to leave.\n"
     );
     return neverRoom;
 }
@@ -363,7 +363,7 @@ Room World::getForeverRoom()
 {
     Room foreverRoom(
         "Forever Room",
-        "You feel a profound tranquility here. A sense that you coud live out eternity, just existing in this room."
+        "You feel a profound tranquility here. A sense that you coud live out eternity, just existing in this room.\n"
     );
     return foreverRoom;
 }
