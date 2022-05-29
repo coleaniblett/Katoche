@@ -93,7 +93,7 @@ void Player::jump()
 void Player::printShadowDescription()
 {
 	if (this->shadowState == 0)
-		std::cout << "Your shadow looks like it always has." << std::endl;
+		std::cout << "Your shadow moves as you rotate, so you cannot turn and face it completely, but it otherwise looks normal from what you can see over your shoulder." << std::endl;
 }
 
 // other methods
