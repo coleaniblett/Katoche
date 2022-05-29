@@ -17,6 +17,7 @@ World::World()
     this->rooms.insert({ getGraveyardRoom().getName(), getGraveyardRoom() });
     this->rooms.insert({ getNeverRoom().getName(), getNeverRoom() });
     this->rooms.insert({ getForeverRoom().getName(), getForeverRoom() });
+    this->rooms.insert({ getFinalRoom().getName(), getFinalRoom() });
     this->rooms.at("Outside Entrance").setExits(&this->rooms.at("Antechamber"), NULL, NULL, NULL,
         NULL, NULL, NULL);
     this->rooms.at("Antechamber").setExits(NULL, NULL, NULL, &this->rooms.at("Outside Entrance"),
@@ -43,7 +44,9 @@ World::World()
         NULL, NULL);
     this->rooms.at("Graveyard Room").setExits(NULL, &this->rooms.at("Never Room"), NULL, 
         &this->rooms.at("Infinity Room"), NULL, NULL, NULL);
-    this->rooms.at("Never Room").setExits(NULL, NULL, NULL, &this->rooms.at("Graveyard Room"), NULL,
+    this->rooms.at("Never Room").setExits(NULL, &this->rooms.at("Final Room"), NULL, 
+        &this->rooms.at("Graveyard Room"), NULL, NULL, NULL);
+    this->rooms.at("Final Room").setExits(NULL, NULL, NULL, &this->rooms.at("Never Room"), NULL,
         NULL, NULL);
     this->currentRoom = &(this->rooms.at("Outside Entrance"));
 }
@@ -371,8 +374,8 @@ Room World::getForeverRoom()
 Room World::getFinalRoom()
 {
     Room finalRoom(
-        "",
-        ""
+        "Final Room",
+        "This room is small and completely empty. A door faces you on the northern side of the room.\n"
     );
     return finalRoom;
 }
