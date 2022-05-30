@@ -18,6 +18,8 @@ std::string CommandInterpreter::standardizeDirObject(std::string dirObject)
         return "entrance";
     else if (dirObject == "body" || dirObject == "dead body" || dirObject == "dead person")
         return "corpse";
+    else if (dirObject == "person" || dirObject == "figure")
+        return "shadow self";
     else
         return dirObject;
 }
