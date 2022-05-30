@@ -75,6 +75,23 @@ void CommandInterpreter::interpretSimpleCommand(std::string action, std::string 
                 std::cout << "There is nothing notable about the ground here.\n";
         }
     }
+    if (action == "jump")
+    {
+        if (identifier == "down")
+        {
+            if (curRoomName == "Event Horizon")
+                player->move("down");
+            else if (curRoomName == "Antechamber")
+            {
+                std::cout << "You jump down the hole. After falling some distance, you hit the ground with a hard thump.\nYou have died.\n";
+                this->player->setContinueGame(false);
+            }
+            else
+            {
+                std::cout << "There is no place for you to jump down to.\n";
+            }
+        }
+	}
 }
 
 void CommandInterpreter::interpretCommand(std::string action, std::string dirObject)
