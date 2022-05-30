@@ -49,6 +49,8 @@ void CommandInterpreter::interpretSimpleCommand(std::string action)
         this->player->jump();
     else if (action == "read")
         std::cout << "Read what?\n";
+    else if (action == "drop")
+        std::cout << "Drop what?\n";
 }
 
 void CommandInterpreter::interpretSimpleCommand(std::string action, std::string identifier)
@@ -75,7 +77,7 @@ void CommandInterpreter::interpretSimpleCommand(std::string action, std::string 
                 std::cout << "There is nothing notable about the ground here.\n";
         }
     }
-    if (action == "jump")
+    if (action == "jump" || action == "drop")
     {
         if (identifier == "down")
         {
