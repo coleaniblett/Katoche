@@ -124,3 +124,9 @@ void Player::getHelp()
 		<< "    - HELP to print this message again\n" 
 		<< "    - QUIT to exit the game\n\n";
 }
+
+void Player::read()
+{
+	// UNDER CONSTRUCTION
+	std::cout << "Book reading functionality under construction\n";
+}

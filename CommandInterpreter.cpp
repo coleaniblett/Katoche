@@ -45,6 +45,8 @@ void CommandInterpreter::interpretSimpleCommand(std::string action)
         std::cout << "Go where?\n";
     else if (action == "jump")
         this->player->jump();
+    else if (action == "read")
+        std::cout << "Read what?\n";
 }
 
 void CommandInterpreter::interpretSimpleCommand(std::string action, std::string identifier)
@@ -68,6 +70,8 @@ void CommandInterpreter::interpretSimpleCommand(std::string action, std::string 
 void CommandInterpreter::interpretCommand(std::string action, std::string dirObject)
 {
     std::string newDirObject = this->standardizeDirObject(dirObject);
+    std::string curRoomName = this->world->getCurrentRoom()->getName();
+    Room* curRoom = this->world->getCurrentRoom();
     if (action == "take" || action == "get" || action == "grab")
     {
         if (this->world->getCurrentRoom()->containsObject(newDirObject))
@@ -114,6 +118,13 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
         else if (dirObject == "north" || dirObject == "west" || dirObject == "south"
             || dirObject == "east")
             this->player->move(dirObject);
+    }
+    else if (action == "read")
+    {
+        if (curRoomName == "First Room" && dirObject == "writing")
+            std::cout << this->world->getCurrentRoom()->getObject("writing")->getDescription() << "\n";
+        else if ((curRoom->containsObject("book") && dirObject == "book") || player->hasObject("book"))
+            player->read();
     }
 }
 

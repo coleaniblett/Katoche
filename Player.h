@@ -33,4 +33,5 @@ public:
 	void jump();
 	// other methods
 	void getHelp();
+	void read();
 };
