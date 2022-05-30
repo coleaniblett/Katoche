@@ -53,9 +53,10 @@ void CommandInterpreter::interpretSimpleCommand(std::string action)
 
 void CommandInterpreter::interpretSimpleCommand(std::string action, std::string identifier)
 {
+    std::string curRoomName = this->world->getCurrentRoom()->getName();
     if (action == "climb" || action == "go")
     {
-        if (this->world->getCurrentRoom()->getName() == "Outside Exit")
+        if (curRoomName == "Outside Exit")
             std::cout << "The door is locked.\n";
         else if (identifier == "up" || identifier == "down")
         {
@@ -66,6 +67,13 @@ void CommandInterpreter::interpretSimpleCommand(std::string action, std::string 
     {
         if (identifier == "around")
             this->world->getCurrentRoom()->printDescription();
+        else if (identifier == "down")
+        {
+            if (curRoomName == "Antechamber")
+                std::cout << "The rope disappears into the darkness below. You can't tell how far the hole goes, but it looks like it is a minimum of 40 feet.\n";
+            else
+                std::cout << "There is nothing notable about the ground here.\n";
+        }
     }
 }
 
