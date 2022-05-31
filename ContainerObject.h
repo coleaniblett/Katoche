@@ -13,6 +13,7 @@ public:
     {}
     void addObject(std::shared_ptr<GameObject> objectToAdd) { this->contents.insert({ objectToAdd->getName(), objectToAdd }); }
     void removeObject(std::string objectToRemove) { this->contents.erase(objectToRemove); }
+    std::shared_ptr<GameObject> getObject(std::string objectToGet) { return this->contents.at(objectToGet); }
     bool hasObject(std::string objectToCheck) { return this->contents.count(objectToCheck); }
 };
 

@@ -177,7 +177,7 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
 
 void CommandInterpreter::interpretCommand(std::string action, std::string dirObject, std::string identifier, std::string secObject)
 {
-    if (action == "take")
+    if (action == "take" || action == "get" || action == "grab")
     {
         if (identifier == "from" || identifier == "in")
         {

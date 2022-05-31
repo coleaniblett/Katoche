@@ -48,9 +48,20 @@ void Player::getObjectFromContainer(std::string objectToGet, std::string contain
 {
 	if (this->world->getCurrentRoom()->containsObject(container))
 	{
-		//const std::type_info& test = typeid(this->world->getCurrentRoom()->getObject(container));
-		//std::cout << test.name() << "\n";
-		//ContainerObject* containerInRoom = dynamic_cast<ContainerObject*>(world->getCurrentRoom()->getObject(container));
+		if (typeid(*this->world->getCurrentRoom()->getObject(container)) == typeid(class ContainerObject))
+		{
+			auto containerToUse = std::dynamic_pointer_cast<ContainerObject>(this->world->getCurrentRoom()->getObject(container));
+			if (containerToUse->hasObject(objectToGet))
+			{
+				std::cout << "You take the " << objectToGet << " from the " << container << ".\n";
+				this->addToInventory(containerToUse->getObject(objectToGet));
+				containerToUse->removeObject(objectToGet);
+			}
+			else
+				std::cout << "There is no " << objectToGet << " in the " << container << ".\n";
+		}
+		else
+			std::cout << "The " << container << " is not a container.\n";
 	}
 }
 
