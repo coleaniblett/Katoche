@@ -60,6 +60,7 @@ void InputParser::parseInput(std::string inputToParse)
             else
             {
                 findObjectsWithIdentifier();
+                this->identifier.erase(this->identifier.size() - 1, 1);
                 this->interpreter->interpretCommand(action, primaryObject, identifier, secondaryObject);
             }
         }
