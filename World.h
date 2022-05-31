@@ -2,36 +2,38 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <memory>
 #include "Room.h"
+#include "ContainerObject.h"
 
 class World
 {
 private:
-	std::map<std::string, Room> rooms;
-	Room* currentRoom;
+	std::map<std::string, std::shared_ptr<Room>> rooms;
+	std::shared_ptr<Room> currentRoom;
 	std::map<std::string, GameObject> objects;
-	Room getOutsideEntrance();
-	Room getAntechamber();
-	Room getEventHorizon();
-	Room getFirstRoom();
-	Room getFountainRoom();
-	Room getStableRoom();
-	Room getTempleRoom();
-	Room getShroomRoom();
-	Room getLibrary();
-	Room getYourBedroom();
-	Room getInfinityRoom();
-	Room getArmory();
-	Room getGraveyardRoom();
-	Room getNeverRoom();
-	Room getForeverRoom();
-	Room getFinalRoom();
-	Room getForest();
-	Room getOutsideExit();
+	std::shared_ptr<Room> getOutsideEntrance();
+	std::shared_ptr<Room> getAntechamber();
+	std::shared_ptr<Room> getEventHorizon();
+	std::shared_ptr<Room> getFirstRoom();
+	std::shared_ptr<Room> getFountainRoom();
+	std::shared_ptr<Room> getStableRoom();
+	std::shared_ptr<Room> getTempleRoom();
+	std::shared_ptr<Room> getShroomRoom();
+	std::shared_ptr<Room> getLibrary();
+	std::shared_ptr<Room> getYourBedroom();
+	std::shared_ptr<Room> getInfinityRoom();
+	std::shared_ptr<Room> getArmory();
+	std::shared_ptr<Room> getGraveyardRoom();
+	std::shared_ptr<Room> getNeverRoom();
+	std::shared_ptr<Room> getForeverRoom();
+	std::shared_ptr<Room> getFinalRoom();
+	std::shared_ptr<Room> getForest();
+	std::shared_ptr<Room> getOutsideExit();
 public:
 	World();
-	Room* getRoom(std::string roomToGet) { return &this->rooms.at(roomToGet); }
-	void setCurrentRoom(Room* roomToSet);
-	Room* getCurrentRoom() { return this->currentRoom; }	
+	std::shared_ptr<Room> getRoom(std::string roomToGet) { return this->rooms.at(roomToGet); }
+	void setCurrentRoom(std::shared_ptr<Room> roomToSet);
+	std::shared_ptr<Room> getCurrentRoom() { return this->currentRoom; }	
 };
 

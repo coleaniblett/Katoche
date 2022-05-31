@@ -4,13 +4,6 @@ Room::Room()
 {
 	this->name = "";
 	this->description = "";
-	this->inner = new Room;
-	this->north = new Room;
-	this->west = new Room;
-	this->south = new Room;
-	this->east = new Room;
-	this->up = new Room;
-	this->down = new Room;
 }
 
 Room::Room(
@@ -22,22 +15,16 @@ Room::Room(
 	this->description = descriptionToSet;
 }
 
-void Room::setExits(Room* innerToSet, Room* northToSet, Room* westToSet, Room* southToSet,
-	Room* eastToSet, Room* upToSet, Room* downToset)
+void Room::setExits(std::shared_ptr<Room> innerToSet, std::shared_ptr<Room> northToSet,
+	std::shared_ptr<Room> westToSet, std::shared_ptr<Room> southToSet, std::shared_ptr<Room> eastToSet,
+	std::shared_ptr<Room> upToSet, std::shared_ptr<Room> downToset)
 {
-	delete this->inner;
 	this->inner = innerToSet;
-	delete this->north;
 	this->north = northToSet;
-	delete this->west;
 	this->west = westToSet;
-	delete this->south;
 	this->south = southToSet;
-	delete this->east;
 	this->east = eastToSet;
-	delete this->up;
 	this->up = upToSet;
-	delete this->down;
 	this->down = downToset;
 }
 
@@ -71,7 +58,7 @@ void Room::printExits()
 	}
 }
 
-Room* Room::getRoom(std::string roomToGet)
+std::shared_ptr<Room> Room::getRoom(std::string roomToGet)
 {
 	if (roomToGet == "inner")
 		return this->inner;

@@ -2,65 +2,67 @@
 
 World::World()
 {
-    this->rooms.insert({ getOutsideEntrance().getName(), getOutsideEntrance() });
-    this->rooms.insert({ getAntechamber().getName(), getAntechamber() });
-    this->rooms.insert({ getEventHorizon().getName(), getEventHorizon() });
-    this->rooms.insert({ getFirstRoom().getName(), getFirstRoom() });
-    this->rooms.insert({ getFountainRoom().getName(), getFountainRoom() });
-    this->rooms.insert({ getStableRoom().getName(), getStableRoom() });
-    this->rooms.insert({ getTempleRoom().getName(), getTempleRoom() });
-    this->rooms.insert({ getShroomRoom().getName(), getShroomRoom() });
-    this->rooms.insert({ getLibrary().getName(), getLibrary() });
-    this->rooms.insert({ getYourBedroom().getName(), getYourBedroom() });
-    this->rooms.insert({ getInfinityRoom().getName(), getInfinityRoom() });
-    this->rooms.insert({ getArmory().getName(), getArmory() });
-    this->rooms.insert({ getGraveyardRoom().getName(), getGraveyardRoom() });
-    this->rooms.insert({ getNeverRoom().getName(), getNeverRoom() });
-    this->rooms.insert({ getForeverRoom().getName(), getForeverRoom() });
-    this->rooms.insert({ getFinalRoom().getName(), getFinalRoom() });
-    this->rooms.insert({ getForest().getName(), getForest() });
-    this->rooms.insert({ getOutsideExit().getName(), getOutsideExit() });
-    this->rooms.at("Outside Entrance").setExits(&this->rooms.at("Antechamber"), &this->rooms.at("Forest"), 
-        &this->rooms.at("Forest"), &this->rooms.at("Forest"), &this->rooms.at("Forest"), NULL, NULL);
-    this->rooms.at("Antechamber").setExits(NULL, NULL, NULL, &this->rooms.at("Outside Entrance"),
-        NULL, NULL, &this->rooms.at("Event Horizon"));
-    this->rooms.at("Event Horizon").setExits(NULL, NULL, NULL, NULL, NULL, &this->rooms.at("Antechamber"),
-        &this->rooms.at("First Room"));
-    this->rooms.at("First Room").setExits(NULL, &this->rooms.at("Fountain Room"), NULL, NULL, NULL,
+    //std::shared_ptr<Room> outsideEntrance = getOutsideEntrance();
+    //this->rooms.insert({ outsideEntrance->getName(), outsideEntrance });
+    this->rooms.insert({ getOutsideEntrance()->getName(), getOutsideEntrance() });
+    this->rooms.insert({ getAntechamber()->getName(), getAntechamber() });
+    this->rooms.insert({ getEventHorizon()->getName(), getEventHorizon() });
+    this->rooms.insert({ getFirstRoom()->getName(), getFirstRoom() });
+    this->rooms.insert({ getFountainRoom()->getName(), getFountainRoom() });
+    this->rooms.insert({ getStableRoom()->getName(), getStableRoom() });
+    this->rooms.insert({ getTempleRoom()->getName(), getTempleRoom() });
+    this->rooms.insert({ getShroomRoom()->getName(), getShroomRoom() });
+    this->rooms.insert({ getLibrary()->getName(), getLibrary() });
+    this->rooms.insert({ getYourBedroom()->getName(), getYourBedroom() });
+    this->rooms.insert({ getInfinityRoom()->getName(), getInfinityRoom() });
+    this->rooms.insert({ getArmory()->getName(), getArmory() });
+    this->rooms.insert({ getGraveyardRoom()->getName(), getGraveyardRoom() });
+    this->rooms.insert({ getNeverRoom()->getName(), getNeverRoom() });
+    this->rooms.insert({ getForeverRoom()->getName(), getForeverRoom() });
+    this->rooms.insert({ getFinalRoom()->getName(), getFinalRoom() });
+    this->rooms.insert({ getForest()->getName(), getForest() });
+    this->rooms.insert({ getOutsideExit()->getName(), getOutsideExit() });
+    this->rooms.at("Outside Entrance")->setExits(this->rooms.at("Antechamber"), this->rooms.at("Forest"), 
+        this->rooms.at("Forest"), this->rooms.at("Forest"), this->rooms.at("Forest"), NULL, NULL);
+    this->rooms.at("Antechamber")->setExits(NULL, NULL, NULL, this->rooms.at("Outside Entrance"),
+        NULL, NULL, this->rooms.at("Event Horizon"));
+    this->rooms.at("Event Horizon")->setExits(NULL, NULL, NULL, NULL, NULL, this->rooms.at("Antechamber"),
+        this->rooms.at("First Room"));
+    this->rooms.at("First Room")->setExits(NULL, this->rooms.at("Fountain Room"), NULL, NULL, NULL,
         NULL, NULL);
-    this->rooms.at("Fountain Room").setExits(NULL, &this->rooms.at("Infinity Room"), 
-        &this->rooms.at("Temple Room"), &this->rooms.at("First Room"), &this->rooms.at("Stable Room"), NULL, NULL);
-    this->rooms.at("Stable Room").setExits(NULL, &this->rooms.at("Armory"), &this->rooms.at("Fountain Room"),
+    this->rooms.at("Fountain Room")->setExits(NULL, this->rooms.at("Infinity Room"), 
+        this->rooms.at("Temple Room"), this->rooms.at("First Room"), this->rooms.at("Stable Room"), NULL, NULL);
+    this->rooms.at("Stable Room")->setExits(NULL, this->rooms.at("Armory"), this->rooms.at("Fountain Room"),
         NULL, NULL, NULL, NULL);
-    this->rooms.at("Temple Room").setExits(NULL, &this->rooms.at("Shroom Room"), &this->rooms.at("Library"), NULL,
-        &this->rooms.at("Fountain Room"), NULL, NULL);
-    this->rooms.at("Shroom Room").setExits(NULL, NULL, NULL, &this->rooms.at("Temple Room"), NULL,
+    this->rooms.at("Temple Room")->setExits(NULL, this->rooms.at("Shroom Room"), this->rooms.at("Library"), NULL,
+        this->rooms.at("Fountain Room"), NULL, NULL);
+    this->rooms.at("Shroom Room")->setExits(NULL, NULL, NULL, this->rooms.at("Temple Room"), NULL,
         NULL, NULL);
-    this->rooms.at("Library").setExits(NULL, NULL, NULL, &this->rooms.at("Your Bedroom"), &this->rooms.at("Temple Room"),
+    this->rooms.at("Library")->setExits(NULL, NULL, NULL, this->rooms.at("Your Bedroom"), this->rooms.at("Temple Room"),
         NULL, NULL);
-    this->rooms.at("Your Bedroom").setExits(NULL, &this->rooms.at("Library"), NULL, NULL, NULL,
+    this->rooms.at("Your Bedroom")->setExits(NULL, this->rooms.at("Library"), NULL, NULL, NULL,
         NULL, NULL);
-    this->rooms.at("Infinity Room").setExits(NULL, &this->rooms.at("Graveyard Room"), NULL, 
-        &this->rooms.at("Fountain Room"), NULL, NULL, NULL);
-    this->rooms.at("Armory").setExits(NULL, NULL, NULL, &this->rooms.at("Stable Room"), NULL,
+    this->rooms.at("Infinity Room")->setExits(NULL, this->rooms.at("Graveyard Room"), NULL, 
+        this->rooms.at("Fountain Room"), NULL, NULL, NULL);
+    this->rooms.at("Armory")->setExits(NULL, NULL, NULL, this->rooms.at("Stable Room"), NULL,
         NULL, NULL);
-    this->rooms.at("Graveyard Room").setExits(NULL, &this->rooms.at("Never Room"), NULL, 
-        &this->rooms.at("Infinity Room"), NULL, NULL, NULL);
-    this->rooms.at("Never Room").setExits(NULL, &this->rooms.at("Final Room"), NULL, 
-        &this->rooms.at("Graveyard Room"), NULL, NULL, NULL);
-    this->rooms.at("Final Room").setExits(NULL, &this->rooms.at("Outside Exit"), NULL, &this->rooms.at("Never Room"), NULL,
+    this->rooms.at("Graveyard Room")->setExits(NULL, this->rooms.at("Never Room"), NULL, 
+        this->rooms.at("Infinity Room"), NULL, NULL, NULL);
+    this->rooms.at("Never Room")->setExits(NULL, this->rooms.at("Final Room"), NULL, 
+        this->rooms.at("Graveyard Room"), NULL, NULL, NULL);
+    this->rooms.at("Final Room")->setExits(NULL, this->rooms.at("Outside Exit"), NULL, this->rooms.at("Never Room"), NULL,
         NULL, NULL);
-    this->rooms.at("Outside Exit").setExits(NULL, &this->rooms.at("Forest"), &this->rooms.at("Forest"),
-        &this->rooms.at("Forest"), &this->rooms.at("Forest"), NULL, NULL);
-    this->currentRoom = &(this->rooms.at("Outside Entrance"));
+    this->rooms.at("Outside Exit")->setExits(NULL, this->rooms.at("Forest"), this->rooms.at("Forest"),
+        this->rooms.at("Forest"), this->rooms.at("Forest"), NULL, NULL);
+    this->currentRoom = (this->rooms.at("Outside Entrance"));
 }
 
-void World::setCurrentRoom(Room* roomToSet)
+void World::setCurrentRoom(std::shared_ptr<Room> roomToSet)
 {
     this->currentRoom = roomToSet;
 }
 
-Room World::getOutsideEntrance()
+std::shared_ptr<Room> World::getOutsideEntrance()
 {
     GameObject entrance(
         "entrance",     
@@ -68,16 +70,16 @@ Room World::getOutsideEntrance()
         "On its front is a tall opening with no door. It looks dark inside.\n",
         false
     );
-    Room outsideEntrance(
+    std::shared_ptr<Room> outsideEntrance( new Room(
         "Outside Entrance",
         "You're in a dark forest. Before you is a concrete cubic structure, about the size of the garage at your parents house.\n"
-    );
+    ));
     this->objects.insert({ entrance.getName(), entrance });
-    outsideEntrance.addObject(&this->objects.at("entrance"));
+    outsideEntrance->addObject(&this->objects.at("entrance"));
     return outsideEntrance;
 }
 
-Room World::getAntechamber()
+std::shared_ptr<Room> World::getAntechamber()
 {
     GameObject hole(
         "hole",
@@ -85,25 +87,25 @@ Room World::getAntechamber()
         "In the middle of the floor is a small square hole with a metal ring fixed into the concrete floor on one of its sides. Attached to the ring, a rope hangs, descending into the darkness below.\n",
         false
     );
-    Room antechamber(
+    std::shared_ptr<Room> antechamber( new Room(
         "Antechamber",
         "Leaves that have blown in from the forest outside scatter the floor.\n"
-    );
+    ));
     this->objects.insert({ hole.getName(), hole });
-    antechamber.addObject(&this->objects.at("hole"));
+    antechamber->addObject(&this->objects.at("hole"));
     return antechamber;
 }
 
-Room World::getEventHorizon()
+std::shared_ptr<Room> World::getEventHorizon()
 {
-    Room eventHorizon(
+    std::shared_ptr<Room> eventHorizon( new Room(
         "Event Horizon",
         "You're hanging on the end of a rope, submerged in darkness. You're not sure how far above the floor you are, but the rope has stopped.\n"
-    );
+    ));
     return eventHorizon;
 }
 
-Room World::getFirstRoom()
+std::shared_ptr<Room> World::getFirstRoom()
 {
     GameObject corpse(
         "corpse",
@@ -123,20 +125,20 @@ Room World::getFirstRoom()
         "A knife sticks out of the back of the corpse.\n",
         true
     );
-    Room firstRoom(
+    std::shared_ptr<Room> firstRoom( new Room(
         "First Room",
         ""
-    );
+    ));
     this->objects.insert({ corpse.getName(), corpse });
     this->objects.insert({ writing.getName(), writing });
     this->objects.insert({ knife.getName(), knife });
-    firstRoom.addObject(&this->objects.at("corpse"));
-    firstRoom.addObject(&this->objects.at("writing"));
-    firstRoom.addObject(&this->objects.at("knife")); 
+    firstRoom->addObject(&this->objects.at("corpse"));
+    firstRoom->addObject(&this->objects.at("writing"));
+    firstRoom->addObject(&this->objects.at("knife")); 
     return firstRoom;
 }
 
-Room World::getFountainRoom()
+std::shared_ptr<Room> World::getFountainRoom()
 {
     GameObject bowAndQuiver(
         "bow and quiver",
@@ -162,18 +164,18 @@ Room World::getFountainRoom()
         "",
         false
     );
-    Room fountainRoom(
+    std::shared_ptr<Room> fountainRoom( new Room(
         "Fountain Room",
         "You find yourself in a circular room. A massive fountain sits at the center. The water flows backwards, out of the fountain and into the mouth of a gargoyle that hangs from the ceiling.\n"
-    );
+    ));
     this->objects.insert({ bowAndQuiver.getName(), bowAndQuiver });
     this->objects.insert({ fountain.getName(), fountain });
-    fountainRoom.addObject(&this->objects.at("fountain"));
-    fountainRoom.addObject(&this->objects.at("bow and quiver"));
+    fountainRoom->addObject(&this->objects.at("fountain"));
+    fountainRoom->addObject(&this->objects.at("bow and quiver"));
     return fountainRoom;
 }
 
-Room World::getStableRoom()
+std::shared_ptr<Room> World::getStableRoom()
 {
     GameObject horse(
         "horse",
@@ -187,18 +189,18 @@ Room World::getStableRoom()
         "A shovel rests against the wall.\n",
         true
     );
-    Room stableRoom(
+    std::shared_ptr<Room> stableRoom( new Room(
         "Stable Room",
         "Straw lies strewn across the ground of this long room. To the right, five stalls line the room.\n"
-    );
+    ));
     this->objects.insert({ horse.getName(), horse });
     this->objects.insert({ shovel.getName(), shovel });
-    stableRoom.addObject(&this->objects.at("horse"));
-    stableRoom.addObject(&this->objects.at("shovel"));
+    stableRoom->addObject(&this->objects.at("horse"));
+    stableRoom->addObject(&this->objects.at("shovel"));
     return stableRoom;
 }
 
-Room World::getTempleRoom()
+std::shared_ptr<Room> World::getTempleRoom()
 {
     GameObject statue(
         "statue",
@@ -206,16 +208,16 @@ Room World::getTempleRoom()
         "Atop the stage sits a statue of a bearded man, head draped and hands cupped.\n",
         false
     );
-    Room templeRoom(
+    std::shared_ptr<Room> templeRoom( new Room(
         "Temple Room",
         "This tall room leads to a short stage.\n"
-    );
+    ));
     this->objects.insert({ statue.getName(), statue });
-    templeRoom.addObject(&this->objects.at("statue"));
+    templeRoom->addObject(&this->objects.at("statue"));
     return templeRoom;
 }
 
-Room World::getShroomRoom()
+std::shared_ptr<Room> World::getShroomRoom()
 {
     GameObject brownMushroom(
         "brown mushroom",
@@ -235,20 +237,20 @@ Room World::getShroomRoom()
         "A few purple mushrooms sit in the corner.\n",
         true
     );
-    Room shroomRoom(
+    std::shared_ptr<Room> shroomRoom( new Room(
         "Shroom Room",
         "This strange room is filled with mushrooms, mostly brown.\n"
-    );
+    ));
     this->objects.insert({ brownMushroom.getName(), brownMushroom });
     this->objects.insert({ redMushroom.getName(), redMushroom });
     this->objects.insert({ purpleMushroom.getName(), purpleMushroom });
-    shroomRoom.addObject(&this->objects.at("brown mushroom"));
-    shroomRoom.addObject(&this->objects.at("red mushroom"));
-    shroomRoom.addObject(&this->objects.at("brown mushroom"));
+    shroomRoom->addObject(&this->objects.at("brown mushroom"));
+    shroomRoom->addObject(&this->objects.at("red mushroom"));
+    shroomRoom->addObject(&this->objects.at("brown mushroom"));
     return shroomRoom;
 }
 
-Room World::getLibrary()
+std::shared_ptr<Room> World::getLibrary()
 {
     GameObject book(
         "book",
@@ -256,16 +258,16 @@ Room World::getLibrary()
         "One book sits in the middle of an otherwise empty shelf.\n",
         true
     );
-    Room library(
+    std::shared_ptr<Room> library( new Room(
         "Library",
         "Shelves line the walls, but they look to have been stripped bare.\n"
-    );
+    ));
     this->objects.insert({ book.getName(), book });
-    library.addObject(&this->objects.at("book"));
+    library->addObject(&this->objects.at("book"));
     return library;
 }
 
-Room World::getYourBedroom()
+std::shared_ptr<Room> World::getYourBedroom()
 {
     GameObject blinds(
         "blinds",
@@ -285,20 +287,20 @@ Room World::getYourBedroom()
         "Your dresser stands against the wall.\n",
         false
     );
-    Room yourBedroom(
+    std::shared_ptr<Room> yourBedroom( new Room(
         "Your Bedroom",
         "It's the strangest thing... This room is your bedroom.\n"
-    );
+    ));
     this->objects.insert({ blinds.getName(), blinds });
     this->objects.insert({ bed.getName(), bed });
     this->objects.insert({ dresser.getName(), dresser });
-    yourBedroom.addObject(&this->objects.at("blinds"));
-    yourBedroom.addObject(&this->objects.at("bed"));
-    yourBedroom.addObject(&this->objects.at("dresser"));
+    yourBedroom->addObject(&this->objects.at("blinds"));
+    yourBedroom->addObject(&this->objects.at("bed"));
+    yourBedroom->addObject(&this->objects.at("dresser"));
     return yourBedroom;
 }
 
-Room World::getInfinityRoom()
+std::shared_ptr<Room> World::getInfinityRoom()
 {
     GameObject shadowSelf(
         "shadow self",
@@ -306,41 +308,49 @@ Room World::getInfinityRoom()
         "The figure appears to be you.\n",
         false
     );
-    Room infinityRoom(
+    std::shared_ptr<Room> infinityRoom( new Room(
         "Infinity Room",
         "As you stand in the open doorway of this room, you see another figure standing in a doorway on the opposite side, his back to you.\n"
-    );
+    ));
     this->objects.insert({ shadowSelf.getName(), shadowSelf });
-    infinityRoom.addObject(&this->objects.at("shadow self"));
+    infinityRoom->addObject(&this->objects.at("shadow self"));
     return infinityRoom;
 }
 
-Room World::getArmory()
+std::shared_ptr<Room> World::getArmory()
 {
-    GameObject chest(
+    ContainerObject chest(
         "chest",
         "It's made of dark wood with no ornamentation. The opening has a clasp, but there is no lock.",
         "",
         false
     );
+    GameObject candle(
+        "candle",
+        "A short, wide candle. It looks like most of it has probably been used.",
+        "A candle sits on the ground",
+        true
+    );
+    chest.addObject(&candle);
     GameObject sword(
         "sword",
         "It's a longsword, a bit aged by the look of it.",
         "Above the chest hangs a sword.\n",
         true
     );
-    Room armory(
+    std::shared_ptr<Room> armory( new Room(
         "Armory",
         "A chest sits in this small room.\n"
-    );
+    ));
     this->objects.insert({ chest.getName(), chest });
+    this->objects.insert({ candle.getName(), candle });
     this->objects.insert({ sword.getName(), sword });
-    armory.addObject(&this->objects.at("chest"));
-    armory.addObject(&this->objects.at("sword"));
+    armory->addObject(&this->objects.at("chest"));
+    armory->addObject(&this->objects.at("sword"));
     return armory;
 }
 
-Room World::getGraveyardRoom()
+std::shared_ptr<Room> World::getGraveyardRoom()
 {
     GameObject headstone(
         "headstone",
@@ -348,56 +358,56 @@ Room World::getGraveyardRoom()
         "A headstone stands erect in the middle of the room.\n",
         false
     );
-    Room graveyardRoom(
+    std::shared_ptr<Room> graveyardRoom( new Room(
         "Graveyard Room",
         "The floor is made of dirt, and the illumination is a bit darker than the other rooms you've seen.\n"
-    );
+    ));
     this->objects.insert({ headstone.getName(), headstone });
-    graveyardRoom.addObject(&this->objects.at("headstone"));
+    graveyardRoom->addObject(&this->objects.at("headstone"));
     return graveyardRoom;
 }
 
-Room World::getNeverRoom()
+std::shared_ptr<Room> World::getNeverRoom()
 {
-    Room neverRoom(
+    std::shared_ptr<Room> neverRoom( new Room(
         "Never Room",
         "There's something wrong with this room. You don't like this room. You have a powerful urge to leave.\n"
-    );
+    ));
     return neverRoom;
 }
 
-Room World::getForeverRoom()
+std::shared_ptr<Room> World::getForeverRoom()
 {
-    Room foreverRoom(
+    std::shared_ptr<Room> foreverRoom( new Room(
         "Forever Room",
         "You feel a profound tranquility here. A sense that you coud live out eternity, just existing in this room.\n"
-    );
+    ));
     return foreverRoom;
 }
 
-Room World::getFinalRoom()
+std::shared_ptr<Room> World::getFinalRoom()
 {
-    Room finalRoom(
+    std::shared_ptr<Room> finalRoom( new Room(
         "Final Room",
         "This room is small and completely empty. A pair of stairs lead up to a slanted door on the opposite side of the room.\n"
-    );
+    ));
     return finalRoom;
 }
 
-Room World::getForest()
+std::shared_ptr<Room> World::getForest()
 {
-    Room forest(
+    std::shared_ptr<Room> forest( new Room(
         "Forest",
         "You're in the forest. The trees are thin, leafless, and almost branchless.\n"
-    );
+    ));
     return forest;
 }
 
-Room World::getOutsideExit()
+std::shared_ptr<Room> World::getOutsideExit()
 {
-    Room outsideExit(
+    std::shared_ptr<Room> outsideExit( new Room(
         "Outside Exit",
         "You're outside. An oblique door like that of a storm cellar emerges from the ground.\n"
-    );
+    ));
     return outsideExit;
 }

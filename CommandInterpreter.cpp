@@ -100,7 +100,7 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
 {
     std::string newDirObject = this->standardizeDirObject(dirObject);
     std::string curRoomName = this->world->getCurrentRoom()->getName();
-    Room* curRoom = this->world->getCurrentRoom();
+    std::shared_ptr<Room> curRoom = this->world->getCurrentRoom();
     if (action == "take" || action == "get" || action == "grab")
     {
         if (this->world->getCurrentRoom()->containsObject(newDirObject))
@@ -177,5 +177,11 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
 
 void CommandInterpreter::interpretCommand(std::string action, std::string dirObject, std::string identifier, std::string secObject)
 {
-
+    if (action == "take")
+    {
+        if (identifier == "from" || identifier == "in")
+        {
+            this->player->getObjectFromContainer(dirObject, secObject);
+        }
+    }
 }

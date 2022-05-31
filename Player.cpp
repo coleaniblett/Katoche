@@ -44,8 +44,18 @@ GameObject* Player::getObject(std::string objectToGet)
 	return this->inventory.at(objectToGet);
 }
 
+void Player::getObjectFromContainer(std::string objectToGet, std::string container)
+{
+	if (this->world->getCurrentRoom()->containsObject(container))
+	{
+		//const std::type_info& test = typeid(this->world->getCurrentRoom()->getObject(container));
+		//std::cout << test.name() << "\n";
+		//ContainerObject* containerInRoom = dynamic_cast<ContainerObject*>(world->getCurrentRoom()->getObject(container));
+	}
+}
+
 // movement methods
-void Player::enterRoom(Room* roomToEnter)
+void Player::enterRoom(std::shared_ptr<Room> roomToEnter)
 {
 	std::string currentRoomName = this->world->getCurrentRoom()->getName();
 	std::string newRoomName = roomToEnter->getName();
