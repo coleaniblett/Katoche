@@ -81,12 +81,12 @@ std::shared_ptr<Room> Room::getRoom(std::string roomToGet)
 	}
 }
 
-GameObject* Room::getObject(std::string objectToGet)
+std::shared_ptr<GameObject> Room::getObject(std::string objectToGet)
 {
 	return this->contents.at(objectToGet);
 }
 
-void Room::addObject(GameObject* objectToAdd)
+void Room::addObject(std::shared_ptr<GameObject> objectToAdd)
 {
 	contents.insert({ objectToAdd->getName(), objectToAdd });
 }
@@ -106,7 +106,7 @@ bool Room::containsObject(std::string objectToCheck)
 
 void Room::printDescription()
 {
-	std::map<std::string, GameObject*>::iterator it;
+	std::map<std::string, std::shared_ptr<GameObject>>::iterator it;
 	std::cout << this->description;
 	for (it = this->contents.begin(); it != this->contents.end(); it++)
 	{

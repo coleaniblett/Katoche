@@ -11,7 +11,7 @@ class Room
 private:
 	std::string name;
 	std::string description;
-	std::map<std::string, GameObject*> contents;
+	std::map<std::string, std::shared_ptr<GameObject>> contents;
 	bool containsRoom;
 	std::shared_ptr<Room> inner;
 	std::shared_ptr<Room> north;
@@ -33,8 +33,8 @@ public:
 		std::shared_ptr<Room> upToSet, std::shared_ptr<Room> downToset);
 	void printExits();
 	std::shared_ptr<Room> getRoom(std::string roomToGet);
-	GameObject* getObject(std::string objectToGet);
-	void addObject(GameObject* objectToAdd);
+	std::shared_ptr<GameObject> getObject(std::string objectToGet);
+	void addObject(std::shared_ptr<GameObject> objectToAdd);
 	void removeObject(std::string objectToRemove);
 	bool containsObject(std::string objectToCheck);
 	void printDescription();

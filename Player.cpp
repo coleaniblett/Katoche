@@ -16,7 +16,7 @@ Player::Player(World* worldToSet)
 }
 
 // inventory methods
-void Player::addToInventory(GameObject* objectToAdd)
+void Player::addToInventory(std::shared_ptr<GameObject> objectToAdd)
 {
 	this->inventory.insert({ objectToAdd->getName(), objectToAdd });
 }
@@ -32,14 +32,14 @@ bool Player::hasObject(std::string objectToCheck)
 void Player::printInventory()
 {
 	std::cout << "You currently have:" << std::endl;
-	std::map<std::string, GameObject*>::iterator it;
+	std::map<std::string, std::shared_ptr<GameObject>>::iterator it;
 	for (it = this->inventory.begin(); it != this->inventory.end(); it++)
 	{
 		std::cout << it->first << std::endl;
 	}
 }
 
-GameObject* Player::getObject(std::string objectToGet)
+std::shared_ptr<GameObject> Player::getObject(std::string objectToGet)
 {
 	return this->inventory.at(objectToGet);
 }
@@ -66,7 +66,7 @@ void Player::enterRoom(std::shared_ptr<Room> roomToEnter)
 	std::cout << std::endl;
 	std::cout << "Current Room: " << this->world->getCurrentRoom()->getName() << std::endl;
 	if (droppingDown == true)
-		std::cout << "Your feet touch the ground after a short drop, and the darkness disappears in an instant, seemingly out of nowhere.";
+		std::cout << "Your feet touch the ground after a short drop, and the darkness disappears in an instant, seemingly out of nowhere.\n";
 	roomToEnter->printDescription();
 }
 

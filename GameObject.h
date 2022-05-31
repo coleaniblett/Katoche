@@ -15,9 +15,9 @@ public:
 		std::string locationDescriptionToSet,
 		bool canBeTakenSetting
 	);
-	std::string getName() { return this->name; }
-	std::string getDescription() { return this->description; }
-	std::string getLocationDescription() { return this->locationDescription; }
-	bool getCanBeTaken() { return this->canBeTaken; }
+	virtual std::string getName() { return this->name; }
+	virtual std::string getDescription() { return this->description; }
+	virtual std::string getLocationDescription() { return this->locationDescription; }
+	virtual bool getCanBeTaken() { return this->canBeTaken; }
 };
 

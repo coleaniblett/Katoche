@@ -7,7 +7,7 @@ class Player
 private:
 	World* world;
 	bool continueGame;
-	std::map <std::string, GameObject*> inventory;
+	std::map <std::string, std::shared_ptr<GameObject>> inventory;
 	int shadowState;
 public:
 	// constructors
@@ -20,10 +20,10 @@ public:
 	bool getContinueGame() { return this->continueGame; }
 	void setContinueGame(bool valueToSet) { this->continueGame = valueToSet; }
 	// inventory methods
-	void addToInventory(GameObject* objectToAdd);
+	void addToInventory(std::shared_ptr<GameObject> objectToAdd);
 	bool hasObject(std::string objectToCheck);
 	void printInventory();
-	GameObject* getObject(std::string objectToGet);
+	std::shared_ptr<GameObject> getObject(std::string objectToGet);
 	void getObjectFromContainer(std::string objectToGet, std::string container);
 	// shadowState methods
 	int getShadowState() { return this->shadowState; }

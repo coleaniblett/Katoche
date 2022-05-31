@@ -2,8 +2,6 @@
 
 World::World()
 {
-    //std::shared_ptr<Room> outsideEntrance = getOutsideEntrance();
-    //this->rooms.insert({ outsideEntrance->getName(), outsideEntrance });
     this->rooms.insert({ getOutsideEntrance()->getName(), getOutsideEntrance() });
     this->rooms.insert({ getAntechamber()->getName(), getAntechamber() });
     this->rooms.insert({ getEventHorizon()->getName(), getEventHorizon() });
@@ -64,35 +62,35 @@ void World::setCurrentRoom(std::shared_ptr<Room> roomToSet)
 
 std::shared_ptr<Room> World::getOutsideEntrance()
 {
-    GameObject entrance(
+    std::shared_ptr<GameObject> entrance( new GameObject(
         "entrance",     
         "The entranceway is about six and a half feet tall, three feet wide. There is no sign that it ever included a door. The little light in the forest barely illuminates the inside.",
         "On its front is a tall opening with no door. It looks dark inside.\n",
         false
-    );
+    ));
     std::shared_ptr<Room> outsideEntrance( new Room(
         "Outside Entrance",
         "You're in a dark forest. Before you is a concrete cubic structure, about the size of the garage at your parents house.\n"
     ));
-    this->objects.insert({ entrance.getName(), entrance });
-    outsideEntrance->addObject(&this->objects.at("entrance"));
+    this->objects.insert({ entrance->getName(), entrance });
+    outsideEntrance->addObject(this->objects.at("entrance"));
     return outsideEntrance;
 }
 
 std::shared_ptr<Room> World::getAntechamber()
 {
-    GameObject hole(
+    std::shared_ptr<GameObject> hole( new GameObject(
         "hole",
         "You cannot see its bottom. The rope descends further than your vision.",
         "In the middle of the floor is a small square hole with a metal ring fixed into the concrete floor on one of its sides. Attached to the ring, a rope hangs, descending into the darkness below.\n",
         false
-    );
+    ));
     std::shared_ptr<Room> antechamber( new Room(
         "Antechamber",
         "Leaves that have blown in from the forest outside scatter the floor.\n"
     ));
-    this->objects.insert({ hole.getName(), hole });
-    antechamber->addObject(&this->objects.at("hole"));
+    this->objects.insert({ hole->getName(), hole });
+    antechamber->addObject(this->objects.at("hole"));
     return antechamber;
 }
 
@@ -107,263 +105,263 @@ std::shared_ptr<Room> World::getEventHorizon()
 
 std::shared_ptr<Room> World::getFirstRoom()
 {
-    GameObject corpse(
+    std::shared_ptr<GameObject> corpse( new GameObject (
         "corpse",
         "Looking more closely at the corpse, you see that its face and body are identical to yours. Its expression is twisted into a look of terror.\n",
         "A body lies on the floor.\n",
         false
-    );
-    GameObject writing(
+    ));
+    std::shared_ptr<GameObject> writing ( new GameObject (
         "writing",
         "The words read, \'you have to find and kill your shadow self\'. It's in your own handwriting.",
         "Above the corpse on the south wall, some writing is scribbled.\n",
         false
-    );
-    GameObject knife(
+    ));
+    std::shared_ptr<GameObject> knife( new GameObject (
         "knife",
         "It looks like a hunting knife.",
         "A knife sticks out of the back of the corpse.\n",
         true
-    );
+    ));
     std::shared_ptr<Room> firstRoom( new Room(
         "First Room",
         ""
     ));
-    this->objects.insert({ corpse.getName(), corpse });
-    this->objects.insert({ writing.getName(), writing });
-    this->objects.insert({ knife.getName(), knife });
-    firstRoom->addObject(&this->objects.at("corpse"));
-    firstRoom->addObject(&this->objects.at("writing"));
-    firstRoom->addObject(&this->objects.at("knife")); 
+    this->objects.insert({ corpse->getName(), corpse });
+    this->objects.insert({ writing->getName(), writing });
+    this->objects.insert({ knife->getName(), knife });
+    firstRoom->addObject(this->objects.at("corpse"));
+    firstRoom->addObject(this->objects.at("writing"));
+    firstRoom->addObject(this->objects.at("knife")); 
     return firstRoom;
 }
 
 std::shared_ptr<Room> World::getFountainRoom()
 {
-    GameObject bowAndQuiver(
+    std::shared_ptr<GameObject> bowAndQuiver( new GameObject(
         "bow and quiver",
         "The bow is a simple short bow, about three feet long. The quiver looks full with arrows.",
         "Around the gargoyle's head hangs a bow and a quiver of arrows. It looks to be out of reach.\n",
         false
-    );
-    GameObject fountain(
+    ));
+    std::shared_ptr<GameObject> fountain( new GameObject(
         "fountain",
         "The bottom of the fountain is filled with coins.",
         "",
         false
-    );
-    GameObject gargoyle(
+    ));
+    std::shared_ptr<GameObject> gargoyle( new GameObject(
         "gargoyle",
         "It has a long neck, a small pair of wings, and a pair of arms tucked into its sides. It looks pretty well crafted.",
         "",
         false
-    );
-    GameObject coins(
+    ));
+    std::shared_ptr<GameObject> coins( new GameObject(
         "coins",
         "They are mostly copper, but some look like they may be made of silver, and you even see a few gold.",
         "",
         false
-    );
+    ));
     std::shared_ptr<Room> fountainRoom( new Room(
         "Fountain Room",
         "You find yourself in a circular room. A massive fountain sits at the center. The water flows backwards, out of the fountain and into the mouth of a gargoyle that hangs from the ceiling.\n"
     ));
-    this->objects.insert({ bowAndQuiver.getName(), bowAndQuiver });
-    this->objects.insert({ fountain.getName(), fountain });
-    fountainRoom->addObject(&this->objects.at("fountain"));
-    fountainRoom->addObject(&this->objects.at("bow and quiver"));
+    this->objects.insert({ bowAndQuiver->getName(), bowAndQuiver });
+    this->objects.insert({ fountain->getName(), fountain });
+    fountainRoom->addObject(this->objects.at("fountain"));
+    fountainRoom->addObject(this->objects.at("bow and quiver"));
     return fountainRoom;
 }
 
 std::shared_ptr<Room> World::getStableRoom()
 {
-    GameObject horse(
+    std::shared_ptr<GameObject> horse( new GameObject(
         "horse",
         "The horse appears calm, but when you look into its eyes you see what looks like remarkable awareness. But then again, you've never spent much time around horses. Have you?",
         "In one of the stalls stands a tall bay horse.\n",
         false
-    );
-    GameObject shovel(
+    ));
+    std::shared_ptr<GameObject> shovel( new GameObject(
         "shovel",
         "It's pretty much an ordinary shovel.",
         "A shovel rests against the wall.\n",
         true
-    );
+    ));
     std::shared_ptr<Room> stableRoom( new Room(
         "Stable Room",
         "Straw lies strewn across the ground of this long room. To the right, five stalls line the room.\n"
     ));
-    this->objects.insert({ horse.getName(), horse });
-    this->objects.insert({ shovel.getName(), shovel });
-    stableRoom->addObject(&this->objects.at("horse"));
-    stableRoom->addObject(&this->objects.at("shovel"));
+    this->objects.insert({ horse->getName(), horse });
+    this->objects.insert({ shovel->getName(), shovel });
+    stableRoom->addObject(this->objects.at("horse"));
+    stableRoom->addObject(this->objects.at("shovel"));
     return stableRoom;
 }
 
 std::shared_ptr<Room> World::getTempleRoom()
 {
-    GameObject statue(
+    std::shared_ptr<GameObject> statue( new GameObject(
         "statue",
         "He looks peaceful. You feel a strong contentment looking at him.",
         "Atop the stage sits a statue of a bearded man, head draped and hands cupped.\n",
         false
-    );
+    ));
     std::shared_ptr<Room> templeRoom( new Room(
         "Temple Room",
         "This tall room leads to a short stage.\n"
     ));
-    this->objects.insert({ statue.getName(), statue });
-    templeRoom->addObject(&this->objects.at("statue"));
+    this->objects.insert({ statue->getName(), statue });
+    templeRoom->addObject(this->objects.at("statue"));
     return templeRoom;
 }
 
 std::shared_ptr<Room> World::getShroomRoom()
 {
-    GameObject brownMushroom(
+    std::shared_ptr<GameObject> brownMushroom( new GameObject(
         "brown mushroom",
         "It's a pretty ordinary looking mushroom, like the kind you'd see on lawns in the winter.",
         "",
         true
-    );
-    GameObject redMushroom(
+    ));
+    std::shared_ptr<GameObject> redMushroom( new GameObject(
         "red mushroom",
         "The mushroom is red, with white spots. It reminds you of a video game you used to play as a kid.",
         "A red mushroom grows in the middle, shorter than the rest but visible by its bright color.\n",
         true
-    );
-    GameObject purpleMushroom(
+    ));
+    std::shared_ptr<GameObject> purpleMushroom( new GameObject(
         "purple mushroom",
         "It's a sickly purple color.",
         "A few purple mushrooms sit in the corner.\n",
         true
-    );
+    ));
     std::shared_ptr<Room> shroomRoom( new Room(
         "Shroom Room",
         "This strange room is filled with mushrooms, mostly brown.\n"
     ));
-    this->objects.insert({ brownMushroom.getName(), brownMushroom });
-    this->objects.insert({ redMushroom.getName(), redMushroom });
-    this->objects.insert({ purpleMushroom.getName(), purpleMushroom });
-    shroomRoom->addObject(&this->objects.at("brown mushroom"));
-    shroomRoom->addObject(&this->objects.at("red mushroom"));
-    shroomRoom->addObject(&this->objects.at("brown mushroom"));
+    this->objects.insert({ brownMushroom->getName(), brownMushroom });
+    this->objects.insert({ redMushroom->getName(), redMushroom });
+    this->objects.insert({ purpleMushroom->getName(), purpleMushroom });
+    shroomRoom->addObject(this->objects.at("brown mushroom"));
+    shroomRoom->addObject(this->objects.at("red mushroom"));
+    shroomRoom->addObject(this->objects.at("brown mushroom"));
     return shroomRoom;
 }
 
 std::shared_ptr<Room> World::getLibrary()
 {
-    GameObject book(
+    std::shared_ptr<GameObject> book( new GameObject(
         "book",
         "The leather cover shows the outline of a feathered serpent. The pages are written in English.",
         "One book sits in the middle of an otherwise empty shelf.\n",
         true
-    );
+    ));
     std::shared_ptr<Room> library( new Room(
         "Library",
         "Shelves line the walls, but they look to have been stripped bare.\n"
     ));
-    this->objects.insert({ book.getName(), book });
-    library->addObject(&this->objects.at("book"));
+    this->objects.insert({ book->getName(), book });
+    library->addObject(this->objects.at("book"));
     return library;
 }
 
 std::shared_ptr<Room> World::getYourBedroom()
 {
-    GameObject blinds(
+    std::shared_ptr<GameObject> blinds( new GameObject(
         "blinds",
         "They're closed.",
         "The blinds are drawn on your bedroom window.",
         false
-    );
-    GameObject bed(
+    ));
+    std::shared_ptr<GameObject> bed( new GameObject(
         "bed",
         "It has the same green and brown bedspread you've had for years.",
         "In front of you is your bed, the one you fall asleep in every night.\n",
         false
-    );
-    GameObject dresser(
+    ));
+    std::shared_ptr<GameObject> dresser( new GameObject(
         "dresser",
         "It has six drawers, probably filled with your clothes.",
         "Your dresser stands against the wall.\n",
         false
-    );
+    ));
     std::shared_ptr<Room> yourBedroom( new Room(
         "Your Bedroom",
         "It's the strangest thing... This room is your bedroom.\n"
     ));
-    this->objects.insert({ blinds.getName(), blinds });
-    this->objects.insert({ bed.getName(), bed });
-    this->objects.insert({ dresser.getName(), dresser });
-    yourBedroom->addObject(&this->objects.at("blinds"));
-    yourBedroom->addObject(&this->objects.at("bed"));
-    yourBedroom->addObject(&this->objects.at("dresser"));
+    this->objects.insert({ blinds->getName(), blinds });
+    this->objects.insert({ bed->getName(), bed });
+    this->objects.insert({ dresser->getName(), dresser });
+    yourBedroom->addObject(this->objects.at("blinds"));
+    yourBedroom->addObject(this->objects.at("bed"));
+    yourBedroom->addObject(this->objects.at("dresser"));
     return yourBedroom;
 }
 
 std::shared_ptr<Room> World::getInfinityRoom()
 {
-    GameObject shadowSelf(
+    std::shared_ptr<GameObject> shadowSelf( new GameObject(
         "shadow self",
         "His movements seem to mirror yours.",
         "The figure appears to be you.\n",
         false
-    );
+    ));
     std::shared_ptr<Room> infinityRoom( new Room(
         "Infinity Room",
         "As you stand in the open doorway of this room, you see another figure standing in a doorway on the opposite side, his back to you.\n"
     ));
-    this->objects.insert({ shadowSelf.getName(), shadowSelf });
-    infinityRoom->addObject(&this->objects.at("shadow self"));
+    this->objects.insert({ shadowSelf->getName(), shadowSelf });
+    infinityRoom->addObject(this->objects.at("shadow self"));
     return infinityRoom;
 }
 
 std::shared_ptr<Room> World::getArmory()
 {
-    ContainerObject chest(
+    std::shared_ptr<GameObject> chest( new ContainerObject(
         "chest",
         "It's made of dark wood with no ornamentation. The opening has a clasp, but there is no lock.",
         "",
         false
-    );
-    GameObject candle(
+    ));
+    std::shared_ptr<GameObject> candle( new GameObject(
         "candle",
         "A short, wide candle. It looks like most of it has probably been used.",
         "A candle sits on the ground",
         true
-    );
-    chest.addObject(&candle);
-    GameObject sword(
+    ));
+    std::dynamic_pointer_cast<ContainerObject>(chest)->addObject(candle);
+    std::shared_ptr<GameObject> sword( new GameObject(
         "sword",
         "It's a longsword, a bit aged by the look of it.",
         "Above the chest hangs a sword.\n",
         true
-    );
+    ));
     std::shared_ptr<Room> armory( new Room(
         "Armory",
         "A chest sits in this small room.\n"
     ));
-    this->objects.insert({ chest.getName(), chest });
-    this->objects.insert({ candle.getName(), candle });
-    this->objects.insert({ sword.getName(), sword });
-    armory->addObject(&this->objects.at("chest"));
-    armory->addObject(&this->objects.at("sword"));
+    this->objects.insert({ chest->getName(), chest });
+    this->objects.insert({ candle->getName(), candle });
+    this->objects.insert({ sword->getName(), sword });
+    armory->addObject(this->objects.at("chest"));
+    armory->addObject(this->objects.at("sword"));
     return armory;
 }
 
 std::shared_ptr<Room> World::getGraveyardRoom()
 {
-    GameObject headstone(
+    std::shared_ptr<GameObject> headstone( new GameObject(
         "headstone",
         "It has your name on it.",
         "A headstone stands erect in the middle of the room.\n",
         false
-    );
+    ));
     std::shared_ptr<Room> graveyardRoom( new Room(
         "Graveyard Room",
         "The floor is made of dirt, and the illumination is a bit darker than the other rooms you've seen.\n"
     ));
-    this->objects.insert({ headstone.getName(), headstone });
-    graveyardRoom->addObject(&this->objects.at("headstone"));
+    this->objects.insert({ headstone->getName(), headstone });
+    graveyardRoom->addObject(this->objects.at("headstone"));
     return graveyardRoom;
 }
 
