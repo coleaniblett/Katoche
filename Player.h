@@ -36,4 +36,6 @@ public:
 	// other methods
 	void getHelp();
 	void read();
+	void openObject(std::string objectToOpen);
+	void closeObject(std::string objectToClose);
 };

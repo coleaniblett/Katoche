@@ -341,9 +341,9 @@ std::shared_ptr<Room> World::getArmory()
         "A chest sits in this small room.\n"
     ));
     this->objects.insert({ chest->getName(), chest });
-    this->objects.insert({ candle->getName(), candle });
     this->objects.insert({ sword->getName(), sword });
     armory->addObject(this->objects.at("chest"));
+    armory->addObject(chest);
     armory->addObject(this->objects.at("sword"));
     return armory;
 }

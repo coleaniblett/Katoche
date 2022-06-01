@@ -151,3 +151,48 @@ void Player::read()
 	// UNDER CONSTRUCTION
 	std::cout << "Book reading functionality under construction\n";
 }
+
+void Player::openObject(std::string objectToOpen)
+{
+	if (this->world->getCurrentRoom()->containsObject(objectToOpen))
+	{
+		if (typeid(*this->world->getCurrentRoom()->getObject(objectToOpen)) == typeid(class ContainerObject))
+		{
+			auto containerToUse = std::dynamic_pointer_cast<ContainerObject>(this->world->getCurrentRoom()->getObject(objectToOpen));
+			if (!containerToUse->checkIsOpen())
+			{
+				std::cout << "You open the " << objectToOpen << ".\n";
+				containerToUse->open();
+				containerToUse->printContents();
+			}
+			else
+				std::cout << "The " << objectToOpen << " is already open.\n";
+		}
+		else
+			std::cout << "You can't open the " << objectToOpen << ".\n";
+	}
+	else
+		std::cout << "There is no " << objectToOpen << ".\n";
+}
+
+void Player::closeObject(std::string objectToClose)
+{
+	if (this->world->getCurrentRoom()->containsObject(objectToClose))
+	{
+		if (typeid(*this->world->getCurrentRoom()->getObject(objectToClose)) == typeid(class ContainerObject))
+		{
+			auto containerToUse = std::dynamic_pointer_cast<ContainerObject>(this->world->getCurrentRoom()->getObject(objectToClose));
+			if (containerToUse->checkIsOpen())
+			{
+				std::cout << "You close the " << objectToClose << ".\n";
+				containerToUse->close();
+			}
+			else
+				std::cout << "The " << objectToClose << " is already closed.\n";
+		}
+		else
+			std::cout << "You can't open the " << objectToClose << ".\n";
+	}
+	else
+		std::cout << "There is no " << objectToClose << ".\n";
+}

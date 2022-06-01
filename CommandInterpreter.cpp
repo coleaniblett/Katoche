@@ -51,6 +51,10 @@ void CommandInterpreter::interpretSimpleCommand(std::string action)
         std::cout << "Read what?\n";
     else if (action == "drop")
         std::cout << "Drop what?\n";
+    else if (action == "open")
+        std::cout << "Open what?\n";
+    else if (action == "close")
+        std::cout << "Close what?\n";
 }
 
 void CommandInterpreter::interpretSimpleCommand(std::string action, std::string identifier)
@@ -153,7 +157,15 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
         if (curRoomName == "First Room" && dirObject == "writing")
             std::cout << this->world->getCurrentRoom()->getObject("writing")->getDescription() << "\n";
         else if ((curRoom->containsObject("book") && dirObject == "book") || player->hasObject("book"))
-            player->read();
+            this->player->read();
+    }
+    else if (action == "open")
+    {
+        this->player->openObject(dirObject);
+    }
+    else if (action == "close")
+    {
+        this->player->closeObject(dirObject);
     }
 }
 
