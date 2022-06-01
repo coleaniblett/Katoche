@@ -51,14 +51,19 @@ void Player::getObjectFromContainer(std::string objectToGet, std::string contain
 		if (typeid(*this->world->getCurrentRoom()->getObject(container)) == typeid(class ContainerObject))
 		{
 			auto containerToUse = std::dynamic_pointer_cast<ContainerObject>(this->world->getCurrentRoom()->getObject(container));
-			if (containerToUse->hasObject(objectToGet))
+			if (containerToUse->checkIsOpen())
 			{
-				std::cout << "You take the " << objectToGet << " from the " << container << ".\n";
-				this->addToInventory(containerToUse->getObject(objectToGet));
-				containerToUse->removeObject(objectToGet);
+				if (containerToUse->hasObject(objectToGet))
+				{
+					std::cout << "You take the " << objectToGet << " from the " << container << ".\n";
+					this->addToInventory(containerToUse->getObject(objectToGet));
+					containerToUse->removeObject(objectToGet);
+				}
+				else
+					std::cout << "There is no " << objectToGet << " in the " << container << ".\n";
 			}
 			else
-				std::cout << "There is no " << objectToGet << " in the " << container << ".\n";
+				std::cout << "The " << container << " is closed.\n";
 		}
 		else
 			std::cout << "The " << container << " is not a container.\n";
