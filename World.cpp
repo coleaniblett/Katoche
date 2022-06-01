@@ -72,8 +72,7 @@ std::shared_ptr<Room> World::getOutsideEntrance()
         "Outside Entrance",
         "You're in a dark forest. Before you is a concrete cubic structure, about the size of the garage at your parents house.\n"
     ));
-    this->objects.insert({ entrance->getName(), entrance });
-    outsideEntrance->addObject(this->objects.at("entrance"));
+    outsideEntrance->addObject(entrance);
     return outsideEntrance;
 }
 
@@ -89,8 +88,7 @@ std::shared_ptr<Room> World::getAntechamber()
         "Antechamber",
         "Leaves that have blown in from the forest outside scatter the floor.\n"
     ));
-    this->objects.insert({ hole->getName(), hole });
-    antechamber->addObject(this->objects.at("hole"));
+    antechamber->addObject(hole);
     return antechamber;
 }
 
@@ -127,12 +125,9 @@ std::shared_ptr<Room> World::getFirstRoom()
         "First Room",
         ""
     ));
-    this->objects.insert({ corpse->getName(), corpse });
-    this->objects.insert({ writing->getName(), writing });
-    this->objects.insert({ knife->getName(), knife });
-    firstRoom->addObject(this->objects.at("corpse"));
-    firstRoom->addObject(this->objects.at("writing"));
-    firstRoom->addObject(this->objects.at("knife")); 
+    firstRoom->addObject(corpse);
+    firstRoom->addObject(writing);
+    firstRoom->addObject(knife); 
     return firstRoom;
 }
 
@@ -166,10 +161,8 @@ std::shared_ptr<Room> World::getFountainRoom()
         "Fountain Room",
         "You find yourself in a circular room. A massive fountain sits at the center. The water flows backwards, out of the fountain and into the mouth of a gargoyle that hangs from the ceiling.\n"
     ));
-    this->objects.insert({ bowAndQuiver->getName(), bowAndQuiver });
-    this->objects.insert({ fountain->getName(), fountain });
-    fountainRoom->addObject(this->objects.at("fountain"));
-    fountainRoom->addObject(this->objects.at("bow and quiver"));
+    fountainRoom->addObject(fountain);
+    fountainRoom->addObject(bowAndQuiver);
     return fountainRoom;
 }
 
@@ -191,10 +184,8 @@ std::shared_ptr<Room> World::getStableRoom()
         "Stable Room",
         "Straw lies strewn across the ground of this long room. To the right, five stalls line the room.\n"
     ));
-    this->objects.insert({ horse->getName(), horse });
-    this->objects.insert({ shovel->getName(), shovel });
-    stableRoom->addObject(this->objects.at("horse"));
-    stableRoom->addObject(this->objects.at("shovel"));
+    stableRoom->addObject(horse);
+    stableRoom->addObject(shovel);
     return stableRoom;
 }
 
@@ -210,8 +201,7 @@ std::shared_ptr<Room> World::getTempleRoom()
         "Temple Room",
         "This tall room leads to a short stage.\n"
     ));
-    this->objects.insert({ statue->getName(), statue });
-    templeRoom->addObject(this->objects.at("statue"));
+    templeRoom->addObject(statue);
     return templeRoom;
 }
 
@@ -239,12 +229,9 @@ std::shared_ptr<Room> World::getShroomRoom()
         "Shroom Room",
         "This strange room is filled with mushrooms, mostly brown.\n"
     ));
-    this->objects.insert({ brownMushroom->getName(), brownMushroom });
-    this->objects.insert({ redMushroom->getName(), redMushroom });
-    this->objects.insert({ purpleMushroom->getName(), purpleMushroom });
-    shroomRoom->addObject(this->objects.at("brown mushroom"));
-    shroomRoom->addObject(this->objects.at("red mushroom"));
-    shroomRoom->addObject(this->objects.at("brown mushroom"));
+    shroomRoom->addObject(brownMushroom);
+    shroomRoom->addObject(redMushroom);
+    shroomRoom->addObject(brownMushroom);
     return shroomRoom;
 }
 
@@ -260,8 +247,7 @@ std::shared_ptr<Room> World::getLibrary()
         "Library",
         "Shelves line the walls, but they look to have been stripped bare.\n"
     ));
-    this->objects.insert({ book->getName(), book });
-    library->addObject(this->objects.at("book"));
+    library->addObject(book);
     return library;
 }
 
@@ -289,12 +275,9 @@ std::shared_ptr<Room> World::getYourBedroom()
         "Your Bedroom",
         "It's the strangest thing... This room is your bedroom.\n"
     ));
-    this->objects.insert({ blinds->getName(), blinds });
-    this->objects.insert({ bed->getName(), bed });
-    this->objects.insert({ dresser->getName(), dresser });
-    yourBedroom->addObject(this->objects.at("blinds"));
-    yourBedroom->addObject(this->objects.at("bed"));
-    yourBedroom->addObject(this->objects.at("dresser"));
+    yourBedroom->addObject(blinds);
+    yourBedroom->addObject(bed);
+    yourBedroom->addObject(dresser);
     return yourBedroom;
 }
 
@@ -310,8 +293,7 @@ std::shared_ptr<Room> World::getInfinityRoom()
         "Infinity Room",
         "As you stand in the open doorway of this room, you see another figure standing in a doorway on the opposite side, his back to you.\n"
     ));
-    this->objects.insert({ shadowSelf->getName(), shadowSelf });
-    infinityRoom->addObject(this->objects.at("shadow self"));
+    infinityRoom->addObject(shadowSelf);
     return infinityRoom;
 }
 
@@ -340,11 +322,8 @@ std::shared_ptr<Room> World::getArmory()
         "Armory",
         "A chest sits in this small room.\n"
     ));
-    this->objects.insert({ chest->getName(), chest });
-    this->objects.insert({ sword->getName(), sword });
-    armory->addObject(this->objects.at("chest"));
     armory->addObject(chest);
-    armory->addObject(this->objects.at("sword"));
+    armory->addObject(sword);
     return armory;
 }
 
@@ -360,8 +339,7 @@ std::shared_ptr<Room> World::getGraveyardRoom()
         "Graveyard Room",
         "The floor is made of dirt, and the illumination is a bit darker than the other rooms you've seen.\n"
     ));
-    this->objects.insert({ headstone->getName(), headstone });
-    graveyardRoom->addObject(this->objects.at("headstone"));
+    graveyardRoom->addObject(headstone);
     return graveyardRoom;
 }
 

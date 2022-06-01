@@ -11,7 +11,6 @@ class World
 private:
 	std::map<std::string, std::shared_ptr<Room>> rooms;
 	std::shared_ptr<Room> currentRoom;
-	std::map<std::string, std::shared_ptr<GameObject>> objects;
 	std::shared_ptr<Room> getOutsideEntrance();
 	std::shared_ptr<Room> getAntechamber();
 	std::shared_ptr<Room> getEventHorizon();
