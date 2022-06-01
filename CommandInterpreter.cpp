@@ -104,6 +104,7 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
 {
     std::string newDirObject = this->standardizeDirObject(dirObject);
     std::string curRoomName = this->world->getCurrentRoom()->getName();
+    std::string itemContainer;
     std::shared_ptr<Room> curRoom = this->world->getCurrentRoom();
     if (action == "take" || action == "get" || action == "grab")
     {
@@ -119,7 +120,13 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
                 std::cout << "You can't take the " << dirObject << "." << std::endl;
         }
         else
-            std::cout << "There is no " << dirObject << " to take." << std::endl;
+        {
+            itemContainer = curRoom->checkContainers(dirObject);
+            if (itemContainer != "")
+                this->player->getObjectFromContainer(dirObject, itemContainer);
+            else
+                std::cout << "There is no " << dirObject << " to take." << std::endl;
+        }
     }
     else if (action == "examine")
     {

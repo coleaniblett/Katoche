@@ -104,6 +104,38 @@ bool Room::containsObject(std::string objectToCheck)
 		return false;
 }
 
+bool Room::containsContainer()
+{
+	std::shared_ptr<GameObject> ptr;
+	for (auto it = this->contents.begin(); it != this->contents.end(); it++)
+	{
+		ptr = it->second;
+		if (typeid(*ptr) == typeid(class ContainerObject))
+			return true;
+	}
+	return false;
+}
+
+std::string Room::checkContainers(std::string objectToCheck)
+{
+	std::shared_ptr<GameObject> ptr;
+	std::string result = "";
+	for (auto it = this->contents.begin(); it != this->contents.end(); it++)
+	{
+		ptr = it->second;
+		if (typeid(*ptr) == typeid(class ContainerObject))
+		{
+			auto containerToCheck = std::dynamic_pointer_cast<ContainerObject>(ptr);
+			if (containerToCheck->checkIsOpen() && containerToCheck->hasObject(objectToCheck))
+			{
+				result = ptr->getName();
+				return result;
+			}
+		}
+	}
+	return result;
+}
+
 void Room::printDescription()
 {
 	std::map<std::string, std::shared_ptr<GameObject>>::iterator it;

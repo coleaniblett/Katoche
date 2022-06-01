@@ -5,7 +5,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <vector>
-#include "GameObject.h"
+#include "ContainerObject.h"
 class Room
 {
 private:
@@ -37,5 +37,7 @@ public:
 	void addObject(std::shared_ptr<GameObject> objectToAdd);
 	void removeObject(std::string objectToRemove);
 	bool containsObject(std::string objectToCheck);
+	bool containsContainer();
+	std::string checkContainers(std::string objectToCheck);
 	void printDescription();
 };
