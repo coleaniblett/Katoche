@@ -46,11 +46,12 @@ std::shared_ptr<GameObject> Player::getObject(std::string objectToGet)
 
 void Player::getObjectFromContainer(std::string objectToGet, std::string container)
 {
-	if (this->world->getCurrentRoom()->containsObject(container))
+	std::shared_ptr<Room> curRoom = this->world->getCurrentRoom();
+	if (curRoom->containsObject(container))
 	{
-		if (typeid(*this->world->getCurrentRoom()->getObject(container)) == typeid(class ContainerObject))
+		if (typeid(*curRoom->getObject(container)) == typeid(class ContainerObject))
 		{
-			auto containerToUse = std::dynamic_pointer_cast<ContainerObject>(this->world->getCurrentRoom()->getObject(container));
+			auto containerToUse = std::dynamic_pointer_cast<ContainerObject>(curRoom->getObject(container));
 			if (containerToUse->checkIsOpen())
 			{
 				if (containerToUse->hasObject(objectToGet))
@@ -94,11 +95,11 @@ void Player::move(std::string direction)
 	{
 		int roomCode = (rand() % 7);
 		if (roomCode <= 3)
-			this->enterRoom(this->getWorld()->getRoom("Forest"));
+			this->enterRoom(this->world->getRoom("Forest"));
 		else if (roomCode <= 5)
-			this->enterRoom(this->getWorld()->getRoom("Outside Entrance"));
+			this->enterRoom(this->world->getRoom("Outside Entrance"));
 		else
-			this->enterRoom(this->getWorld()->getRoom("Outside Exit"));
+			this->enterRoom(this->world->getRoom("Outside Exit"));
 	}
 	// standard functionality
 	else
@@ -159,11 +160,12 @@ void Player::read()
 
 void Player::openObject(std::string objectToOpen)
 {
-	if (this->world->getCurrentRoom()->containsObject(objectToOpen))
+	std::shared_ptr<Room> curRoom = this->world->getCurrentRoom();
+	if (curRoom->containsObject(objectToOpen))
 	{
-		if (typeid(*this->world->getCurrentRoom()->getObject(objectToOpen)) == typeid(class ContainerObject))
+		if (typeid(*curRoom->getObject(objectToOpen)) == typeid(class ContainerObject))
 		{
-			auto containerToUse = std::dynamic_pointer_cast<ContainerObject>(this->world->getCurrentRoom()->getObject(objectToOpen));
+			auto containerToUse = std::dynamic_pointer_cast<ContainerObject>(curRoom->getObject(objectToOpen));
 			if (!containerToUse->checkIsOpen())
 			{
 				std::cout << "You open the " << objectToOpen << ".\n";
@@ -182,11 +184,12 @@ void Player::openObject(std::string objectToOpen)
 
 void Player::closeObject(std::string objectToClose)
 {
-	if (this->world->getCurrentRoom()->containsObject(objectToClose))
+	std::shared_ptr<Room> curRoom = this->world->getCurrentRoom();
+	if (curRoom->containsObject(objectToClose))
 	{
-		if (typeid(*this->world->getCurrentRoom()->getObject(objectToClose)) == typeid(class ContainerObject))
+		if (typeid(*curRoom->getObject(objectToClose)) == typeid(class ContainerObject))
 		{
-			auto containerToUse = std::dynamic_pointer_cast<ContainerObject>(this->world->getCurrentRoom()->getObject(objectToClose));
+			auto containerToUse = std::dynamic_pointer_cast<ContainerObject>(curRoom->getObject(objectToClose));
 			if (containerToUse->checkIsOpen())
 			{
 				std::cout << "You close the " << objectToClose << ".\n";
@@ -196,7 +199,7 @@ void Player::closeObject(std::string objectToClose)
 				std::cout << "The " << objectToClose << " is already closed.\n";
 		}
 		else
-			std::cout << "You can't open the " << objectToClose << ".\n";
+			std::cout << "You can't close the " << objectToClose << ".\n";
 	}
 	else
 		std::cout << "There is no " << objectToClose << ".\n";
