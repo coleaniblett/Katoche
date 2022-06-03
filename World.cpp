@@ -84,11 +84,18 @@ std::shared_ptr<Room> World::getAntechamber()
         "In the middle of the floor is a small square hole with a metal ring fixed into the concrete floor on one of its sides. Attached to the ring, a rope hangs, descending into the darkness below.\n",
         false
     ));
+    std::shared_ptr<GameObject> rope(new GameObject(
+        "rope",
+        "It looks thick and sturdy, like it would support your bodyweight.",
+        "",
+        false
+    ));
     std::shared_ptr<Room> antechamber( new Room(
         "Antechamber",
         "Leaves that have blown in from the forest outside scatter the floor.\n"
     ));
     antechamber->addObject(hole);
+    antechamber->addObject(rope);
     return antechamber;
 }
 
