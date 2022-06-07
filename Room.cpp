@@ -104,16 +104,24 @@ bool Room::containsObject(std::string objectToCheck)
 		return false;
 }
 
-bool Room::containsContainer()
+std::string Room::checkSearchedObjects(std::string objectToCheck)
 {
 	std::shared_ptr<GameObject> ptr;
+	std::string result = "";
 	for (auto it = this->contents.begin(); it != this->contents.end(); it++)
 	{
 		ptr = it->second;
-		if (typeid(*ptr) == typeid(class ContainerObject))
-			return true;
+		if (typeid(*ptr) == typeid(class SearchableObject))
+		{
+			auto searchableObjectToCheck = std::dynamic_pointer_cast<SearchableObject>(ptr);
+			if (searchableObjectToCheck->getHasBeenSearched() && searchableObjectToCheck->hasObject(objectToCheck))
+			{
+				result = ptr->getName();
+				return result;
+			}
+		}
 	}
-	return false;
+	return result;
 }
 
 std::string Room::checkContainers(std::string objectToCheck)

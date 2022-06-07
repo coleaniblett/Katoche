@@ -6,6 +6,7 @@
 #include <ctime>
 #include <vector>
 #include "ContainerObject.h"
+#include "SearchableObject.h"
 class Room
 {
 private:
@@ -37,7 +38,7 @@ public:
 	void addObject(std::shared_ptr<GameObject> objectToAdd);
 	void removeObject(std::string objectToRemove);
 	bool containsObject(std::string objectToCheck);
-	bool containsContainer();
+	std::string checkSearchedObjects(std::string objectToCheck);
 	std::string checkContainers(std::string objectToCheck);
 	void printDescription();
 };

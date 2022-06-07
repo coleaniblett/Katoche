@@ -55,6 +55,8 @@ void CommandInterpreter::interpretSimpleCommand(std::string action)
         std::cout << "Open what?\n";
     else if (action == "close")
         std::cout << "Close what?\n";
+    else if (action == "search")
+        std::cout << "Search what?\n";
 }
 
 void CommandInterpreter::interpretSimpleCommand(std::string action, std::string identifier)
@@ -105,6 +107,7 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
     std::string newDirObject = this->standardizeDirObject(dirObject);
     std::string curRoomName = this->world->getCurrentRoom()->getName();
     std::string itemContainer;
+    std::string searchedObject;
     std::shared_ptr<Room> curRoom = this->world->getCurrentRoom();
     if (action == "take" || action == "get" || action == "grab")
     {
@@ -122,8 +125,13 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
         else
         {
             itemContainer = curRoom->checkContainers(dirObject);
+            searchedObject = curRoom->checkSearchedObjects(dirObject);
             if (itemContainer != "")
                 this->player->getObjectFromContainer(dirObject, itemContainer);
+            else if (searchedObject != "")
+            {
+                this->player->getObjectFromSearchedObject(dirObject, searchedObject);
+            }
             else
                 std::cout << "There is no " << dirObject << " to take." << std::endl;
         }
@@ -174,6 +182,10 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
     {
         this->player->closeObject(dirObject);
     }
+    else if (action == "search")
+    {
+        this->player->searchObject(newDirObject);
+    }
 }
 
 void CommandInterpreter::interpretCommand(std::string action, std::string dirObject, std::string identifier)
@@ -196,6 +208,7 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
 
 void CommandInterpreter::interpretCommand(std::string action, std::string dirObject, std::string identifier, std::string secObject)
 {
+    std::string newDirObject = this->standardizeDirObject(dirObject);
     if (action == "take" || action == "get" || action == "grab")
     {
         if (identifier == "from" || identifier == "in")

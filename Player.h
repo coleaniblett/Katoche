@@ -25,6 +25,7 @@ public:
 	void printInventory();
 	std::shared_ptr<GameObject> getObject(std::string objectToGet);
 	void getObjectFromContainer(std::string objectToGet, std::string container);
+	void getObjectFromSearchedObject(std::string objectToGet, std::string searchedObject);
 	// shadowState methods
 	int getShadowState() { return this->shadowState; }
 	void setShadowState(int stateToSet) { this->shadowState = stateToSet; }
@@ -38,4 +39,5 @@ public:
 	void read();
 	void openObject(std::string objectToOpen);
 	void closeObject(std::string objectToClose);
+	void searchObject(std::string objectToSearch);
 };

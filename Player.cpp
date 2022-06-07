@@ -71,6 +71,33 @@ void Player::getObjectFromContainer(std::string objectToGet, std::string contain
 	}
 }
 
+void Player::getObjectFromSearchedObject(std::string objectToGet, std::string searchedObject)
+{
+	std::shared_ptr<Room> curRoom = this->world->getCurrentRoom();
+	if (curRoom->containsObject(searchedObject))
+	{
+		if (typeid(*curRoom->getObject(searchedObject)) == typeid(class SearchableObject))
+		{
+			auto objectToUse = std::dynamic_pointer_cast<SearchableObject>(curRoom->getObject(searchedObject));
+			if (objectToUse->getHasBeenSearched())
+			{
+				if (objectToUse->hasObject(objectToGet))
+				{
+					std::cout << "You take the " << objectToGet << " from the " << searchedObject << ".\n";
+					this->addToInventory(objectToUse->getObject(objectToGet));
+					objectToUse->removeObject(objectToGet);
+				}
+				else
+					std::cout << "The " << searchedObject << " doesn't have a " << objectToGet << ".\n";
+			}
+			else
+				std::cout << "The " << searchedObject << " doesn't have a " << objectToGet << ".\n";
+		}
+		else
+			std::cout << "You can't take anything from the " << searchedObject << ".\n";
+	}
+}
+
 // movement methods
 void Player::enterRoom(std::shared_ptr<Room> roomToEnter)
 {
@@ -203,4 +230,22 @@ void Player::closeObject(std::string objectToClose)
 	}
 	else
 		std::cout << "There is no " << objectToClose << ".\n";
+}
+
+void Player::searchObject(std::string objectToSearch)
+{
+	std::shared_ptr<Room> curRoom = this->world->getCurrentRoom();
+	if (curRoom->containsObject(objectToSearch))
+	{
+		if (typeid(*curRoom->getObject(objectToSearch)) == typeid(class SearchableObject))
+		{
+			auto objectToUse = std::dynamic_pointer_cast<SearchableObject>(curRoom->getObject(objectToSearch));
+			objectToUse->setHasBeenSearched();
+			objectToUse->printContents();
+		}
+		else
+			std::cout << "You can't search the " << objectToSearch << ".\n";
+	}
+	else
+		std::cout << "There is no " << objectToSearch << " to search.\n";
 }

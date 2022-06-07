@@ -5,6 +5,7 @@
 #include <memory>
 #include "Room.h"
 #include "ContainerObject.h"
+#include "SearchableObject.h"
 
 class World
 {
