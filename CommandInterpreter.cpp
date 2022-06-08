@@ -106,9 +106,9 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
 {
     std::string newDirObject = this->standardizeDirObject(dirObject);
     std::string curRoomName = this->world->getCurrentRoom()->getName();
-    std::string itemContainer;
-    std::string searchedObject;
     std::shared_ptr<Room> curRoom = this->world->getCurrentRoom();
+    std::string itemContainer = curRoom->checkContainers(newDirObject);
+    std::string searchedObject = curRoom->checkSearchedObjects(newDirObject);
     if (action == "take" || action == "get" || action == "grab")
     {
         if (this->world->getCurrentRoom()->containsObject(newDirObject))
@@ -138,31 +138,35 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
     }
     else if (action == "examine")
     {
-        std::string itemContainer;
-        std::string searchedObject;
-        std::shared_ptr<Room> curRoom = this->world->getCurrentRoom();
         if (dirObject == "room")
+        {
             curRoom->printDescription();
+        }
         else if (dirObject == "shadow")
+        {
             this->player->printShadowDescription();
+        }
         else if (curRoom->containsObject(newDirObject))
+        {
             std::cout << curRoom->getObject(newDirObject)->getDescription() << std::endl;
+        }
         else if (this->player->hasObject(newDirObject))
+        {
             std::cout << this->player->getObject(newDirObject)->getDescription() << std::endl;
+        }
+        else if (itemContainer != "" &&
+            std::dynamic_pointer_cast<ContainerObject>(curRoom->getObject(itemContainer))->hasObject(newDirObject))
+        {
+            std::cout << std::dynamic_pointer_cast<ContainerObject>(curRoom->getObject(itemContainer))->getObject(newDirObject)->getDescription() << "\n";
+        }
+        else if (searchedObject != "" &&
+            std::dynamic_pointer_cast<SearchableObject>(curRoom->getObject(searchedObject))->hasObject(newDirObject))
+        {
+            std::cout << std::dynamic_pointer_cast<SearchableObject>(curRoom->getObject(searchedObject))->getObject(newDirObject)->getDescription() << "\n";
+        }
         else
         {
-            itemContainer = curRoom->checkContainers(newDirObject);
-            searchedObject = curRoom->checkContainers(newDirObject);
-            if (itemContainer != "")
-            {
-                std::shared_ptr<GameObject> containerToCheck = curRoom->getObject(itemContainer);
-                if (std::dynamic_pointer_cast<ContainerObject>(containerToCheck)->hasObject(newDirObject))
-                    std::cout << std::dynamic_pointer_cast<ContainerObject>(containerToCheck)->getObject(newDirObject)->getDescription() << "\n";
-                else
-                    std::cout << "What " << dirObject << "?" << std::endl;
-            }
-            else
-                std::cout << "What " << dirObject << "?" << std::endl;
+            std::cout << "What " << dirObject << "?\n";
         }
     }
     else if (action == "enter")
