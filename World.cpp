@@ -112,7 +112,7 @@ std::shared_ptr<Room> World::getFirstRoom()
 {
     std::shared_ptr<GameObject> corpse( new SearchableObject (
         "corpse",
-        "Looking more closely at the corpse, you see that its face and body are identical to yours. Its expression is twisted into a look of terror.\n",
+        "Looking more closely at the corpse, you see that its face and body are identical to yours. Its expression is twisted into a look of terror.",
         "A body lies on the floor.\n",
         false
     ));
@@ -125,7 +125,7 @@ std::shared_ptr<Room> World::getFirstRoom()
     std::dynamic_pointer_cast<SearchableObject>(corpse)->addObject(magicRing1);
     std::shared_ptr<GameObject> writing ( new GameObject (
         "writing",
-        "The words read, \'you have to find and kill your shadow self\'. It's in your own handwriting.",
+        "The words read, \'you have to find and kill your shadow self\'. It's in your own handwriting.\n",
         "Above the corpse on the south wall, some writing is scribbled.\n",
         false
     ));
