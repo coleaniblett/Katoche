@@ -6,12 +6,14 @@
 #include "Room.h"
 #include "ContainerObject.h"
 #include "SearchableObject.h"
+#include "MagicRings.h"
 
 class World
 {
 private:
 	std::map<std::string, std::shared_ptr<Room>> rooms;
 	std::shared_ptr<Room> currentRoom;
+	std::shared_ptr<MagicRings> rings;
 	std::shared_ptr<Room> getOutsideEntrance();
 	std::shared_ptr<Room> getAntechamber();
 	std::shared_ptr<Room> getEventHorizon();
@@ -35,5 +37,6 @@ public:
 	std::shared_ptr<Room> getRoom(std::string roomToGet) { return this->rooms.at(roomToGet); }
 	void setCurrentRoom(std::shared_ptr<Room> roomToSet);
 	std::shared_ptr<Room> getCurrentRoom() { return this->currentRoom; }	
+	std::shared_ptr<MagicRings> getRings() { return this->rings; }
 };
 

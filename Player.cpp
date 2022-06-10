@@ -19,6 +19,8 @@ Player::Player(World* worldToSet)
 void Player::addToInventory(std::shared_ptr<GameObject> objectToAdd)
 {
 	this->inventory.insert({ objectToAdd->getName(), objectToAdd });
+	if (objectToAdd->getName() == "ring")
+		this->world->getRings()->addRing();
 }
 
 bool Player::hasObject(std::string objectToCheck)
