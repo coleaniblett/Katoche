@@ -166,18 +166,27 @@ std::shared_ptr<Room> World::getFountainRoom()
         "",
         false
     ));
-    std::shared_ptr<GameObject> coins( new GameObject(
+    std::shared_ptr<GameObject> magicRing2(new GameObject(
+        "ring",
+        "It's made of silver. It looks... precious.",
+        "",
+        true
+    ));
+    std::shared_ptr<GameObject> coins( new SearchableObject(
         "coins",
         "They are mostly copper, but some look like they may be made of silver, and you even see a few gold.",
         "",
         false
     ));
+    std::dynamic_pointer_cast<SearchableObject>(coins)->addObject(magicRing2);
     std::shared_ptr<Room> fountainRoom( new Room(
         "Fountain Room",
         "You find yourself in a circular room. A massive fountain sits at the center. The water flows backwards, out of the fountain and into the mouth of a gargoyle that hangs from the ceiling.\n"
     ));
     fountainRoom->addObject(fountain);
     fountainRoom->addObject(bowAndQuiver);
+    fountainRoom->addObject(coins);
+    fountainRoom->addObject(gargoyle);
     return fountainRoom;
 }
 
