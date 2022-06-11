@@ -289,12 +289,19 @@ std::shared_ptr<Room> World::getYourBedroom()
         "In front of you is your bed, the one you fall asleep in every night.\n",
         false
     ));
-    std::shared_ptr<GameObject> dresser( new GameObject(
+    std::shared_ptr<GameObject> magicRing3(new GameObject(
+        "ring",
+        "It's made of silver. It looks... precious.",
+        "",
+        true
+    ));
+    std::shared_ptr<GameObject> dresser( new SearchableObject(
         "dresser",
         "It has six drawers, probably filled with your clothes.",
         "Your dresser stands against the wall.\n",
         false
     ));
+    std::dynamic_pointer_cast<SearchableObject>(dresser)->addObject(magicRing3);
     std::shared_ptr<Room> yourBedroom( new Room(
         "Your Bedroom",
         "It's the strangest thing... This room is your bedroom.\n"
