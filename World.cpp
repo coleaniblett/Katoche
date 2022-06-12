@@ -53,7 +53,7 @@ World::World()
     this->rooms.at("Outside Exit")->setExits(NULL, this->rooms.at("Forest"), this->rooms.at("Forest"),
         this->rooms.at("Forest"), this->rooms.at("Forest"), NULL, NULL);
     this->currentRoom = (this->rooms.at("Outside Entrance"));
-    this->rings.reset(new MagicRings());
+    this->magicRings.reset(new MagicRings());
 }
 
 void World::setCurrentRoom(std::shared_ptr<Room> roomToSet)
@@ -280,7 +280,7 @@ std::shared_ptr<Room> World::getYourBedroom()
     std::shared_ptr<GameObject> blinds( new GameObject(
         "blinds",
         "They're closed.",
-        "The blinds are drawn on your bedroom window.",
+        "The blinds are drawn on your bedroom window.\n",
         false
     ));
     std::shared_ptr<GameObject> bed( new GameObject(

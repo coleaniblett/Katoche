@@ -18,9 +18,18 @@ Player::Player(World* worldToSet)
 // inventory methods
 void Player::addToInventory(std::shared_ptr<GameObject> objectToAdd)
 {
-	this->inventory.insert({ objectToAdd->getName(), objectToAdd });
 	if (objectToAdd->getName() == "ring")
-		this->world->getRings()->addRing();
+	{
+		this->world->getMagicRings()->addRing();
+		std::shared_ptr<GameObject> ring = this->world->getMagicRings()->getRings();
+		if (this->hasObject("ring"))
+			this->inventory.erase("ring");
+		else if (this->hasObject("rings"))
+			this->inventory.erase("rings");
+		this->inventory.insert({ ring->getName(), ring });
+	}
+	else
+		this->inventory.insert({ objectToAdd->getName(), objectToAdd });
 }
 
 bool Player::hasObject(std::string objectToCheck)
