@@ -57,6 +57,8 @@ void CommandInterpreter::interpretSimpleCommand(std::string action)
         std::cout << "Close what?\n";
     else if (action == "search")
         std::cout << "Search what?\n";
+    else if (action == "lead")
+        std::cout << "Lead what?\n";
 }
 
 void CommandInterpreter::interpretSimpleCommand(std::string action, std::string identifier)
@@ -205,6 +207,13 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
     else if (action == "search")
     {
         this->player->searchObject(newDirObject);
+    }
+    else if (action == "lead")
+    {
+        if (newDirObject == "horse")
+            this->player->leadHorse();
+        else
+            std::cout << "You can't lead that.\n";
     }
 }
 

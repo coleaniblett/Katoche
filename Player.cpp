@@ -13,6 +13,7 @@ Player::Player(World* worldToSet)
 	this->world = worldToSet;
 	this->continueGame = true;
 	this->shadowState = 0;
+	this->leadingHorse = false;
 }
 
 // inventory methods
@@ -123,6 +124,19 @@ void Player::enterRoom(std::shared_ptr<Room> roomToEnter)
 	if (droppingDown == true)
 		std::cout << "Your feet touch the ground after a short drop, and the darkness disappears in an instant, seemingly out of nowhere.\n";
 	roomToEnter->printDescription();
+	if (this->leadingHorse == true && newRoomName == "Fountain Room")
+	{
+		std::cout << "Upon entering, the horse calmly walks up to the fountain and begins to drink from its water.\n"
+			<< "It shows no sign of stopping.\n";
+		std::shared_ptr<GameObject> horse(new GameObject(
+			"horse",
+			"It just keeps drinking. It looks transfixed and won't be budged.",
+			"A horse stands next to the fountain, drinking incessantly.\n",
+			false
+		));
+		roomToEnter->addObject(horse);
+		this->leadingHorse = false;
+	}
 }
 
 void Player::move(std::string direction)
@@ -259,4 +273,17 @@ void Player::searchObject(std::string objectToSearch)
 	}
 	else
 		std::cout << "There is no " << objectToSearch << " to search.\n";
+}
+
+void Player::leadHorse()
+{
+	std::shared_ptr<Room> curRoom = this->world->getCurrentRoom();
+	if (curRoom->containsObject("horse"))
+	{
+		this->leadingHorse = true;
+		std::cout << "Although the horse has no harness, it seems willing to follow you.\n";
+		curRoom->removeObject("horse");
+	}
+	else
+		std::cout << "There is no horse here.\n";
 }
