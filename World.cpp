@@ -204,6 +204,19 @@ std::shared_ptr<Room> World::getStableRoom()
         "A shovel rests against the wall.\n",
         true
     ));
+    std::shared_ptr<GameObject> straw(new SearchableObject(
+        "straw",
+        "It's straw. Or is it hay? You never learned the difference.",
+        "",
+        false
+    ));
+    std::shared_ptr<GameObject> magicRing3(new GameObject(
+        "ring",
+        "It's made of silver. It looks... precious.",
+        "",
+        true
+    ));
+    std::dynamic_pointer_cast<SearchableObject>(straw)->addObject(magicRing3);
     std::shared_ptr<Room> stableRoom( new Room(
         "Stable Room",
         "Straw lies strewn across the ground of this long room. To the right, five stalls line the room.\n"
