@@ -379,6 +379,19 @@ std::shared_ptr<Room> World::getGraveyardRoom()
         "A headstone stands erect in the middle of the room.\n",
         false
     ));
+    std::shared_ptr<GameObject> grave(new SearchableObject(
+        "grave",
+        "The ground seems to have been packed tight.",
+        "",
+        false
+    ));
+    std::shared_ptr<GameObject> magicRing4(new GameObject(
+        "ring",
+        "It's made of silver. It looks... precious.",
+        "",
+        true
+    ));
+    std::dynamic_pointer_cast<SearchableObject>(grave)->addObject(magicRing4);
     std::shared_ptr<Room> graveyardRoom( new Room(
         "Graveyard Room",
         "The floor is made of dirt, and the illumination is a bit darker than the other rooms you've seen.\n"
