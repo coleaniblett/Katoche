@@ -217,6 +217,11 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
         else
             std::cout << "You can't lead that.\n";
     }
+    else if (action == "dig")
+    {
+        if (newDirObject == "ground" || newDirObject == "grave")
+            this->player->dig();
+    }
 }
 
 void CommandInterpreter::interpretCommand(std::string action, std::string dirObject, std::string identifier)
@@ -234,6 +239,13 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
             std::cout << this->player->getObject(newDirObject)->getDescription() << std::endl;
         else
             std::cout << "What " << dirObject << "?" << std::endl;
+    }
+    if (action == "dig")
+    {
+        if (identifier == "up" && (newDirObject == "ground" || newDirObject == "grave"))
+            this->player->dig();
+        else if (identifier == "with" && dirObject == "shovel")
+            this->player->dig();
     }
 }
 
