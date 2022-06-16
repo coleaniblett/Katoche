@@ -6,6 +6,7 @@ Player::Player()
 	this->world = new World;
 	this->continueGame = true;
 	this->shadowState = 0;
+	this->leadingHorse = false;
 }
 
 Player::Player(World* worldToSet)
@@ -262,6 +263,21 @@ void Player::searchObject(std::string objectToSearch)
 	std::shared_ptr<Room> curRoom = this->world->getCurrentRoom();
 	if (curRoom->containsObject(objectToSearch))
 	{
+		if (objectToSearch == "grave" && curRoom->containsObject(objectToSearch))
+		{
+			if (this->inventory.count("shovel"))
+			{
+				auto objectToUse = std::dynamic_pointer_cast<SearchableObject>(curRoom->getObject(objectToSearch));
+				objectToUse->setHasBeenSearched();
+				std::cout << "Using your shovel, you dig up the grave.\n";
+				objectToUse->printContents();
+			}
+			else
+			{
+				std::cout << "You can't dig up this ground with your bare hands.\n";
+			}
+			return;
+		}
 		if (typeid(*curRoom->getObject(objectToSearch)) == typeid(class SearchableObject))
 		{
 			auto objectToUse = std::dynamic_pointer_cast<SearchableObject>(curRoom->getObject(objectToSearch));
