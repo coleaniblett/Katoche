@@ -43,4 +43,5 @@ public:
 	void closeObject(std::string objectToClose);
 	void searchObject(std::string objectToSearch);
 	void leadHorse();
+	void dig();
 };

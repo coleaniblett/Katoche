@@ -303,3 +303,11 @@ void Player::leadHorse()
 	else
 		std::cout << "There is no horse here.\n";
 }
+
+void Player::dig()
+{
+	if (this->world->getCurrentRoom()->getName() == "Graveyard Room")
+		this->searchObject("grave");
+	else
+		std::cout << "You can't dig here.\n";
+}

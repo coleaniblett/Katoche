@@ -59,6 +59,8 @@ void CommandInterpreter::interpretSimpleCommand(std::string action)
         std::cout << "Search what?\n";
     else if (action == "lead")
         std::cout << "Lead what?\n";
+    else if (action == "dig")
+        player->dig();
 }
 
 void CommandInterpreter::interpretSimpleCommand(std::string action, std::string identifier)
