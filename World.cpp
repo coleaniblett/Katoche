@@ -396,6 +396,7 @@ std::shared_ptr<Room> World::getGraveyardRoom()
         "Graveyard Room",
         "The floor is made of dirt, and the illumination is a bit darker than the other rooms you've seen.\n"
     ));
+    graveyardRoom->addObject(grave);
     graveyardRoom->addObject(headstone);
     return graveyardRoom;
 }
