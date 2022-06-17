@@ -126,7 +126,7 @@ std::shared_ptr<Room> World::getFirstRoom()
     std::dynamic_pointer_cast<SearchableObject>(corpse)->addObject(magicRing1);
     std::shared_ptr<GameObject> writing ( new GameObject (
         "writing",
-        "The words read, \'you have to find and kill your shadow self\'. It's in your own handwriting.\n",
+        "The words read, \'you have to find and kill your shadow self\'. It's in your own handwriting.",
         "Above the corpse on the south wall, some writing is scribbled.\n",
         false
     ));
