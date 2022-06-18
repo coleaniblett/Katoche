@@ -10,6 +10,7 @@ private:
 	std::map <std::string, std::shared_ptr<GameObject>> inventory;
 	int shadowState;
 	bool leadingHorse;
+	int esotericKnowledge;
 public:
 	// constructors
 	Player();
@@ -44,4 +45,5 @@ public:
 	void searchObject(std::string objectToSearch);
 	void leadHorse();
 	void dig();
+	void eat(std::string objectToEat);
 };

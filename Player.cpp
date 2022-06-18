@@ -15,6 +15,7 @@ Player::Player(World* worldToSet)
 	this->continueGame = true;
 	this->shadowState = 0;
 	this->leadingHorse = false;
+	this->esotericKnowledge = 0;
 }
 
 // inventory methods
@@ -310,4 +311,36 @@ void Player::dig()
 		this->searchObject("grave");
 	else
 		std::cout << "You can't dig here.\n";
+}
+
+void Player::eat(std::string objectToEat)
+{
+	if (objectToEat == "red mushroom" || objectToEat == "purple mushroom" ||
+		objectToEat == "brown mushroom")
+	{
+		if (this->hasObject(objectToEat) || this->world->getCurrentRoom()->containsObject(objectToEat))
+		{
+			if (objectToEat == "red mushroom")
+			{
+				this->esotericKnowledge += 1;
+				std::cout << "You eat the mushroom. You feel some new profound understanding of reality itself, "
+					<< "as if you can see the hidden stitches of this dimension.\n";
+			}
+			else if (objectToEat == "purple mushroom")
+			{
+				std::cout << "You eat the purple mushroom and a powerful nausea quickly overtakes you. "
+					<< "You fall to your knees and the room seems to spin around you.\n"
+					<< "You have died.\n";
+				this->continueGame = false;
+			}
+			else if (objectToEat == "brown mushroom")
+			{
+				std::cout << "You eat the mushroom. Nothing seems to happen.\n";
+			}
+		}
+		else
+			std::cout << "There is no " << objectToEat << ".\n";
+	}
+	else
+		std::cout << "You cant' eat that.\n";
 }
