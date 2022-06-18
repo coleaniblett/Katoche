@@ -268,7 +268,7 @@ std::shared_ptr<Room> World::getShroomRoom()
     ));
     shroomRoom->addObject(brownMushroom);
     shroomRoom->addObject(redMushroom);
-    shroomRoom->addObject(brownMushroom);
+    shroomRoom->addObject(purpleMushroom);
     return shroomRoom;
 }
 
