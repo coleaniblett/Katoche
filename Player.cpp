@@ -344,3 +344,36 @@ void Player::eat(std::string objectToEat)
 	else
 		std::cout << "You cant' eat that.\n";
 }
+
+void Player::climb(std::string objectToClimb)
+{
+	std::shared_ptr<Room> curRoom = this->world->getCurrentRoom();
+	if (!curRoom->containsObject(objectToClimb))
+	{
+		std::cout << "What " << objectToClimb << "?\n";
+		return;
+	}
+	if (objectToClimb == "rope")
+	{
+		if (curRoom->getName() == "Antechamber")
+		{
+			this->move("down");
+		}
+		else if (curRoom->getName() == "First Room")
+		{
+			this->move("up");
+		}
+	}
+	else if (objectToClimb == "horse")
+	{
+		std::cout << "You climb onto the back of the horse.\n";
+		if (curRoom->getName() == "Fountain Room")
+		{
+			//	functionality for reaching Gargoyle/bow-and-arrow
+		}
+	}
+	else
+	{
+		std::cout << "You can't climb that.\n";
+	}
+}

@@ -46,4 +46,5 @@ public:
 	void leadHorse();
 	void dig();
 	void eat(std::string objectToEat);
+	void climb(std::string objectToClimb);
 };

@@ -228,6 +228,10 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
     {
         player->eat(newDirObject);
     }
+    else if (action == "climb")
+    {
+        player->climb(newDirObject);
+    }
 }
 
 void CommandInterpreter::interpretCommand(std::string action, std::string dirObject, std::string identifier)
