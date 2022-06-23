@@ -19,5 +19,6 @@ public:
 	virtual std::string getDescription() { return this->description; }
 	virtual std::string getLocationDescription() { return this->locationDescription; }
 	virtual bool getCanBeTaken() { return this->canBeTaken; }
+	void setCanbeTaken(bool valueToSet) { this->canBeTaken = valueToSet; }
 };
 

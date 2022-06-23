@@ -115,7 +115,8 @@ void Player::getObjectFromSearchedObject(std::string objectToGet, std::string se
 // movement methods
 void Player::enterRoom(std::shared_ptr<Room> roomToEnter)
 {
-	std::string currentRoomName = this->world->getCurrentRoom()->getName();
+	std::shared_ptr<Room> curRoom = this->world->getCurrentRoom();
+	std::string currentRoomName = curRoom->getName();
 	std::string newRoomName = roomToEnter->getName();
 	bool droppingDown = false;
 	if (currentRoomName == "Event Horizon" && newRoomName == "First Room")
@@ -139,6 +140,8 @@ void Player::enterRoom(std::shared_ptr<Room> roomToEnter)
 		roomToEnter->addObject(horse);
 		this->leadingHorse = false;
 	}
+	if (currentRoomName == "Fountain Room" && curRoom->containsObject("bow and quiver"))
+		curRoom->getObject("bow and quiver")->setCanbeTaken(false);
 }
 
 void Player::move(std::string direction)
@@ -369,7 +372,7 @@ void Player::climb(std::string objectToClimb)
 		std::cout << "You climb onto the back of the horse.\n";
 		if (curRoom->getName() == "Fountain Room")
 		{
-			//	functionality for reaching Gargoyle/bow-and-arrow
+			curRoom->getObject("bow and quiver")->setCanbeTaken(true);
 		}
 	}
 	else
