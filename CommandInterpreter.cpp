@@ -20,6 +20,8 @@ std::string CommandInterpreter::standardizeDirObject(std::string dirObject)
         return "corpse";
     else if (dirObject == "person" || dirObject == "figure")
         return "shadow self";
+    else if (dirObject == "bow" || dirObject == "quiver")
+        return "bow and quiver";
     else
         return dirObject;
 }
@@ -63,6 +65,10 @@ void CommandInterpreter::interpretSimpleCommand(std::string action)
         player->dig();
     else if (action == "eat")
         std::cout << "Eat what?\n";
+    else if (action == "stab")
+        std::cout << "Stab what?\n";
+    else if (action == "cut")
+        std::cout << "Cut what?\n";
 }
 
 void CommandInterpreter::interpretSimpleCommand(std::string action, std::string identifier)
@@ -232,6 +238,10 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
     {
         player->climb(newDirObject);
     }
+    else if (action == "cut" || action == "stab")
+    {
+        std::cout << "With what?\n";
+    }
 }
 
 void CommandInterpreter::interpretCommand(std::string action, std::string dirObject, std::string identifier)
@@ -262,11 +272,16 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
 void CommandInterpreter::interpretCommand(std::string action, std::string dirObject, std::string identifier, std::string secObject)
 {
     std::string newDirObject = this->standardizeDirObject(dirObject);
+    std::string newSecObject = this->standardizeDirObject(secObject);
     if (action == "take" || action == "get" || action == "grab")
     {
         if (identifier == "from" || identifier == "in")
         {
             this->player->getObjectFromContainer(dirObject, secObject);
         }
+    }
+    else if ((action == "stab" || action == "cut" || action == "attack") && identifier == "with")
+    {
+        this->player->attack(newDirObject, newSecObject);
     }
 }

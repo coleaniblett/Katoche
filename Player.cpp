@@ -7,6 +7,7 @@ Player::Player()
 	this->continueGame = true;
 	this->shadowState = 0;
 	this->leadingHorse = false;
+	this->esotericKnowledge = 0;
 }
 
 Player::Player(World* worldToSet)
@@ -378,5 +379,35 @@ void Player::climb(std::string objectToClimb)
 	else
 	{
 		std::cout << "You can't climb that.\n";
+	}
+}
+
+void Player::attack(std::string target, std::string weapon)
+{
+	if (weapon == "knife" || weapon == "bow and quiver" || weapon == "sword" || weapon == "shovel")
+	{
+		if (this->hasObject(weapon))
+		{
+			if (target == "shadow self")
+			{
+
+			}
+			else if (target == "yourself")
+			{
+				std::cout << "Why would you want to hurt yourself?\n";
+			}
+			else
+			{
+				std::cout << "Why would you want to hurt a " << target << "?\n";
+			}
+		}
+		else
+		{
+			std::cout << "You don't have one of those.\n";
+		}
+	}
+	else
+	{
+		std::cout << "That's not a weapon.\n";
 	}
 }
