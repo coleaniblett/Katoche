@@ -20,5 +20,7 @@ public:
 	virtual std::string getLocationDescription() { return this->locationDescription; }
 	virtual bool getCanBeTaken() { return this->canBeTaken; }
 	void setCanbeTaken(bool valueToSet) { this->canBeTaken = valueToSet; }
+	void setDescription(std::string descriptionToSet) { this->description = descriptionToSet; }
+	void setLocationDescription(std::string descriptionToSet) { this->locationDescription = descriptionToSet; }
 };
 
