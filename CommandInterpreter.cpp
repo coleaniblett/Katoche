@@ -280,7 +280,7 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
             this->player->getObjectFromContainer(dirObject, secObject);
         }
     }
-    else if ((action == "stab" || action == "cut" || action == "attack") && identifier == "with")
+    else if ((action == "stab" || action == "cut" || action == "attack" || action == "shoot") && identifier == "with")
     {
         this->player->attack(newDirObject, newSecObject);
     }

@@ -14,6 +14,7 @@ private:
 	std::map<std::string, std::shared_ptr<Room>> rooms;
 	std::shared_ptr<Room> currentRoom;
 	std::shared_ptr<MagicRings> magicRings;
+	bool shadowSelfAlive;
 	std::shared_ptr<Room> getOutsideEntrance();
 	std::shared_ptr<Room> getAntechamber();
 	std::shared_ptr<Room> getEventHorizon();
@@ -36,6 +37,8 @@ public:
 	World();
 	std::shared_ptr<Room> getRoom(std::string roomToGet) { return this->rooms.at(roomToGet); }
 	void setCurrentRoom(std::shared_ptr<Room> roomToSet);
+	void setShadowSelfAlive(bool valueToSet) { this->shadowSelfAlive = valueToSet; }
+	bool getShadowSelfAlive() { return this->shadowSelfAlive; }
 	std::shared_ptr<Room> getCurrentRoom() { return this->currentRoom; }	
 	std::shared_ptr<MagicRings> getMagicRings() { return this->magicRings; }
 };

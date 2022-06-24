@@ -122,12 +122,23 @@ void Player::enterRoom(std::shared_ptr<Room> roomToEnter)
 	bool droppingDown = false;
 	if (currentRoomName == "Event Horizon" && newRoomName == "First Room")
 		droppingDown = true;
-	this->world->setCurrentRoom(roomToEnter);
-	std::cout << std::endl;
-	std::cout << "Current Room: " << this->world->getCurrentRoom()->getName() << std::endl;
-	if (droppingDown == true)
-		std::cout << "Your feet touch the ground after a short drop, and the darkness disappears in an instant, seemingly out of nowhere.\n";
-	roomToEnter->printDescription();
+	if (newRoomName != "Graveyard Room" || !this->world->getShadowSelfAlive())
+	{
+		this->world->setCurrentRoom(roomToEnter);
+		std::cout << std::endl;
+		std::cout << "Current Room: " << this->world->getCurrentRoom()->getName() << std::endl;
+		if (droppingDown == true)
+			std::cout << "Your feet touch the ground after a short drop, and the darkness disappears in an instant, seemingly out of nowhere.\n";
+		roomToEnter->printDescription();
+	}
+	else
+	{
+		std::cout << "As you walk to the north side of the room, the figure of you walks forward "
+			<< "in an identical manner. Upon reaching the north exit, you find yourself standing "
+			<< "in the doorway of an identical room, seeing the same image of your duplicate "
+			<< "facing away from you that you witnessed upon stepping into the last room.\n";
+	}
+	// special functionality for leading horse
 	if (this->leadingHorse == true && newRoomName == "Fountain Room")
 	{
 		std::cout << "Upon entering, the horse calmly walks up to the fountain and begins to drink from its water.\n"
@@ -141,6 +152,7 @@ void Player::enterRoom(std::shared_ptr<Room> roomToEnter)
 		roomToEnter->addObject(horse);
 		this->leadingHorse = false;
 	}
+	// special functionality for climbing horse in Fountain Room
 	if (currentRoomName == "Fountain Room" && curRoom->containsObject("bow and quiver"))
 		curRoom->getObject("bow and quiver")->setCanbeTaken(false);
 }
@@ -390,7 +402,34 @@ void Player::attack(std::string target, std::string weapon)
 		{
 			if (target == "shadow self")
 			{
-
+				if (weapon == "bow and quiver")
+				{
+					std::cout << "You place an arrow in your bow and pull the string back. With "
+						<< "careful aim, you point the arrow at the being ahead of you and "
+						<< "let go. The arrow lands in itss back and he shrieks, twisting and falling "
+						<< "to the ground. It's the first movement you've seen from it that wasn't a "
+						<< "perfect mimickry of your own movements. It now lies in the floor in a "
+						<< "puddle of its own blood.\n";
+					this->world->setShadowSelfAlive(false);
+					this->getWorld()->getCurrentRoom()->getObject("shadow self")->setDescription(
+						"He's a complete duplicate of you, except deader."
+					);
+					this->getWorld()->getCurrentRoom()->getObject("shadow self")->setLocationDescription(
+						""
+					);
+					this->getWorld()->getCurrentRoom()->setDescription(
+						"The corpse of your double lies on the floor of this room.\n"
+					);
+				}
+				else
+				{
+					std::cout << "As you move forward to attack with your " << weapon
+						<< " the figure ahead of you also moves head with the exact same "
+						<< "movements as you. Stepping after it, you find yourself in a "
+						<< "doorway identical to the one you started in, staring at "
+						<< "an identical room, the other figure just as far away from you "
+						<< "as before.\n";
+				}
 			}
 			else if (target == "yourself")
 			{

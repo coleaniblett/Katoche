@@ -53,6 +53,7 @@ World::World()
     this->rooms.at("Outside Exit")->setExits(NULL, this->rooms.at("Forest"), this->rooms.at("Forest"),
         this->rooms.at("Forest"), this->rooms.at("Forest"), NULL, NULL);
     this->currentRoom = (this->rooms.at("Outside Entrance"));
+    this->shadowSelfAlive = true;
     this->magicRings.reset(new MagicRings());
 }
 
