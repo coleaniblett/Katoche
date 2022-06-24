@@ -62,13 +62,15 @@ void CommandInterpreter::interpretSimpleCommand(std::string action)
     else if (action == "lead")
         std::cout << "Lead what?\n";
     else if (action == "dig")
-        player->dig();
+        this->player->dig();
     else if (action == "eat")
         std::cout << "Eat what?\n";
     else if (action == "stab")
         std::cout << "Stab what?\n";
     else if (action == "cut")
         std::cout << "Cut what?\n";
+    else if (action == "sleep")
+        this->player->sleep();
 }
 
 void CommandInterpreter::interpretSimpleCommand(std::string action, std::string identifier)
@@ -260,12 +262,17 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
         else
             std::cout << "What " << dirObject << "?" << std::endl;
     }
-    if (action == "dig")
+    else if (action == "dig")
     {
         if (identifier == "up" && (newDirObject == "ground" || newDirObject == "grave"))
             this->player->dig();
         else if (identifier == "with" && dirObject == "shovel")
             this->player->dig();
+    }
+    else if (action == "go")
+    {
+        if (newDirObject == "sleep" || newDirObject == "bed")
+            this->player->sleep();
     }
 }
 
