@@ -41,4 +41,5 @@ public:
 	std::string checkSearchedObjects(std::string objectToCheck);
 	std::string checkContainers(std::string objectToCheck);
 	void printDescription();
+	void setDescription(std::string descriptionToSet) { this->description = descriptionToSet; }
 };
