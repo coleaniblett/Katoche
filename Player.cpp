@@ -450,3 +450,46 @@ void Player::attack(std::string target, std::string weapon)
 		std::cout << "That's not a weapon.\n";
 	}
 }
+
+void Player::sleep()
+{
+	if (this->world->getCurrentRoom()->getName() == "Your Bedroom")
+	{
+		std::cout << "You lie down on your old bed and quickly nod off.\n\n"
+			<< "Current Room: ???\n"
+			<< "You find yourself in a new room - or is it a room? The walls and ceiling "
+			<< "seem to retreat in the distance. You're in a white robe, kneeling "
+			<< "before a set of stairs that lead up to a throne. An old bearded man sits "
+			<< "there.\n";
+		int numRings = this->world->getMagicRings()->getNumRings();
+		if (numRings == 0)
+		{
+			std::cout << "He frowns at you.\n \"It seems that you are only at the start "
+				<< "of your journey,\" he says to you. \"No matter.\"\n";
+		}
+		else if (numRings == 1)
+		{
+			std::cout << "He looks at you.\n\ \"It seems you've found one of my rings.\", "
+				<< "he says to you. \"Have you noticed its power? How it changes the "
+				<< "world around you?\" He runs his hand through his beard. \"But you "
+				<< "still have much to learn.\"\n";
+		}
+		else
+		{
+			std::cout << "He smiles at you. \"Already, you've found " << numRings << " of my rings. "
+				<< "You are doing well.\"\n";
+		}
+		std::cout << "The old man closes his eyes and raises his hands. As he speaks, his "
+			<< "voice seems to come from within your own mind.\n"
+			<< "BE\nEVERYWHERE\nFOREVER\n";
+		std::cout << "?od uoy od tahW ";
+		std::string userInput;
+		std::getline(std::cin, userInput);
+		std::cout << "\nCurrent Room: Your Bedroom\n"
+			<< "You wake up in your bed.\n";
+	}
+	else
+	{
+		std::cout << "You can't sleep here.\n";
+	}
+}

@@ -48,4 +48,5 @@ public:
 	void eat(std::string objectToEat);
 	void climb(std::string objectToClimb);
 	void attack(std::string target, std::string weapon);
+	void sleep();
 };
