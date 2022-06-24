@@ -71,6 +71,8 @@ void CommandInterpreter::interpretSimpleCommand(std::string action)
         std::cout << "Cut what?\n";
     else if (action == "sleep")
         this->player->sleep();
+    else if (action == "leave")
+        std::cout << "Leave what?\n";
 }
 
 void CommandInterpreter::interpretSimpleCommand(std::string action, std::string identifier)
@@ -85,7 +87,7 @@ void CommandInterpreter::interpretSimpleCommand(std::string action, std::string 
             this->player->move(identifier);
         }
     }
-    if (action == "look")
+    else if (action == "look")
     {
         if (identifier == "around")
             this->world->getCurrentRoom()->printDescription();
@@ -97,7 +99,7 @@ void CommandInterpreter::interpretSimpleCommand(std::string action, std::string 
                 std::cout << "There is nothing notable about the ground here.\n";
         }
     }
-    if (action == "jump" || action == "drop")
+    else if (action == "jump" || action == "drop")
     {
         if (identifier == "down")
         {
@@ -243,6 +245,10 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
     else if (action == "cut" || action == "stab")
     {
         std::cout << "With what?\n";
+    }
+    else if (action == "leave")
+    {
+        player->drop(newDirObject);
     }
 }
 

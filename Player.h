@@ -49,4 +49,5 @@ public:
 	void climb(std::string objectToClimb);
 	void attack(std::string target, std::string weapon);
 	void sleep();
+	void drop(std::string objectToDrop);
 };

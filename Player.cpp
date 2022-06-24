@@ -412,7 +412,7 @@ void Player::attack(std::string target, std::string weapon)
 						<< "puddle of its own blood.\n";
 					this->world->setShadowSelfAlive(false);
 					this->getWorld()->getCurrentRoom()->getObject("shadow self")->setDescription(
-						"He's a complete duplicate of you, except deader."
+						"He's a complete duplicate of you, only deader."
 					);
 					this->getWorld()->getCurrentRoom()->getObject("shadow self")->setLocationDescription(
 						""
@@ -491,5 +491,30 @@ void Player::sleep()
 	else
 	{
 		std::cout << "You can't sleep here.\n";
+	}
+}
+
+void Player::drop(std::string objectToDrop)
+{
+	std::shared_ptr<Room> curRoom = this->world->getCurrentRoom();
+	if (objectToDrop == "horse")
+	{
+		if (this->leadingHorse)
+		{
+			std::shared_ptr<GameObject> horse(new GameObject(
+				"horse",
+				"The horse appears calm, but when you look into its eyes you see what looks like remarkable awareness. But then again, you've never spent much time around horses. Have you?",
+				"In the room stands a tall bay horse.\n",
+				false
+			));
+			curRoom->addObject(horse);
+			std::cout << "You slowly wave your hands at the floor in a gesture to the horse to stay. "
+				<< "It seems to understand.\n";
+			this->leadingHorse = false;
+		}
+		else
+		{
+			std::cout << "You're not leading a horse.\n";
+		}
 	}
 }
