@@ -303,7 +303,7 @@ std::shared_ptr<Room> World::getYourBedroom()
         "In front of you is your bed, the one you fall asleep in every night.\n",
         false
     ));
-    std::shared_ptr<GameObject> magicRing3(new GameObject(
+    std::shared_ptr<GameObject> magicRing4(new GameObject(
         "ring",
         "It's made of silver. It looks... precious.",
         "",
@@ -315,7 +315,7 @@ std::shared_ptr<Room> World::getYourBedroom()
         "Your dresser stands against the wall.\n",
         false
     ));
-    std::dynamic_pointer_cast<SearchableObject>(dresser)->addObject(magicRing3);
+    std::dynamic_pointer_cast<SearchableObject>(dresser)->addObject(magicRing4);
     std::shared_ptr<Room> yourBedroom( new Room(
         "Your Bedroom",
         "It's the strangest thing... This room is your bedroom.\n"
@@ -328,12 +328,19 @@ std::shared_ptr<Room> World::getYourBedroom()
 
 std::shared_ptr<Room> World::getInfinityRoom()
 {
-    std::shared_ptr<GameObject> shadowSelf( new GameObject(
+    std::shared_ptr<GameObject> shadowSelf( new SearchableObject(
         "shadow self",
         "His movements seem to mirror yours.",
         "The figure appears to be you.\n",
         false
     ));
+    std::shared_ptr<GameObject> magicRing5(new GameObject(
+        "ring",
+        "It's made of silver. It looks... precious.",
+        "",
+        true
+    ));
+    std::dynamic_pointer_cast<SearchableObject>(shadowSelf)->addObject(magicRing5);
     std::shared_ptr<Room> infinityRoom( new Room(
         "Infinity Room",
         "As you stand in the open doorway of this room, you see another figure standing in a doorway on the opposite side, his back to you.\n"
@@ -386,13 +393,13 @@ std::shared_ptr<Room> World::getGraveyardRoom()
         "",
         false
     ));
-    std::shared_ptr<GameObject> magicRing4(new GameObject(
+    std::shared_ptr<GameObject> magicRing6(new GameObject(
         "ring",
         "It's made of silver. It looks... precious.",
         "",
         true
     ));
-    std::dynamic_pointer_cast<SearchableObject>(grave)->addObject(magicRing4);
+    std::dynamic_pointer_cast<SearchableObject>(grave)->addObject(magicRing6);
     std::shared_ptr<Room> graveyardRoom( new Room(
         "Graveyard Room",
         "The floor is made of dirt, and the illumination is a bit darker than the other rooms you've seen.\n"
