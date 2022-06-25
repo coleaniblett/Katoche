@@ -224,6 +224,7 @@ std::shared_ptr<Room> World::getStableRoom()
     ));
     stableRoom->addObject(horse);
     stableRoom->addObject(shovel);
+    stableRoom->addObject(straw);
     return stableRoom;
 }
 
