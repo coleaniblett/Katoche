@@ -406,10 +406,10 @@ void Player::attack(std::string target, std::string weapon)
 				{
 					std::cout << "You place an arrow in your bow and pull the string back. With "
 						<< "careful aim, you point the arrow at the being ahead of you and "
-						<< "let go. The arrow lands in itss back and he shrieks, twisting and falling "
-						<< "to the ground. It's the first movement you've seen from it that wasn't a "
-						<< "perfect mimickry of your own movements. It now lies in the floor in a "
-						<< "puddle of its own blood.\n";
+						<< "let go. The arrow lands in his back and he shrieks, twisting and falling "
+						<< "to the ground. It's the first movement you've seen from him that wasn't a "
+						<< "perfect mimickry of your own movements. He now lies in the floor in a "
+						<< "puddle of his own blood.\n";
 					this->world->setShadowSelfAlive(false);
 					this->getWorld()->getCurrentRoom()->getObject("shadow self")->setDescription(
 						"He's a complete duplicate of you, only deader."
