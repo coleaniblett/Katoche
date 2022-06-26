@@ -517,4 +517,16 @@ void Player::drop(std::string objectToDrop)
 			std::cout << "You're not leading a horse.\n";
 		}
 	}
+	else if (this->hasObject(objectToDrop))
+	{
+		std::string newLocationDescription = "A " + objectToDrop + " lies on the floor.\n";
+		this->getObject(objectToDrop)->setLocationDescription(newLocationDescription);
+		curRoom->addObject(this->getObject(objectToDrop));
+		this->inventory.erase(objectToDrop);
+		std::cout << "You drop the " << objectToDrop << ".\n";
+	}
+	else
+	{
+		std::cout << "You don't have a " << objectToDrop << ".\n";
+	}
 }

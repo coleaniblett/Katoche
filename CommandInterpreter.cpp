@@ -73,6 +73,8 @@ void CommandInterpreter::interpretSimpleCommand(std::string action)
         this->player->sleep();
     else if (action == "leave")
         std::cout << "Leave what?\n";
+    else if (action == "drop")
+        std::cout << "Drop what?\n";
 }
 
 void CommandInterpreter::interpretSimpleCommand(std::string action, std::string identifier)
@@ -246,7 +248,7 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
     {
         std::cout << "With what?\n";
     }
-    else if (action == "leave")
+    else if (action == "leave" || action == "drop")
     {
         player->drop(newDirObject);
     }
