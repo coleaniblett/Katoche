@@ -523,7 +523,11 @@ void Player::drop(std::string objectToDrop)
 		this->getObject(objectToDrop)->setLocationDescription(newLocationDescription);
 		curRoom->addObject(this->getObject(objectToDrop));
 		this->inventory.erase(objectToDrop);
-		std::cout << "You drop the " << objectToDrop << ".\n";
+		std::cout << "You place the " << objectToDrop << " on the ground.\n";
+		if (objectToDrop == "candle" && curRoom->getName() == "Temple Room")
+		{
+			std::cout << "After setting the candle bown before the statue, it suddenly lights up.\n";
+		}
 	}
 	else
 	{

@@ -248,7 +248,7 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
     {
         std::cout << "With what?\n";
     }
-    else if (action == "leave" || action == "drop")
+    else if (action == "leave" || action == "drop" || action == "place")
     {
         player->drop(newDirObject);
     }
