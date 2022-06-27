@@ -12,6 +12,7 @@ private:
 	bool leadingHorse;
 	int esotericKnowledge;
 	bool prayed;
+	bool visitedWiseOldMan;
 public:
 	// constructors
 	Player();

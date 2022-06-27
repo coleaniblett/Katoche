@@ -9,6 +9,7 @@ Player::Player()
 	this->leadingHorse = false;
 	this->prayed = false;
 	this->esotericKnowledge = 0;
+	this->visitedWiseOldMan = false;
 }
 
 Player::Player(World* worldToSet)
@@ -19,6 +20,7 @@ Player::Player(World* worldToSet)
 	this->leadingHorse = false;
 	this->prayed = false;
 	this->esotericKnowledge = 0;
+	this->visitedWiseOldMan = false;
 }
 
 // inventory methods
@@ -489,6 +491,13 @@ void Player::sleep()
 		std::getline(std::cin, userInput);
 		std::cout << "\nCurrent Room: Your Bedroom\n"
 			<< "You wake up in your bed.\n";
+		if (!this->visitedWiseOldMan)
+		{
+			this->visitedWiseOldMan = true;
+			this->esotericKnowledge += 1;
+			std::cout << "You feel a new profound sense of order and perspective, as if your "
+				<< "role in the larger universe has been illuminted.\n";
+		}
 	}
 	else
 	{
@@ -548,7 +557,8 @@ void Player::pray()
 		{
 			this->prayed = true;
 			esotericKnowledge += 1;
-			std::cout << "You feel a new profound sense of wisdom and serenity.\n";
+			std::cout << "You feel a new profound sense of wisdom and serenity, "
+				<< "as if the anxieties of mundane existence have lessened their grip on your mind.\n";
 		}
 	}
 	else
