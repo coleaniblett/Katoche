@@ -15,6 +15,7 @@ private:
 	std::shared_ptr<Room> currentRoom;
 	std::shared_ptr<MagicRings> magicRings;
 	bool shadowSelfAlive;
+	int neverRoomTime;
 	std::shared_ptr<Room> getOutsideEntrance();
 	std::shared_ptr<Room> getAntechamber();
 	std::shared_ptr<Room> getEventHorizon();
@@ -41,5 +42,7 @@ public:
 	bool getShadowSelfAlive() { return this->shadowSelfAlive; }
 	std::shared_ptr<Room> getCurrentRoom() { return this->currentRoom; }	
 	std::shared_ptr<MagicRings> getMagicRings() { return this->magicRings; }
+	int getNeverTime() { return this->neverRoomTime; }
+	void incNeverTime() { this->neverRoomTime += 1; }
 };
 

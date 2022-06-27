@@ -10,6 +10,7 @@ Player::Player()
 	this->prayed = false;
 	this->esotericKnowledge = 0;
 	this->visitedWiseOldMan = false;
+
 }
 
 Player::Player(World* worldToSet)

@@ -54,6 +54,7 @@ World::World()
         this->rooms.at("Forest"), this->rooms.at("Forest"), NULL, NULL);
     this->currentRoom = (this->rooms.at("Outside Entrance"));
     this->shadowSelfAlive = true;
+    this->neverRoomTime = 0;
     this->magicRings.reset(new MagicRings());
 }
 

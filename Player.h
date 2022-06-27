@@ -25,7 +25,6 @@ public:
 	void setContinueGame(bool valueToSet) { this->continueGame = valueToSet; }
 	// inventory methods
 	void addToInventory(std::shared_ptr<GameObject> objectToAdd);
-	void removeFromInventory(std::string objectToRemove);
 	bool hasObject(std::string objectToCheck);
 	void printInventory();
 	std::shared_ptr<GameObject> getObject(std::string objectToGet);

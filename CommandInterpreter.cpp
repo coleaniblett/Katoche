@@ -77,6 +77,7 @@ void CommandInterpreter::interpretSimpleCommand(std::string action)
         std::cout << "Drop what?\n";
     else if (action == "pray")
         this->player->pray();
+    checkNeverTime();
 }
 
 void CommandInterpreter::interpretSimpleCommand(std::string action, std::string identifier)
@@ -120,6 +121,7 @@ void CommandInterpreter::interpretSimpleCommand(std::string action, std::string 
             }
         }
 	}
+    checkNeverTime();
 }
 
 void CommandInterpreter::interpretCommand(std::string action, std::string dirObject)
@@ -254,6 +256,7 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
     {
         player->drop(newDirObject);
     }
+    checkNeverTime();
 }
 
 void CommandInterpreter::interpretCommand(std::string action, std::string dirObject, std::string identifier)
@@ -284,6 +287,7 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
         if (newDirObject == "sleep" || newDirObject == "bed")
             this->player->sleep();
     }
+    checkNeverTime();
 }
 
 void CommandInterpreter::interpretCommand(std::string action, std::string dirObject, std::string identifier, std::string secObject)
@@ -301,4 +305,41 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
     {
         this->player->attack(newDirObject, newSecObject);
     }
+    checkNeverTime();
+}
+
+bool CommandInterpreter::checkNeverTime()
+{
+    std::shared_ptr<Room> curRoom = this->world->getCurrentRoom();
+    bool output = true;
+    if (curRoom->getName() == "Never Room")
+    {
+        this->world->incNeverTime();
+        int curTime = this->world->getNeverTime();
+        switch (curTime)
+        {
+            case 2:
+            {
+                std::cout << "You are starting to get a worried feeling that something "
+                    << "horrible is about to happen.\n";
+                break;
+            }
+            case 3:
+            {
+                std::cout << "Something deep down in you, some kind of ancient instinct "
+                    << "that you didn't know existed, is screaming at you: get out of this room.\n";
+                    break;
+            }
+            case 4:
+            {
+                std::cout << "\nIf you were never born, would you have a problem with that?\n"
+                    << "Because you never were. Maybe in some version of this reality, along some "
+                    << "dimensional axis only comprehensible to the greatest superintelligences.\n"
+                    << "But not here.\nYou were never here.\n";
+                this->player->setContinueGame(false);
+                break;
+            }
+        }
+    }
+    return output;
 }

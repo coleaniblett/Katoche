@@ -19,4 +19,5 @@ public:
 	void interpretCommand(std::string action, std::string dirObject);
 	void interpretCommand(std::string action, std::string dirObject, std::string identifier);
 	void interpretCommand(std::string action, std::string dirObject, std::string identifier, std::string secObject);
+	bool checkNeverTime();
 };
