@@ -14,6 +14,7 @@ private:
 	bool prayed;
 	bool visitedWiseOldMan;
 	bool hasExited;
+	bool hasRead;
 public:
 	// constructors
 	Player();

@@ -239,8 +239,17 @@ void Player::getHelp()
 
 void Player::read()
 {
-	// UNDER CONSTRUCTION
-	std::cout << "Book reading functionality under construction\n";
+	if (!this->hasRead)
+	{
+		this->esotericKnowledge += 1;
+		this->hasRead = true;
+		std::cout << "You read the spellbook. Much is lost on you, but you nevertheless "
+			<< "gain a new profound insight into the workings of magic.\n";
+	}
+	else
+	{
+		std::cout << "You've learned all you can from this book.\n";
+	}
 }
 
 void Player::openObject(std::string objectToOpen)
