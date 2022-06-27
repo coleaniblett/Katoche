@@ -528,6 +528,13 @@ void Player::sleep()
 void Player::drop(std::string objectToDrop)
 {
 	std::shared_ptr<Room> curRoom = this->world->getCurrentRoom();
+	// special functionality for rings
+	if (objectToDrop == "ring" || objectToDrop == "rings")
+	{
+		std::cout << "Something tells you it wouldn't be a good idea to lose these rings.\n";
+		return;
+	}
+	// special functionality for horse
 	if (objectToDrop == "horse")
 	{
 		if (this->leadingHorse)
@@ -548,6 +555,7 @@ void Player::drop(std::string objectToDrop)
 			std::cout << "You're not leading a horse.\n";
 		}
 	}
+	// standard functionality
 	else if (this->hasObject(objectToDrop))
 	{
 		std::string newLocationDescription = "A " + objectToDrop + " lies on the floor.\n";
