@@ -7,6 +7,7 @@ Player::Player()
 	this->continueGame = true;
 	this->shadowState = 0;
 	this->leadingHorse = false;
+	this->prayed = false;
 	this->esotericKnowledge = 0;
 }
 
@@ -16,6 +17,7 @@ Player::Player(World* worldToSet)
 	this->continueGame = true;
 	this->shadowState = 0;
 	this->leadingHorse = false;
+	this->prayed = false;
 	this->esotericKnowledge = 0;
 }
 
@@ -532,5 +534,26 @@ void Player::drop(std::string objectToDrop)
 	else
 	{
 		std::cout << "You don't have a " << objectToDrop << ".\n";
+	}
+}
+
+void Player::pray()
+{
+	std::shared_ptr<Room> curRoom = this->world->getCurrentRoom();
+	if (curRoom->getName() == "Temple Room")
+	{	
+		std::cout << "You kneel on the ground before the statue and put your hands "
+				<< "together in prayer.\n";
+		if (curRoom->containsObject("candle") && !this->prayed)
+		{
+			this->prayed = true;
+			esotericKnowledge += 1;
+			std::cout << "You feel a new profound sense of wisdom and serenity.\n";
+		}
+	}
+	else
+	{
+		std::cout << "This space doesn't appear appropriate for that sort of "
+			<< "reverence.\n";
 	}
 }

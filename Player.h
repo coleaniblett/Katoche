@@ -11,6 +11,7 @@ private:
 	int shadowState;
 	bool leadingHorse;
 	int esotericKnowledge;
+	bool prayed;
 public:
 	// constructors
 	Player();
@@ -50,4 +51,5 @@ public:
 	void attack(std::string target, std::string weapon);
 	void sleep();
 	void drop(std::string objectToDrop);
+	void pray();
 };

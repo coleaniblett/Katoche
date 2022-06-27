@@ -75,6 +75,8 @@ void CommandInterpreter::interpretSimpleCommand(std::string action)
         std::cout << "Leave what?\n";
     else if (action == "drop")
         std::cout << "Drop what?\n";
+    else if (action == "pray")
+        this->player->pray();
 }
 
 void CommandInterpreter::interpretSimpleCommand(std::string action, std::string identifier)
