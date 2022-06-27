@@ -10,7 +10,7 @@ Player::Player()
 	this->prayed = false;
 	this->esotericKnowledge = 0;
 	this->visitedWiseOldMan = false;
-
+	this->hasExited = false;
 }
 
 Player::Player(World* worldToSet)
@@ -22,6 +22,7 @@ Player::Player(World* worldToSet)
 	this->prayed = false;
 	this->esotericKnowledge = 0;
 	this->visitedWiseOldMan = false;
+	this->hasExited = false;
 }
 
 // inventory methods
@@ -160,6 +161,15 @@ void Player::enterRoom(std::shared_ptr<Room> roomToEnter)
 	// special functionality for climbing horse in Fountain Room
 	if (currentRoomName == "Fountain Room" && curRoom->containsObject("bow and quiver"))
 		curRoom->getObject("bow and quiver")->setCanbeTaken(false);
+	// special functionality for exiting dungeon
+	if (roomToEnter->getName() == "Outside Exit" && this->hasExited == false)
+	{
+		std::cout << "The forest is difficult to navigate, but you feel a strong "
+			<< "intuition about the path back to the entrance.\n"
+			<< "(Use the command \"return to entrance\" to navigate back to start "
+			<< "of dungeon)\n";
+		this->hasExited = true;
+	}
 }
 
 void Player::move(std::string direction)

@@ -13,6 +13,7 @@ private:
 	int esotericKnowledge;
 	bool prayed;
 	bool visitedWiseOldMan;
+	bool hasExited;
 public:
 	// constructors
 	Player();
@@ -52,4 +53,5 @@ public:
 	void sleep();
 	void drop(std::string objectToDrop);
 	void pray();
+	bool getHasExited() { return this->hasExited; }
 };

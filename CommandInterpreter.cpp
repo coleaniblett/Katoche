@@ -77,6 +77,8 @@ void CommandInterpreter::interpretSimpleCommand(std::string action)
         std::cout << "Drop what?\n";
     else if (action == "pray")
         this->player->pray();
+    else if (action == "stay")
+        std::cout << "You decide to hang out for a second.\n";
     checkNeverTime();
 }
 
@@ -286,6 +288,11 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
     {
         if (newDirObject == "sleep" || newDirObject == "bed")
             this->player->sleep();
+    }
+    else if (action == "return" && identifier == "to" && dirObject == "entrance" &&
+        this->player->getHasExited())
+    {
+        this->player->enterRoom(this->world->getRoom("Outside Entrance"));
     }
     checkNeverTime();
 }
