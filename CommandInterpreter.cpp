@@ -319,31 +319,63 @@ bool CommandInterpreter::checkNeverTime()
 {
     std::shared_ptr<Room> curRoom = this->world->getCurrentRoom();
     bool output = true;
+    int curTime = this->world->getNeverTime();
     if (curRoom->getName() == "Never Room")
     {
         this->world->incNeverTime();
-        int curTime = this->world->getNeverTime();
         switch (curTime)
         {
-            case 2:
+            case 1:
             {
                 std::cout << "You are starting to get a worried feeling that something "
                     << "horrible is about to happen.\n";
                 break;
             }
-            case 3:
+            case 2:
             {
                 std::cout << "Something deep down in you, some kind of ancient instinct "
                     << "that you didn't know existed, is screaming at you: get out of this room.\n";
                     break;
             }
-            case 4:
+            case 3:
             {
                 std::cout << "\nIf you were never born, would you have a problem with that?\n"
                     << "Because you never were. Maybe in some version of this reality, along some "
                     << "dimensional axis only comprehensible to the greatest superintelligences.\n"
                     << "But not here.\nYou were never here.\n";
                 this->player->setContinueGame(false);
+                break;
+            }
+        }
+    }
+    else if (curRoom->getName() == "Forever Room")
+    {
+        this->world->incNeverTime();
+        switch (curTime)
+        {
+            case 1:
+            {
+                std::cout << "You become lost in the tranquility of the room - so deeply lost that "
+                    << "a full aeon passes before you are able to regain your lucidity.\n"
+                    << "You feel a new profund sense of time, as if there were almost no difference "
+                    << "between a moment and an epoch.\n";
+                this->player->incEsotericKnowledge();
+                break;
+            }
+            case 2:
+            {
+                std::cout << "Another aeon passes before your mind finally recovers from the "
+                    << "black hole that is this room, just barely capable of registering a thought.\n";
+                break;
+            }
+            case 3:
+            {
+                std::cout << "It too late occurs to you that change is the currency of existence,"
+                    << " and in the unchanging state you have found yourself in you're not longer "
+                    << "quite sure you exist.\n"
+                    << "Maybe you were always here, and everywhere, so completely present and "
+                    << "ubiquitous that you escaped all of our notice. The canvas under the paint.\n"
+                    << "But you're spread so thin against time that it's hard to say it matters.\n";
                 break;
             }
         }

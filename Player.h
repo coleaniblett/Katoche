@@ -55,4 +55,5 @@ public:
 	void drop(std::string objectToDrop);
 	void pray();
 	bool getHasExited() { return this->hasExited; }
+	void incEsotericKnowledge() { this->esotericKnowledge += 1; }
 };

@@ -44,5 +44,7 @@ public:
 	std::shared_ptr<MagicRings> getMagicRings() { return this->magicRings; }
 	int getNeverTime() { return this->neverRoomTime; }
 	void incNeverTime() { this->neverRoomTime += 1; }
+	void setForeverRoom();
+	void resetNeverTime() { this->neverRoomTime = 0; }
 };
 

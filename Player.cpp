@@ -37,6 +37,11 @@ void Player::addToInventory(std::shared_ptr<GameObject> objectToAdd)
 		else if (this->hasObject("rings"))
 			this->inventory.erase("rings");
 		this->inventory.insert({ ring->getName(), ring });
+		int numRings = this->world->getMagicRings()->getNumRings();
+		if (numRings >= 3)
+		{
+			this->world->setForeverRoom();
+		}
 	}
 	else
 		this->inventory.insert({ objectToAdd->getName(), objectToAdd });
@@ -169,6 +174,11 @@ void Player::enterRoom(std::shared_ptr<Room> roomToEnter)
 			<< "(Use the command \"return to entrance\" to navigate back to start "
 			<< "of dungeon)\n";
 		this->hasExited = true;
+	}
+	// special functionality for Never/Forever Room
+	if (currentRoomName == "Forever Room" || currentRoomName == "Never Room")
+	{
+		this->world->resetNeverTime();
 	}
 }
 

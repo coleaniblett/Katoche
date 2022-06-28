@@ -63,6 +63,16 @@ void World::setCurrentRoom(std::shared_ptr<Room> roomToSet)
     this->currentRoom = roomToSet;
 }
 
+void World::setForeverRoom()
+{
+    this->rooms.at("Graveyard Room")->setExits(NULL, this->rooms.at("Forever Room"), NULL,
+        this->rooms.at("Infinity Room"), NULL, NULL, NULL);
+    this->rooms.at("Final Room")->setExits(NULL, this->rooms.at("Outside Exit"), NULL, this->rooms.at("Forever Room"), NULL,
+        NULL, NULL);
+    this->rooms.at("Forever Room")->setExits(NULL, this->rooms.at("Final Room"), NULL, 
+        this->rooms.at("Graveyard Room"), NULL, NULL, NULL);
+}
+
 std::shared_ptr<Room> World::getOutsideEntrance()
 {
     std::shared_ptr<GameObject> entrance( new GameObject(
