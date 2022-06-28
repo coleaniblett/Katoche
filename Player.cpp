@@ -13,9 +13,10 @@ Player::Player()
 	this->hasExited = false;
 }
 
-Player::Player(World* worldToSet)
+Player::Player(World* worldToSet, Inventory* inventoryToSet)
 {
 	this->world = worldToSet;
+	this->inventory = inventoryToSet;
 	this->continueGame = true;
 	this->shadowState = 0;
 	this->leadingHorse = false;
@@ -23,51 +24,6 @@ Player::Player(World* worldToSet)
 	this->esotericKnowledge = 0;
 	this->visitedWiseOldMan = false;
 	this->hasExited = false;
-}
-
-// inventory methods
-void Player::addToInventory(std::shared_ptr<GameObject> objectToAdd)
-{
-	if (objectToAdd->getName() == "ring")
-	{
-		this->world->getMagicRings()->addRing();
-		std::shared_ptr<GameObject> ring = this->world->getMagicRings()->getRings();
-		if (this->hasObject("ring"))
-			this->inventory.erase("ring");
-		else if (this->hasObject("rings"))
-			this->inventory.erase("rings");
-		this->inventory.insert({ ring->getName(), ring });
-		int numRings = this->world->getMagicRings()->getNumRings();
-		if (numRings >= 3)
-		{
-			this->world->setForeverRoom();
-		}
-	}
-	else
-		this->inventory.insert({ objectToAdd->getName(), objectToAdd });
-}
-
-bool Player::hasObject(std::string objectToCheck)
-{
-	if (this->inventory.count(objectToCheck))
-		return true;
-	else
-		return false;
-}
-
-void Player::printInventory()
-{
-	std::cout << "You currently have:" << std::endl;
-	std::map<std::string, std::shared_ptr<GameObject>>::iterator it;
-	for (it = this->inventory.begin(); it != this->inventory.end(); it++)
-	{
-		std::cout << it->first << std::endl;
-	}
-}
-
-std::shared_ptr<GameObject> Player::getObject(std::string objectToGet)
-{
-	return this->inventory.at(objectToGet);
 }
 
 void Player::getObjectFromContainer(std::string objectToGet, std::string container)
@@ -83,7 +39,7 @@ void Player::getObjectFromContainer(std::string objectToGet, std::string contain
 				if (containerToUse->hasObject(objectToGet))
 				{
 					std::cout << "You take the " << objectToGet << " from the " << container << ".\n";
-					this->addToInventory(containerToUse->getObject(objectToGet));
+					this->inventory->addToInventory(containerToUse->getObject(objectToGet));
 					containerToUse->removeObject(objectToGet);
 				}
 				else
@@ -110,7 +66,7 @@ void Player::getObjectFromSearchedObject(std::string objectToGet, std::string se
 				if (objectToUse->hasObject(objectToGet))
 				{
 					std::cout << "You take the " << objectToGet << " from the " << searchedObject << ".\n";
-					this->addToInventory(objectToUse->getObject(objectToGet));
+					this->inventory->addToInventory(objectToUse->getObject(objectToGet));
 					objectToUse->removeObject(objectToGet);
 				}
 				else
@@ -316,7 +272,7 @@ void Player::searchObject(std::string objectToSearch)
 	{
 		if (objectToSearch == "grave" && curRoom->containsObject(objectToSearch))
 		{
-			if (this->inventory.count("shovel"))
+			if (this->inventory->hasObject("shovel"))
 			{
 				auto objectToUse = std::dynamic_pointer_cast<SearchableObject>(curRoom->getObject(objectToSearch));
 				objectToUse->setHasBeenSearched();
@@ -355,6 +311,27 @@ void Player::leadHorse()
 		std::cout << "There is no horse here.\n";
 }
 
+void Player::leaveHorse()
+{
+	if (this->leadingHorse)
+	{
+		std::shared_ptr<GameObject> horse(new GameObject(
+			"horse",
+			"The horse appears calm, but when you look into its eyes you see what looks like remarkable awareness. But then again, you've never spent much time around horses. Have you?",
+			"In the room stands a tall bay horse.\n",
+			false
+		));
+		this->world->getCurrentRoom()->addObject(horse);
+		std::cout << "You slowly wave your hands at the floor in a gesture to the horse to stay. "
+			<< "It seems to understand.\n";
+		this->leadingHorse = false;
+	}
+	else
+	{
+		std::cout << "You're not leading a horse.\n";
+	}
+}
+
 void Player::dig()
 {
 	if (this->world->getCurrentRoom()->getName() == "Graveyard Room")
@@ -368,7 +345,7 @@ void Player::eat(std::string objectToEat)
 	if (objectToEat == "red mushroom" || objectToEat == "purple mushroom" ||
 		objectToEat == "brown mushroom")
 	{
-		if (this->hasObject(objectToEat) || this->world->getCurrentRoom()->containsObject(objectToEat))
+		if (this->inventory->hasObject(objectToEat) || this->world->getCurrentRoom()->containsObject(objectToEat))
 		{
 			if (objectToEat == "red mushroom")
 			{
@@ -432,7 +409,7 @@ void Player::attack(std::string target, std::string weapon)
 {
 	if (weapon == "knife" || weapon == "bow and quiver" || weapon == "sword" || weapon == "shovel")
 	{
-		if (this->hasObject(weapon))
+		if (this->inventory->hasObject(weapon))
 		{
 			if (target == "shadow self")
 			{
@@ -495,7 +472,7 @@ void Player::sleep()
 			<< "seem to retreat in the distance. You're in a white robe, kneeling "
 			<< "before a set of stairs that lead up to a throne. An old bearded man sits "
 			<< "there.\n";
-		int numRings = this->world->getMagicRings()->getNumRings();
+		int numRings = this->inventory->getMagicRings()->getNumRings();
 		if (numRings == 0)
 		{
 			std::cout << "He frowns at you.\n \"It seems that you are only at the start "
@@ -503,7 +480,7 @@ void Player::sleep()
 		}
 		else if (numRings == 1)
 		{
-			std::cout << "He looks at you.\n\ \"It seems you've found one of my rings.\", "
+			std::cout << "He looks at you.\n\"It seems you've found one of my rings.\", "
 				<< "he says to you. \"Have you noticed its power? How it changes the "
 				<< "world around you?\" He runs his hand through his beard. \"But you "
 				<< "still have much to learn.\"\n";
@@ -535,54 +512,6 @@ void Player::sleep()
 	}
 }
 
-void Player::drop(std::string objectToDrop)
-{
-	std::shared_ptr<Room> curRoom = this->world->getCurrentRoom();
-	// special functionality for rings
-	if (objectToDrop == "ring" || objectToDrop == "rings")
-	{
-		std::cout << "Something tells you it wouldn't be a good idea to lose these rings.\n";
-		return;
-	}
-	// special functionality for horse
-	if (objectToDrop == "horse")
-	{
-		if (this->leadingHorse)
-		{
-			std::shared_ptr<GameObject> horse(new GameObject(
-				"horse",
-				"The horse appears calm, but when you look into its eyes you see what looks like remarkable awareness. But then again, you've never spent much time around horses. Have you?",
-				"In the room stands a tall bay horse.\n",
-				false
-			));
-			curRoom->addObject(horse);
-			std::cout << "You slowly wave your hands at the floor in a gesture to the horse to stay. "
-				<< "It seems to understand.\n";
-			this->leadingHorse = false;
-		}
-		else
-		{
-			std::cout << "You're not leading a horse.\n";
-		}
-	}
-	// standard functionality
-	else if (this->hasObject(objectToDrop))
-	{
-		std::string newLocationDescription = "A " + objectToDrop + " lies on the floor.\n";
-		this->getObject(objectToDrop)->setLocationDescription(newLocationDescription);
-		curRoom->addObject(this->getObject(objectToDrop));
-		this->inventory.erase(objectToDrop);
-		std::cout << "You place the " << objectToDrop << " on the ground.\n";
-		if (objectToDrop == "candle" && curRoom->getName() == "Temple Room")
-		{
-			std::cout << "After setting the candle bown before the statue, it suddenly lights up.\n";
-		}
-	}
-	else
-	{
-		std::cout << "You don't have a " << objectToDrop << ".\n";
-	}
-}
 
 void Player::pray()
 {

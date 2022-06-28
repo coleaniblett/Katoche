@@ -55,7 +55,7 @@ World::World()
     this->currentRoom = (this->rooms.at("Outside Entrance"));
     this->shadowSelfAlive = true;
     this->neverRoomTime = 0;
-    this->magicRings.reset(new MagicRings());
+    //this->magicRings.reset(new MagicRings());
 }
 
 void World::setCurrentRoom(std::shared_ptr<Room> roomToSet)

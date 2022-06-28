@@ -1,5 +1,6 @@
 #pragma once
 #include <typeinfo>
+#include "Inventory.h"
 #include "Room.h"
 #include "World.h"
 class Player
@@ -7,7 +8,8 @@ class Player
 private:
 	World* world;
 	bool continueGame;
-	std::map <std::string, std::shared_ptr<GameObject>> inventory;
+	//std::map <std::string, std::shared_ptr<GameObject>> inventory;
+	Inventory* inventory;
 	int shadowState;
 	bool leadingHorse;
 	int esotericKnowledge;
@@ -18,7 +20,7 @@ private:
 public:
 	// constructors
 	Player();
-	Player(World* worldToSet);
+	Player(World* worldToSet, Inventory* inventory);
 	// world methods
 	World* getWorld() { return this->world; }
 	void setWorld(World* worldToSet) { delete this->world; this->world = worldToSet; }
@@ -26,10 +28,8 @@ public:
 	bool getContinueGame() { return this->continueGame; }
 	void setContinueGame(bool valueToSet) { this->continueGame = valueToSet; }
 	// inventory methods
-	void addToInventory(std::shared_ptr<GameObject> objectToAdd);
-	bool hasObject(std::string objectToCheck);
-	void printInventory();
-	std::shared_ptr<GameObject> getObject(std::string objectToGet);
+	Inventory* getInventory() { return this->inventory; }
+	//std::shared_ptr<GameObject> getObject(std::string objectToGet);
 	void getObjectFromContainer(std::string objectToGet, std::string container);
 	void getObjectFromSearchedObject(std::string objectToGet, std::string searchedObject);
 	// shadowState methods
@@ -47,12 +47,12 @@ public:
 	void closeObject(std::string objectToClose);
 	void searchObject(std::string objectToSearch);
 	void leadHorse();
+	void leaveHorse();
 	void dig();
 	void eat(std::string objectToEat);
 	void climb(std::string objectToClimb);
 	void attack(std::string target, std::string weapon);
 	void sleep();
-	void drop(std::string objectToDrop);
 	void pray();
 	bool getHasExited() { return this->hasExited; }
 	void incEsotericKnowledge() { this->esotericKnowledge += 1; }

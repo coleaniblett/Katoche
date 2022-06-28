@@ -37,7 +37,7 @@ void CommandInterpreter::interpretSimpleCommand(std::string action)
     else if (action == "get")
         std::cout << "Get what?\n";
     else if (action == "inventory")
-        this->player->printInventory();
+        this->player->getInventory()->printInventory();
     else if (action == "north" || action == "east" || action == "south" ||
         action == "west" || action == "up" || action == "down")
         this->player->move(action);
@@ -139,7 +139,8 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
         {
             if (this->world->getCurrentRoom()->getObject(newDirObject)->getCanBeTaken())
             {
-                this->player->addToInventory(this->world->getCurrentRoom()->getObject(newDirObject));
+                this->player->getInventory()->addToInventory(this->world->getCurrentRoom()->getObject(newDirObject));
+                //this->player->addToInventory(this->world->getCurrentRoom()->getObject(newDirObject));
                 this->world->getCurrentRoom()->removeObject(newDirObject);
                 std::cout << "You take the " << dirObject << "." << std::endl;
             }
@@ -159,6 +160,10 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
             else
                 std::cout << "There is no " << dirObject << " to take." << std::endl;
         }
+        if (this->player->getInventory()->getMagicRings()->getNumRings() >= 3)
+        {
+            this->world->setForeverRoom();
+        }
     }
     else if (action == "examine")
     {
@@ -174,9 +179,9 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
         {
             std::cout << curRoom->getObject(newDirObject)->getDescription() << std::endl;
         }
-        else if (this->player->hasObject(newDirObject))
+        else if (this->player->getInventory()->hasObject(newDirObject))
         {
-            std::cout << this->player->getObject(newDirObject)->getDescription() << std::endl;
+            std::cout << this->player->getInventory()->getObject(newDirObject)->getDescription() << std::endl;
         }
         else if (itemContainer != "" &&
             std::dynamic_pointer_cast<ContainerObject>(curRoom->getObject(itemContainer))->hasObject(newDirObject))
@@ -215,7 +220,7 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
     {
         if (curRoomName == "First Room" && dirObject == "writing")
             std::cout << this->world->getCurrentRoom()->getObject("writing")->getDescription() << "\n";
-        else if ((curRoom->containsObject("book") && dirObject == "book") || player->hasObject("book"))
+        else if ((curRoom->containsObject("book") && dirObject == "book") || player->getInventory()->hasObject("book"))
             this->player->read();
     }
     else if (action == "open")
@@ -256,7 +261,12 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
     }
     else if (action == "leave" || action == "drop" || action == "place")
     {
-        player->drop(newDirObject);
+        if (newDirObject == "horse")
+        {
+            this->player->leaveHorse();
+        }
+        else
+            player->getInventory()->drop(newDirObject, curRoom);
     }
     checkNeverTime();
 }
@@ -272,8 +282,8 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
             this->player->printShadowDescription();
         else if (this->world->getCurrentRoom()->containsObject(newDirObject))
             std::cout << this->world->getCurrentRoom()->getObject(newDirObject)->getDescription() << std::endl;
-        else if (this->player->hasObject(newDirObject))
-            std::cout << this->player->getObject(newDirObject)->getDescription() << std::endl;
+        else if (this->player->getInventory()->hasObject(newDirObject))
+            std::cout << this->player->getInventory()->getObject(newDirObject)->getDescription() << std::endl;
         else
             std::cout << "What " << dirObject << "?" << std::endl;
     }

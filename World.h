@@ -13,7 +13,7 @@ class World
 private:
 	std::map<std::string, std::shared_ptr<Room>> rooms;
 	std::shared_ptr<Room> currentRoom;
-	std::shared_ptr<MagicRings> magicRings;
+	//std::shared_ptr<MagicRings> magicRings;
 	bool shadowSelfAlive;
 	int neverRoomTime;
 	std::shared_ptr<Room> getOutsideEntrance();
@@ -41,7 +41,7 @@ public:
 	void setShadowSelfAlive(bool valueToSet) { this->shadowSelfAlive = valueToSet; }
 	bool getShadowSelfAlive() { return this->shadowSelfAlive; }
 	std::shared_ptr<Room> getCurrentRoom() { return this->currentRoom; }	
-	std::shared_ptr<MagicRings> getMagicRings() { return this->magicRings; }
+	//std::shared_ptr<MagicRings> getMagicRings() { return this->magicRings; }
 	int getNeverTime() { return this->neverRoomTime; }
 	void incNeverTime() { this->neverRoomTime += 1; }
 	void setForeverRoom();

@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <iostream>
+#include "Inventory.h"
 #include "Player.h"
 #include "World.h"
 class CommandInterpreter

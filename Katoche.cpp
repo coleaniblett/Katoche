@@ -6,11 +6,13 @@
 #include "Player.h"
 #include "World.h"
 #include "InputParser.h"
+#include "Inventory.h"
 
 int main()
 {
 	World world;
-	Player player(&world);
+	Inventory inventory;
+	Player player(&world, &inventory);
 	CommandInterpreter interpreter(&player, &world);
 	InputParser parser(&interpreter);
 	StdInStream input(&player, &parser);
