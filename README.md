@@ -7,6 +7,15 @@ _Katoche_ is a text-based adventure game, inspired by the groundbreaking text ad
 
 In Katoche, the user explores a puzzle-based dungeon consisting of well over a dozen rooms, interacting with the objects and environment through a variety of commands, accumulating rings of power and and esoteric knowledge all the while.
 
+### Installation
+1. Clone the repository to your local machine using git clone https://github.com/coleaniblett/Katoche.git.
+2. Navigate to the project directory using cd your-repo.
+3. Compile the game using your C++ compiler.
+4. Run the compiled executable to start the game.
+
+### Usage
+Players navigate the dungeon using natural language commands that the game parses and then interprets. The game supports a variety of verbs, including "go", "take", "drop", "examine", "inventory", and "help". For example, to move from the starting room to the east, the player could enter the command "go east". To examine an object in the room, the player could enter the command "examine object".
+
 ## Development Background
 I developed Katoche as a personal project to apply the skills in C++ and object-oriented programming I had picked up as a Systems Programming student at De Anza College. While I had learned the basics of C++ through a variety of modest projects in my courses, Katoche was an opportunity to practice those skills to a more complex, self-directed project.
 
@@ -22,8 +31,8 @@ __Inheritance__ is utilized to present the user with a variety of interactable o
 
 Finally, Katoche implements __polymorphism__ through its use of world objects. Dungeon room contents are stored as a collection of GameObject pointers, though those pointers may refer to the SearchableObject and ContainerObject classes described above. When the user attempts to interact with these objects using their unique functionality, dynamic downcasting is utilized.
 
-## Future
-
-Katoche was developed at a time when the majority of my coding experience was in C++. Although writing Katoche helped me strengthen my understanding of the language, it is not the most appropriate language for a project of this sort. In the future I may redevelop Katoche as a web app, using another language such as JavaScript. While I am proud of the work I have done on Katoche, it was an early project for me, and I expect that as I continue to hone my software design skills I may discover new and better ways to implement this program.
-
-If I do choose to return to this project, ideas for improvement include the implementation of a distinct StdOutStream class, as well as refactoring several of the program's larger methods into more distinct parts.
+## Contributions
+Contributions to this project are welcome. Possible contributions might be:
+- New dungeon rooms
+- New features (ex. combat, magic)
+- Refactoring of existing features (ex. creating a new class to handle output)
