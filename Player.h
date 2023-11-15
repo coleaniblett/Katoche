@@ -1,3 +1,6 @@
+// Player.h
+// Defines the Player class, representing a player in the game
+
 #pragma once
 #include <typeinfo>
 #include "Inventory.h"

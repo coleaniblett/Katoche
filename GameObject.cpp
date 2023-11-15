@@ -1,3 +1,6 @@
+// GameObject.cpp
+// Implements the functionality for the GameObject class
+
 #include "GameObject.h"
 
 GameObject::GameObject()

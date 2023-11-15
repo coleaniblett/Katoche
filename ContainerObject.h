@@ -1,3 +1,6 @@
+// ContainerObject.h
+// Defines the ContainerObject class, representing a game object that can contain other objects
+
 #pragma once
 #include <map>
 #include <memory>

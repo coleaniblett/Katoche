@@ -1,3 +1,6 @@
+// CommandInterpreter.h
+// Defines the command interpreter class, responsible for interpreting user commands
+
 #pragma once
 #include <string>
 #include <iostream>

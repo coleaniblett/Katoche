@@ -1,3 +1,6 @@
+// SearchableObject.cpp
+// Implements the functionality of the SearchableObject class
+
 #include "SearchableObject.h"
 
 void SearchableObject::printContents()

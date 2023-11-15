@@ -1,3 +1,6 @@
+// Player.cpp
+// Implements the functionality of the Player class
+
 #include "Player.h"
 
 // constructors

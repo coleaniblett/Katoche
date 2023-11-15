@@ -1,3 +1,6 @@
+// World.cpp
+// Implements the functionality of the World class
+
 #include "World.h"
 
 World::World()

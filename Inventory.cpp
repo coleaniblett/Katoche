@@ -1,3 +1,6 @@
+// Inventory.cpp
+// Implements the functionality of the Inventory class
+
 #include "Inventory.h"
 
 void Inventory::addToInventory(std::shared_ptr<GameObject> objectToAdd)

@@ -1,3 +1,6 @@
+// InputParser.h
+// Defines the InputParser class, responsible for parsing user input into meaningful commands
+
 #pragma once
 #include <string>
 #include <iostream>

@@ -1,3 +1,6 @@
+// Inventory.h
+// Defines the Inventory class, responsible for managing the player's items and belongings in the game
+
 #pragma once
 #include <map>
 #include <memory>

@@ -1,3 +1,6 @@
+// InputParer.cpp
+// Implements the functionality of the InputParser class
+
 #include "InputParser.h"
 
 InputParser::InputParser()

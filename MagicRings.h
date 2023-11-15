@@ -1,3 +1,6 @@
+// MagicRings.h
+// Defines the MagicRings class, representing a collection of magic rings in the game
+
 #pragma once
 #include <iostream>
 #include <map>

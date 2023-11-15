@@ -1,3 +1,6 @@
+// ContainerObject.cpp
+// implements the functionality of the ContainerObject class
+
 #include "ContainerObject.h"
 
 void ContainerObject::printContents()

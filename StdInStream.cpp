@@ -1,3 +1,6 @@
+// StdInStream.cpp
+// Implements the functionality of the StdInStream class
+
 #include "StdInStream.h"
 
 StdInStream::StdInStream(Player* playerToSet, InputParser* parserToSet)

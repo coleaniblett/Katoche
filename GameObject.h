@@ -1,3 +1,7 @@
+// GameObject.h
+// Defines the GameObject class, representing a basic game object
+// This class serves as a base for other game entities
+
 #pragma once
 #include <string>
 class GameObject

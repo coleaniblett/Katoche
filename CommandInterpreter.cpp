@@ -1,3 +1,6 @@
+// CommandInterpreter.cpp
+// Implements the functionality of the CommandInterpreter class
+
 #include "CommandInterpreter.h"
 
 CommandInterpreter::CommandInterpreter()

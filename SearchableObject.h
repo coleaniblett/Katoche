@@ -1,3 +1,6 @@
+// SearchableObject.h
+// Defines the SearchableObject class, representing an object that can be searched
+
 #pragma once
 #include <map>
 #include <memory>

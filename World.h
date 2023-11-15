@@ -1,3 +1,6 @@
+// World.h
+// Defines the World class, representing the game world with rooms and objects
+
 #pragma once
 #include <vector>
 #include <string>
