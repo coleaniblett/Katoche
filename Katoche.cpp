@@ -1,7 +1,13 @@
-// Katoche.cpp
-// Entry point for the "Katoche" text-based adventure game
-// This file houses the main function where the game execution begins
-// Created by Cole Niblett
+
+/*******************************************************************************
+*	Katoche.cpp                                                                *
+*                                                                              *
+*	Entry point for the "Katoche" text-based adventure game					   *
+*	This file houses the main function where the game execution begins         *
+*                                                                              *
+*	Created by Cole Niblett                                                    *
+*                                                                              *
+*******************************************************************************/
 
 #include <iostream>
 #include <string>

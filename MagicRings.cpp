@@ -1,5 +1,10 @@
-// MagicRings.cpp
-// Implements the functionality of the MagicRings class	
+
+/*******************************************************************************
+*	MagicRings.cpp                                                             *
+*                                                                              *
+*	Implements the functionality of the MagicRings class                       *
+*                                                                              *
+*******************************************************************************/
 
 #include "MagicRings.h"
 

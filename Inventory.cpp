@@ -1,5 +1,10 @@
-// Inventory.cpp
-// Implements the functionality of the Inventory class
+
+/*******************************************************************************
+*	Inventory.cpp                                                              *
+*                                                                              *
+*	Implements the functionality of the Inventory class                        *
+*                                                                              *
+*******************************************************************************/
 
 #include "Inventory.h"
 

@@ -1,5 +1,11 @@
-// World.h
-// Defines the World class, representing the game world with rooms and objects
+
+/*******************************************************************************
+ *  CommandInterpreter.cpp                                                     *
+ *                                                                             *
+ *  Defines the World class, representing the game world with rooms and        *
+ *	objects                                                                    *
+ *                                                                             *
+ ******************************************************************************/
 
 #pragma once
 #include <vector>

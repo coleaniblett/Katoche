@@ -1,5 +1,10 @@
-// Room.h
-// Defines the Room class, representing a location within the game world
+
+/*******************************************************************************
+ *  Room.h                                                                     *
+ *                                                                             *
+ *  Defines the Room class, representing a location within the game world      *
+ *                                                                             *
+ ******************************************************************************/
 
 #pragma once
 #include <string>

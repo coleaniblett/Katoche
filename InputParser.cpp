@@ -1,5 +1,10 @@
-// InputParer.cpp
-// Implements the functionality of the InputParser class
+
+/*******************************************************************************
+*	InputParser.cpp                                                            *
+*                                                                              *
+*	Implements the functionality of the InputParser class                      *
+*                                                                              *
+*******************************************************************************/
 
 #include "InputParser.h"
 

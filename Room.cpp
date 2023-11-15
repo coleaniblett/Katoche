@@ -1,5 +1,10 @@
-// Room.cpp
-// Implements the functionality of the Room class
+
+/*******************************************************************************
+*	Room.cpp                                                                   *
+*                                                                              *
+*	Implements the functionality of the Room class                             *
+*                                                                              *
+*******************************************************************************/
 
 #include "Room.h"
 

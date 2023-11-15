@@ -1,5 +1,10 @@
-// SearchableObject.cpp
-// Implements the functionality of the SearchableObject class
+
+/*******************************************************************************
+*	SearchableObject.cpp                                                       *
+*                                                                              *
+*	Implements the functionality of the SearchableObject class                 *
+*                                                                              *
+*******************************************************************************/
 
 #include "SearchableObject.h"
 

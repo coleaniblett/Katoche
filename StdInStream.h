@@ -1,5 +1,11 @@
-// StdInStream.h
-// Defines the StdInStream class, representing a standard input stream wrapper
+
+/*******************************************************************************
+ *  StdInStream.h                                                              *
+ *                                                                             *
+ *  Defines the StdInStream class, representing a standard input stream        *
+ *	wrapper                                                                    *
+ *                                                                             *
+ ******************************************************************************/
 
 #pragma once
 #include <iostream>

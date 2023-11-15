@@ -1,5 +1,10 @@
-// StdInStream.cpp
-// Implements the functionality of the StdInStream class
+
+/*******************************************************************************
+*	StdInStream.cpp                                                            *
+*                                                                              *
+*	Implements the functionality of the StdInStream class                      *
+*                                                                              *
+*******************************************************************************/
 
 #include "StdInStream.h"
 

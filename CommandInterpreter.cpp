@@ -1,79 +1,30 @@
-// CommandInterpreter.cpp
-// Implements the functionality of the CommandInterpreter class
+
+/*******************************************************************************  
+ *  CommandInterpreter.cpp                                                     *
+ *                                                                             *
+ *  Implements the functionality of the CommandInterpreter class               *
+ *                                                                             *
+ ******************************************************************************/
 
 #include "CommandInterpreter.h"
 
+// No-argument constructor
 CommandInterpreter::CommandInterpreter()
 {
     this->player = new Player;
     this->world = new World;
 }
 
+// Standard constructor
 CommandInterpreter::CommandInterpreter(Player* playerToSet, World* worldToSet)
 {
     this->player = playerToSet;
     this->world = worldToSet;
 }
 
-std::string CommandInterpreter::standardizeDirObject(std::string dirObject)
-{
-    return synonymMap[dirObject];
-}
-
+// Interpret commands consisting of an action (ex. jump)
 void CommandInterpreter::interpretSimpleCommand(std::string action)
 {
-    // TODO: create map to hold actions as keys and their results as values
-    /*if (action == "quit")
-        this->player->setContinueGame(false);
-    if (action == "help")
-        this->player->getHelp();
-    else if (action == "take")
-        std::cout << "Take what?\n";
-    else if (action == "get")
-        std::cout << "Get what?\n";
-    else if (action == "inventory")
-        this->player->getInventory()->printInventory();
-    else if (action == "north" || action == "east" || action == "south" ||
-        action == "west" || action == "up" || action == "down")
-        this->player->move(action);
-    else if (action == "examine" || action == "look")
-        this->world->getCurrentRoom()->printDescription();
-    else if (action == "enter")
-        std::cout << "Enter what?\n";
-    else if (action == "go")
-        std::cout << "Go where?\n";
-    else if (action == "jump")
-        this->player->jump();
-    else if (action == "read")
-        std::cout << "Read what?\n";
-    else if (action == "drop")
-        std::cout << "Drop what?\n";
-    else if (action == "open")
-        std::cout << "Open what?\n";
-    else if (action == "close")
-        std::cout << "Close what?\n";
-    else if (action == "search")
-        std::cout << "Search what?\n";
-    else if (action == "lead")
-        std::cout << "Lead what?\n";
-    else if (action == "dig")
-        this->player->dig();
-    else if (action == "eat")
-        std::cout << "Eat what?\n";
-    else if (action == "stab")
-        std::cout << "Stab what?\n";
-    else if (action == "cut")
-        std::cout << "Cut what?\n";
-    else if (action == "sleep")
-        this->player->sleep();
-    else if (action == "leave")
-        std::cout << "Leave what?\n";
-    else if (action == "drop")
-        std::cout << "Drop what?\n";
-    else if (action == "pray")
-        this->player->pray();
-    else if (action == "stay")
-        std::cout << "You decide to hang out for a second.\n";*/
     auto command = simpleCommandMap.find(action);
     if (command != simpleCommandMap.end()) 
     {
@@ -86,6 +37,7 @@ void CommandInterpreter::interpretSimpleCommand(std::string action)
     checkNeverTime();
 }
 
+// Interpret commands consisting of an action and an identifier (ex. look down)
 void CommandInterpreter::interpretSimpleCommand(std::string action, std::string identifier)
 {
     std::string curRoomName = this->world->getCurrentRoom()->getName();
@@ -130,13 +82,15 @@ void CommandInterpreter::interpretSimpleCommand(std::string action, std::string 
     checkNeverTime();
 }
 
+// Interpret commands consisting of an action and a direct object (ex. take sword)
 void CommandInterpreter::interpretCommand(std::string action, std::string dirObject)
 {
-    std::string newDirObject = this->standardizeDirObject(dirObject);
+    std::string newDirObject = this->synonymMap.count(dirObject) ? this->synonymMap[dirObject] : dirObject;
     std::string curRoomName = this->world->getCurrentRoom()->getName();
     std::shared_ptr<Room> curRoom = this->world->getCurrentRoom();
     std::string itemContainer = curRoom->checkContainers(newDirObject);
     std::string searchedObject = curRoom->checkSearchedObjects(newDirObject);
+    // get object
     if (action == "take" || action == "get" || action == "grab")
     {
         if (this->world->getCurrentRoom()->containsObject(newDirObject))
@@ -144,7 +98,6 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
             if (this->world->getCurrentRoom()->getObject(newDirObject)->getCanBeTaken())
             {
                 this->player->getInventory()->addToInventory(this->world->getCurrentRoom()->getObject(newDirObject));
-                //this->player->addToInventory(this->world->getCurrentRoom()->getObject(newDirObject));
                 this->world->getCurrentRoom()->removeObject(newDirObject);
                 std::cout << "You take the " << dirObject << "." << std::endl;
             }
@@ -169,6 +122,17 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
             this->world->setForeverRoom();
         }
     }
+    // drop object
+    else if (action == "leave" || action == "drop" || action == "place")
+    {
+        if (newDirObject == "horse")
+        {
+            this->player->leaveHorse();
+        }
+        else
+            player->getInventory()->drop(newDirObject, curRoom);
+    }
+    // examine object
     else if (action == "examine")
     {
         if (dirObject == "room")
@@ -202,11 +166,13 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
             std::cout << "What " << dirObject << "?\n";
         }
     }
+    // enter object
     else if (action == "enter")
     {
         if (this->world->getCurrentRoom()->getRoom("inner"))
             this->player->move("inner");
     }
+    // go object
     else if (action == "go")
     {
         if (dirObject == "inside")
@@ -220,6 +186,7 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
             || dirObject == "east")
             this->player->move(dirObject);
     }
+    // read object
     else if (action == "read")
     {
         if (curRoomName == "First Room" && dirObject == "writing")
@@ -227,18 +194,22 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
         else if ((curRoom->containsObject("book") && dirObject == "book") || player->getInventory()->hasObject("book"))
             this->player->read();
     }
+    // open object
     else if (action == "open")
     {
         this->player->openObject(dirObject);
     }
+    // close object
     else if (action == "close")
     {
         this->player->closeObject(dirObject);
     }
+    // search object
     else if (action == "search")
     {
         this->player->searchObject(newDirObject);
     }
+    // lead object
     else if (action == "lead")
     {
         if (newDirObject == "horse")
@@ -246,38 +217,35 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
         else
             std::cout << "You can't lead that.\n";
     }
+    // dig object
     else if (action == "dig")
     {
         if (newDirObject == "ground" || newDirObject == "grave")
             this->player->dig();
     }
+    // eat object
     else if (action == "eat")
     {
         player->eat(newDirObject);
     }
+    // climb object
     else if (action == "climb")
     {
         player->climb(newDirObject);
     }
+    // attack object
     else if (action == "cut" || action == "stab")
     {
         std::cout << "With what?\n";
     }
-    else if (action == "leave" || action == "drop" || action == "place")
-    {
-        if (newDirObject == "horse")
-        {
-            this->player->leaveHorse();
-        }
-        else
-            player->getInventory()->drop(newDirObject, curRoom);
-    }
     checkNeverTime();
 }
 
+// Interpret commands consisting of an action, a direct object, and an identifier (ex. look at writing)
+// TODO: add "pick up _____" commands
 void CommandInterpreter::interpretCommand(std::string action, std::string dirObject, std::string identifier)
 {
-    std::string newDirObject = this->standardizeDirObject(dirObject);
+    std::string newDirObject = this->synonymMap.count(dirObject) ? this->synonymMap[dirObject] : dirObject;
     if (action == "look" && identifier == "at")
     {
         if (newDirObject == "room")
@@ -311,10 +279,11 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
     checkNeverTime();
 }
 
+// Interpret commands consisting of an action, a direct object, an identifier, and a secondary object (ex. attack goblin with sword)
 void CommandInterpreter::interpretCommand(std::string action, std::string dirObject, std::string identifier, std::string secObject)
 {
-    std::string newDirObject = this->standardizeDirObject(dirObject);
-    std::string newSecObject = this->standardizeDirObject(secObject);
+    std::string newDirObject = this->synonymMap.count(dirObject) ? this->synonymMap[dirObject] : dirObject;
+    std::string newSecObject = this->synonymMap.count(secObject) ? this->synonymMap[secObject] : secObject;
     if (action == "take" || action == "get" || action == "grab")
     {
         if (identifier == "from" || identifier == "in")
@@ -329,6 +298,8 @@ void CommandInterpreter::interpretCommand(std::string action, std::string dirObj
     checkNeverTime();
 }
 
+// Check if the player is passing time in the Never Room or the Forever Room and update accordingly
+// TODO: find a more approrpriate location for this function
 bool CommandInterpreter::checkNeverTime()
 {
     std::shared_ptr<Room> curRoom = this->world->getCurrentRoom();

@@ -1,8 +1,14 @@
-// GameObject.cpp
-// Implements the functionality for the GameObject class
+
+/*******************************************************************************
+*	GameObject.cpp                                                             *
+*                                                                              *
+*	Implements the functionality for the GameObject class                      *
+*                                                                              *
+*******************************************************************************/
 
 #include "GameObject.h"
 
+// No-argument constructor
 GameObject::GameObject()
 {
 	this->name = "";
@@ -11,6 +17,7 @@ GameObject::GameObject()
 	this->canBeTaken = false;
 }
 
+// Standard constructor
 GameObject::GameObject(
 	std::string nameToSet,
 	std::string descriptionToSet,

@@ -1,5 +1,10 @@
-// Player.cpp
-// Implements the functionality of the Player class
+
+/*******************************************************************************
+*	Player.cpp                                                                 *
+*                                                                              *
+*	Implements the functionality of the Player class                           *
+*                                                                              *
+*******************************************************************************/
 
 #include "Player.h"
 
