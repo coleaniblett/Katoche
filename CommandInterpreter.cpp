@@ -17,21 +17,13 @@ CommandInterpreter::CommandInterpreter(Player* playerToSet, World* worldToSet)
 
 std::string CommandInterpreter::standardizeDirObject(std::string dirObject)
 {
-    if (dirObject == "opening" || dirObject == "building" || dirObject == "structure")
-        return "entrance";
-    else if (dirObject == "body" || dirObject == "dead body" || dirObject == "dead person")
-        return "corpse";
-    else if (dirObject == "person" || dirObject == "figure")
-        return "shadow self";
-    else if (dirObject == "bow" || dirObject == "quiver")
-        return "bow and quiver";
-    else
-        return dirObject;
+    return synonymMap[dirObject];
 }
 
 void CommandInterpreter::interpretSimpleCommand(std::string action)
 {
-    if (action == "quit")
+    // TODO: create map to hold actions as keys and their results as values
+    /*if (action == "quit")
         this->player->setContinueGame(false);
     if (action == "help")
         this->player->getHelp();
@@ -81,7 +73,16 @@ void CommandInterpreter::interpretSimpleCommand(std::string action)
     else if (action == "pray")
         this->player->pray();
     else if (action == "stay")
-        std::cout << "You decide to hang out for a second.\n";
+        std::cout << "You decide to hang out for a second.\n";*/
+    auto command = simpleCommandMap.find(action);
+    if (command != simpleCommandMap.end()) 
+    {
+        command->second();
+    }
+    else 
+    {
+        std::cout << "Unknown command: " << action << "\n";
+    }
     checkNeverTime();
 }
 
@@ -104,7 +105,7 @@ void CommandInterpreter::interpretSimpleCommand(std::string action, std::string 
         else if (identifier == "down")
         {
             if (curRoomName == "Antechamber")
-                std::cout << "The rope disappears into the darkness below. You can't tell how far the hole goes, but it looks like it is a minimum of 40 feet.\n";
+                 std::cout << "The rope disappears into the darkness below. You can't tell how far the hole goes, but it looks like it is a minimum of 40 feet.\n";
             else
                 std::cout << "There is nothing notable about the ground here.\n";
         }
